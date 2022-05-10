@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <title>Casos de uso - Next Procurement</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Esta página describe la información semántica de los diferentes catálogos geográficos del IGN.">
+    <meta name="languaje" content="Spanish">
+    <meta name="author" content="Miguel García">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.2.1.slim.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.js"></script>
+	<!-- cookies -->
+	<link rel="stylesheet" href="css/cookie.css">
+	<script src="js/cookies.js" type="text/javascript"></script>
+  </head>
+  <body>
+
+
+	<div class="container">
+		<div class="card text-center">
+		  <div class="card-header">
+			<ul class="nav nav-pills card-header-pills">
+			  <li class="nav-item">
+				<a class="nav-link" href="index.html">Inicio</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="catalogo.html">Catálogo de datos</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="sparql.html">Punto SPARQL</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="vocabularios.html">Vocabularios</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link active" href="#">Casos de uso</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="cpv.html">CPV Classificator</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="contacto.html">Contacto</a>
+			  </li>
+			</ul>
+		  </div>
+		</div>
+		<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Casos de uso</li>
+		  </ol>
+		</nav>
+	<div class="row">
+		<div class="col-12">
+		  <h1>Casos de uso</h1>
+		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-12">
+			
+			<p align="justify">En este apartado se van a presentar diferentes casos de uso de los datos, tomando como punto de inicio las preguntas de competencia que se definieron en los primeros pasos del desarrollo de la ontología desarrollada para Next Procurement. El proceso seguido en cada caso de uso para obtener las consultas SPARQL a partir de la pregunta de competencia ha sido el siguiente:
+			<ul>
+				<li>se seleccionaron diferentes preguntas por cada uno de los temas INSPIRE en los que se engloban los datos. Estos temas son: unidades administrativas, altimetría, hidrografía, poblaciones y construcciones, transportes, energía y conducciones y, por último, vértices geodésicos</li>
+				<li>por cada pregunta, se identificaron los tipos de recursos y las propiedades implicados en la consulta</li>
+				<li>si hay funciones que se deben aplicar sobre los datos, ya sean geoespaciales, calculos numéricos, etc, implicadas en la consulta, se identifica que función es la que debe usarse para tenerlo en cuenta a la hora de realizar la consulta</li>
+				<li>una vez se han realizado los pasos anteriores, se procede a generar la consulta SPARQL. Más información sobre <a href="http://www.w3.org/TR/rdf-sparql-query/">SPARQL Query Language for RDF</a></li>
+			</ul>			
+			
+			A continuación se muestran diferentes ejemplos de casos de uso.
+			</p>
+			
+			<div id="accordion" role="tablist">
+			  <div class="card">
+				<div class="card-header" role="tab" id="headingOne">
+				  <h5 class="mb-0">
+					<a data-toggle="collapse" href="#collapseOne" role="button" aria-expanded="false" aria-controls="collapseOne">
+					  EJEMPLO: Pregunta: ¿Cuáles son los municipios de la provincia de Las Palmas?
+					</a>&nbsp;&nbsp;<a href="https://datos.ign.es/sparql?default-graph-uri=&query=PREFIX+esadm%3A+%3Chttp%3A%2F%2Fvocab.linkeddata.es%2Fdatosabiertos%2Fdef%2Fsector-publico%2Fterritorio%23%3E%0D%0A%09PREFIX+geosparql%3A+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23%3E%0D%0A%09PREFIX+dc%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0A%09%0D%0A%09SELECT+DISTINCT+%3FcodigoMunicipio+%3FnombreMunicipio+%0D%0A%09WHERE+%7B%0D%0A%09%09%3Fprovincia+a+esadm%3AProvincia+.%0D%0A%09%09%3Fprovincia+dc%3Atitle+%22Las+Palmas%22+.%0D%0A%09%09%3Fprovincia+dc%3Atitle+%3FnombreProvincia+.%0D%0A%09%09%3Fprovincia+geosparql%3AhasGeometry+%3FgeoProv+.%0D%0A%09%09%3FgeoProv+geosparql%3AasWKT+%3FgeoProvLocali+.%0D%0A%09%09%0D%0A%09%09%3Fmunicipio+a+esadm%3AMunicipio+.%0D%0A%09%09%3Fmunicipio+dc%3Atitle+%3FnombreMunicipio+.%0D%0A%09%09%3Fmunicipio+dc%3Aidentifier+%3FcodigoMunicipio+.%0D%0A%09%09%3Fmunicipio+geosparql%3AhasGeometry+%3FgeoMuni+.%0D%0A%09%09%3FgeoMuni+geosparql%3AasWKT+%3FgeoMuniLocali+.%0D%0A%09++FILTER+%28bif%3Ast_within%28%3FgeoMuniLocali%2C+%3FgeoProvLocali%29%29+.++%0D%0A%09%0D%0A%09%7D+ORDER+BY+ASC%28%3FnombreMunicipio%29&format=text%2Fhtml&timeout=0&debug=on" class="btn btn-secondary btn-sm" role="button" target="_blank">Ejecutar</a>
+				  </h5>
+				</div>
+
+				<div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+				  <div class="card-body">
+				  <p align="justify">Para poder generar esta consulta, hay que recuperar el recurso que representa la provincia de "Las Palmas", recuperar todos los recursos que representan municipios y filtrar por aquellos que se encuentren dentro de la provincia.
+				  <br><br>
+				  El primero paso se realizar recuperando el recurso de tipo esadm:Provincia con la etiqueta "Las Palmas". Una vez identificado, se recupera su geometría.
+				  <br><br>
+				  Después, se recuperan todos los recursos de tipo esadm:Municipio, así como las geometrías de cada uno de ellos.
+				  <br><br>
+				  Una vez se dispone de las geometrías de la provincia y de los municipios, se filtran usando la función geoespacial bif:st_within que indica si una geometría se encuentra dentro de otra. De esta manera, se recuperan los municipios que se encuentran "dentro" de la provincia de "Las Palmas".
+				  <br><br>
+				  A continuación se muestra la consulta generada para este caso de uso:
+				  </p>
+					<pre><code>	PREFIX esadm: &lt;http://vocab.linkeddata.es/datosabiertos/def/sector-publico/territorio#&gt;
+	PREFIX geosparql: &lt;http://www.opengis.net/ont/geosparql#&gt;
+	PREFIX dc: &lt;http://purl.org/dc/terms/&gt;
+	
+	SELECT DISTINCT ?codigoMunicipio ?nombreMunicipio 
+	WHERE {
+		?provincia a esadm:Provincia .
+		?provincia dc:title "Las Palmas" .
+		?provincia dc:title ?nombreProvincia .
+		?provincia geosparql:hasGeometry ?geoProv .
+		?geoProv geosparql:asWKT ?geoProvLocali .
+		
+		?municipio a esadm:Municipio .
+		?municipio dc:title ?nombreMunicipio .
+		?municipio dc:identifier ?codigoMunicipio .
+		?municipio geosparql:hasGeometry ?geoMuni .
+		?geoMuni geosparql:asWKT ?geoMuniLocali .
+		
+		FILTER (bif:st_within(?geoMuniLocali, ?geoProvLocali)) .  
+	
+	} ORDER BY ASC(?nombreMunicipio)
+	<br>
+	</code></pre>							
+				  </div>
+				  
+				</div>
+			  </div>
+			  <div class="card">
+				<div class="card-header" role="tab" id="headingTwo">
+				  <h5 class="mb-0">
+					<a class="collapsed" data-toggle="collapse" href="#collapseTwo" role="button" aria-expanded="false" aria-controls="collapseTwo">
+					  EJEMPLO: Pregunta: Lugares de interés a 1km a la redonda del municipio "Las Rozas de Madrid"
+					</a>&nbsp;&nbsp;<a href="https://datos.ign.es/sparql?default-graph-uri=&query=PREFIX+dc%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0A%09PREFIX+geosparql%3A+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23%3E%0D%0A%09PREFIX+btn100%3A%3Chttps%3A%2F%2Fdatos.ign.es%2Fdef%2Fbtn100%23%3E%0D%0A%0D%0A%09SELECT+DISTINCT+%3Fnombre+%3FgeoLugarLocali++WHERE%7B%0D%0A%09%09%3FuriNucleo+a+btn100%3ANucleoPoblacionSuperficial+.%0D%0A%09%09%3FuriNucleo+dc%3Atitle+%22Las+Rozas+de+Madrid%22+.%0D%0A%09%09%3FuriNucleo+geosparql%3AhasGeometry+%3FgeoNucleo+.%0D%0A%09%09%3FgeoNucleo+geosparql%3AasWKT+%3FgeoNucleoLocali+.%0D%0A%0D%0A%09%09%3FuriLugar+a+btn100%3ALugarDeInteres+.%0D%0A%09%09%3FuriLugar+dc%3Atitle+%3Fnombre+.%0D%0A%09%09%3FuriLugar+geosparql%3AhasGeometry+%3FgeoLugar+.%0D%0A%09%09%3FgeoLugar+geosparql%3AasWKT+%3FgeoLugarLocali+.%0D%0A%0D%0A%09%09FILTER+%28bif%3Ast_intersects%28%3FgeoLugarLocali%2C%3FgeoNucleoLocali%2C1%29%29%0D%0A%0D%0A%09%7DORDER+by+%28%3Fnombre%29&format=text%2Fhtml&timeout=0&debug=on" class="btn btn-secondary btn-sm" role="button" target="_blank">Ejecutar</a>
+				  </h5>
+				</div>
+				<div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+				  <div class="card-body">
+					  <p align="justify">Para poder generar esta consulta, hay que recuperar el recurso que representa el municipio de "Las Rozas de Madrid", recuperar todos los recursos que representan lugares de interés y filtrar por aquellos que se encuentren en un kilometro a la redonda del municipio.
+					  <br><br>
+					  El primero paso se realizar recuperando el recurso de tipo esadm:Municipio con la etiqueta "Las Rozas de Madrid". Una vez identificado, se recupera su geometría.
+					  <br><br>
+					  Después, se recuperan todos los recursos de tipo btn100:LugarDeInteres, así como las geometrías de cada uno de ellos.
+					  <br><br>
+					  Una vez se dispone de las geometrías del municipio y los lugares de interés, se filtran usando la función geoespacial bif:st_intersects que indica si dos geometrías intersecan, tienen algún punto en común, indicando la distancia máxima, en este caso 1 kilómetro. De esta manera, se recuperan los lugares de interés a 1 kilómetro del municipio de "Las Rozas de Madrid".
+					  <br><br>
+					  A continuación se muestra la consulta generada para este caso de uso:
+					  </p>
+					<pre><code>	PREFIX dc: &lt;http://purl.org/dc/terms/&gt;
+	PREFIX geosparql: &lt;http://www.opengis.net/ont/geosparql#&gt;
+	PREFIX btn100:&lt;https://datos.ign.es/def/btn100#&gt;
+
+	SELECT DISTINCT ?nombre ?geoLugarLocali  WHERE{
+		?uriNucleo a btn100:NucleoPoblacionSuperficial .
+		?uriNucleo dc:title "Las Rozas de Madrid" .
+		?uriNucleo geosparql:hasGeometry ?geoNucleo .
+		?geoNucleo geosparql:asWKT ?geoNucleoLocali .
+
+		?uriLugar a btn100:LugarDeInteres .
+		?uriLugar dc:title ?nombre .
+		?uriLugar geosparql:hasGeometry ?geoLugar .
+		?geoLugar geosparql:asWKT ?geoLugarLocali .
+
+		FILTER (bif:st_intersects(?geoLugarLocali,?geoNucleoLocali,1))
+
+	}ORDER by (?nombre)</code></pre>
+				  </div>
+				</div>
+			  </div>
+
+			</div>
+			
+		</div>
+		
+	</div>
+	<hr>
+      <footer class="footer">
+            <div class="row">
+    	<div class="col-md-8">
+    		Desarrollado por <a href="http://www.oeg-upm.net" target="_blank">Ontology Engineering Gruop (OEG)</a>
+	        <br>
+			Desarrollado usando <a target="_blank" href="http://getbootstrap.com/">Bootstrap</a>
+ 	        <br>
+	        Última revisión - Mayo 2022
+           <br><p><image src="images/logos/ccby4.png" alt="CC-BY 4.0"/>   Creative Commons Attribution 4.0 International License.</p>
+        </div>
+    	<div class="col-md-4">
+    		<a href="https://oeg.fi.upm.es/" target="_blank"><img src="images/logos/logooeg.png" alt="IGN logo" class="img-rounded" class="img-responsive" /></a>
+    	</div>
+      </div>
+      </footer>
+	</div> <!-- Container -->
+	<!-- cookies -->
+	<div id="overbox3">
+		<div id="infobox3">
+			<p>Esta web utiliza cookies para obtener datos estadísticos de la navegación de sus usuarios. Si continúas navegando consideramos que aceptas su uso.
+			<a href="http://www.ign.es/web/ign/portal/info-aviso-legal">Más información</a>
+			<a onclick="aceptar_cookies();" style="cursor:pointer;">X Cerrar</a></p>
+		</div>
+	</div>
+  </body>
+</html>

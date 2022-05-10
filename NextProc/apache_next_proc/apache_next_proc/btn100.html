@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <title>BTN100 - datos.ign.es</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Esta página describe la información semántica de los diferentes catálogos geográficos del IGN.">
+    <meta name="languaje" content="Spanish">
+    <meta name="author" content="Miguel García">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">	
+	<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.2.1.slim.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.js"></script>	
+	<!-- cookies -->
+	<link rel="stylesheet" href="css/cookie.css">
+	<script src="js/cookies.js" type="text/javascript"></script>
+	<script>
+	function send(f) {
+		var cadena = document.getElementById('default-graph-uri').value;
+		cadena ="SELECT DISTINCT ?s ?o WHERE {?s <http://purl.org/dc/terms/title> ?o . FILTER (regex(?o, \""+cadena+"\", \"i\"))}";
+		//f.query.value = cadena;
+		document.getElementById('query').value = cadena;
+		document.getElementById('default-graph-uri').value = '';
+		return true;
+	  
+	}
+
+</script>
+  </head>
+  <body>
+
+
+	<div class="container">
+		<div class="card text-center">
+		  <div class="card-header">
+			<ul class="nav nav-pills card-header-pills">
+			  <li class="nav-item">
+				<a class="nav-link" href="index.html">Inicio</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="catalogo.html">Catálogo de datos</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="sparql.html">Punto SPARQL</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="vocabularios.html">Vocabularios</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="casos-de-uso.html">Casos de uso</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link active" href="cpv.html">CPV Classificator</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="contacto.html">Contacto</a>
+			  </li>
+			</ul>
+		  </div>
+		</div>
+		<nav aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+			<li class="breadcrumb-item"><a href="catalogo.html">Catálogo de datos</a></li>
+			<li class="breadcrumb-item active" aria-current="page">BTN100</li>
+		  </ol>
+		</nav>
+	
+	<div class="row">
+		<div class="col-12">
+			<h1>Base Topográfica Nacional 1:100.000 (BTN100)</h1>
+			<hr>
+			<p align="justify">Base Topográfica Nacional 1:100.000 (BTN100) es un catálogo de datos geográficos agrupados por temáticas: unidades administrativas y zonas protegidas, relieve, hidrografía, poblaciones y construcciones, transportes, conducciones y energía y puntos de control.
+			Para más información sobre BTN100, puede descargar la <a href="http://centrodedescargas.cnig.es/CentroDescargas/documentos/Doc_auxiliar_BTN100.zip" target="_blank">información adicional</a> disponible en el <a href="http://centrodedescargas.cnig.es" target="_blank">Centro de Descargas del CNIG</a>.
+			</p>
+			<p align="justify">La ontología para la representación de los datos de la Base Topográfica Nacional a escala 1:100.000 fue generada en base al conjunto de datos BTN100 publicado por el IGN, las especificaciones del Catálogo de Objetos Geográficos para esta base topográfica y los requerimientos que fueron consensuados con los expertos del dominio. A partir de los insumos mencionados se detectaron las clases, relaciones e instancias que serían representados, tomando en consideración, en lo posible, la reutilización de ontologías existentes que permitan representar los elementos detectados y en caso contrario la generación de los restantes en la ontología. Como resultado de este proceso se generaron dos ontologías: <a href="https://datos.ign.es/def/geo_core" target="_blank">geo_core</a> y <a href="https://datos.ign.es/def/btn100" target="_blank">btn100</a>. La primera permite la representación de los atributos comunes a todos los objetos geográficos tomando como base a la ontología estándar GeoSPARQL. La segunda reutiliza geo_core y representa los diferentes tipos de objetos del catálogo, sus relaciones y tipos de datos. Para finalizar este proceso se generó la documentación de las dos ontologías en la que se explican, mediante diagramas y ejemplos, todos los elementos involucrados y su utilización.
+			Puede consultar la documentación completa sobre las ontologías en los siguientes enlaces: <a href="https://datos.ign.es/def/geo_core" target="_blank">geo_core</a> y <a href="https://datos.ign.es/def/btn100" target="_blank">btn100</a>.</p>
+			<p align="justify">Los recursos semánticos generados están disponibles en el siguiente <a href="https://datos.ign.es/sparql" target="_blank">SPARQL Endpoint</a> para su consulta y reutilización. Se pueden consultar los diferentes <b>casos de uso</b> disponibles en el siguiente <a href="casos-de-uso.html">enlace</a>. A continuación, se muestran unas consulta básicas de ejemplo, para consultas más complejas se recomienda visitar el apartado <a href="casos-de-uso.html">casos de uso</a>:</p>
+					
+			<div id="accordion" role="tablist">
+			  <div class="card">
+				<div class="card-header" role="tab" id="headingZero">
+				  <h5 class="mb-0">					
+					  Consultas básicas de SPARQL					
+				  </h5>
+				</div>
+
+				<div id="collapseZero" class="collapse show" role="tabpanel" aria-labelledby="headingZero" data-parent="#accordion">
+				  <div class="card-body">
+					  <ul>
+						<li><a href="https://datos.ign.es/sparql?default-graph-uri=&query=select+distinct+%3Fmunicipio+where+%7B%3Fmunicipio+a+%3Chttp%3A%2F%2Fvocab.linkeddata.es%2Fdatosabiertos%2Fdef%2Fsector-publico%2Fterritorio%23Municipio%3E%7D+LIMIT+100&format=text%2Fhtml&timeout=0&debug=on">Recuperar 100 municipios</a>
+						<pre><code>   select distinct ?municipio where <br>      {?municipio a &lt;http://vocab.linkeddata.es/datosabiertos/def/sector-publico/territorio#Municipio&gt;} LIMIT 100</code></pre>
+						</li>
+						<li><a href="https://datos.ign.es/sparql?default-graph-uri=&query=select+distinct+%3Fy+%3FConcept+where+%7B%3Chttps%3A%2F%2Fdatos.ign.es%2Frecurso%2Fbtn100%2Fmunicipio%2F06002%3E+%3Fy+%3FConcept%7D+LIMIT+100&format=text%2Fhtml&timeout=0&debug=on" >Recuperar el detalle de un municipio</a>
+						<pre><code>   select distinct ?obj ?pred where {&lt;https://datos.ign.es/recurso/btn100/municipio/06002&gt; ?obj ?pred}</code></pre>
+						</li>
+						<li><a href="https://datos.ign.es/sparql?default-graph-uri=&query=select+distinct+%3Fy+%3FConcept+where+%7B%3Chttps%3A%2F%2Fdatos.ign.es%2Frecurso%2Fbtn100%2Fmunicipio%2F06002%3E+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23hasGeometry%3E+%3Fgeo.%0D%0A%3Fgeo+%3Fy+%3FConcept%7D+LIMIT+100&format=text%2Fhtml&timeout=0&debug=on">Recuperar la geometría del municipio anterior</a>
+						<pre><code>   select distinct ?obj ?pred where {&lt;https://datos.ign.es/recurso/btn100/municipio/06002/geometry&gt; ?obj ?pred}</code></pre>
+						</li>
+						<li><a href="https://datos.ign.es/sparql?default-graph-uri=&query=SELECT+DISTINCT+%3Fs+%3Fo+WHERE+%7B%3Fs+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2Ftitle%3E+%3Fo+.+FILTER+%28regex%28%3Fo%2C+%27Ciudad+Real%27%2C+%27i%27%29%29%7D&format=text%2Fhtml&timeout=0&debug=on">Recursos que contienen un texto, por ejemplo "Ciudad Real"</a>
+						<pre><code>   select ?s ?o  <br>	where {?s &lt;http://purl.org/dc/terms/title&gt; ?o . <br>	FILTER (regex(?o, 'Ciudad Real', 'i'))}</code></pre>	
+<form id="form_sparql" action="https://datos.ign.es/sparql" method="GET" onsubmit="send(this)";> 
+					<input id="format" name="format" type="hidden" value="text/html"/>
+					<input id="query" name="query" type="hidden" value=""/>
+					Puedes buscar recursos que contengan, por ejemplo, el texto Ciudad Real:
+					<br>
+					<input id="default-graph-uri" name="default-graph-uri" label="query" value="Ciudad Real"/>
+					<input type="submit" value="Ejecutar consulta"/>
+				</form>						
+						</li>
+					</ul>											
+				  </div>
+				</div>
+			  </div>
+			  
+			</div>
+		</div>
+	
+	</div>
+	<hr>
+      <footer class="footer">
+            <div class="row">
+    	<div class="col-md-8">
+    		Desarrollado por 	        <a href="http://www.ign.es/" target="_blank">Instituto Geográfico Nacional (IGN)</a> y <a href="http://www.oeg-upm.net" target="_blank">Ontology Engineering Gruop (OEG)</a>
+	        <br>
+			Desarrollado usando <a target="_blank" href="http://getbootstrap.com/">Bootstrap</a>
+ 	        <br>
+	        Última revisión - Enero 2018
+           <br><p><image src="images/logos/ccby4.png" alt="CC-BY 4.0"/>   Creative Commons Attribution 4.0 International License.</p>
+        </div>
+    	<div class="col-md-4">
+    		<a href="http://www.ign.es/" target="_blank"><img src="images/logos/IGN-Logo-Fomento.png" alt="IGN logo" class="img-rounded" class="img-responsive" /></a>
+    	</div>
+      </div>
+      </footer>
+	</div> <!-- Container -->
+	<!-- cookies -->
+	<div id="overbox3">
+		<div id="infobox3">
+			<p>Esta web utiliza cookies para obtener datos estadísticos de la navegación de sus usuarios. Si continúas navegando consideramos que aceptas su uso.
+			<a href="http://www.ign.es/web/ign/portal/info-aviso-legal">Más información</a>
+			<a onclick="aceptar_cookies();" style="cursor:pointer;">X Cerrar</a></p>
+		</div>
+	</div>
+  </body>
+</html>

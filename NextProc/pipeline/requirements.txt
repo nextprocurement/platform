@@ -1,0 +1,8 @@
+requests 
+dpath 
+xmltodict 
+python-dotenv 
+morph-kgc
+fastAPI
+uvicorn
+python-multipart
