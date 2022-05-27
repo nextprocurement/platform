@@ -23,8 +23,8 @@ services:
       SPARQL_UPDATE: "true"
       DEFAULT_GRAPH: "http://www.example.com/my-graph"
       DBA_PASSWORD: "dba"
-      VIRT_Parameters_NumberOfBuffers: 2720000
-      VIRT_Parameters_MaxDirtyBuffers: 2000000
+      VIRT_Parameters_NumberOfBuffers: 680000
+      VIRT_Parameters_MaxDirtyBuffers: 500000
       VIRT_Parameters_ThreadCleanupInterval: 0
       VIRT_Parameters_ThreadThreshold: 0
       VIRT_Database_MaxCheckpointRemap: 150000
@@ -60,7 +60,7 @@ services:
 
 networks:
   virtuoso:
-    name: virtuoso_platform
+    #name: virtuoso_platform
 
 volumes: 
   pipeline_input_data:
