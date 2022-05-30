@@ -56,7 +56,7 @@ services:
         - log:/mnt/log
       networks: 
        - virtuoso
-      #restart: always
+      restart: always
 
 networks:
   virtuoso:
