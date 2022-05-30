@@ -10,7 +10,7 @@ services:
       PLATFORM_IP: 'virtuoso'
       LOG4J_FORMAT_MSG_NO_LOOKUPS: "true"
     ports:
-      - "0.0.0.0:8080:80"
+      - "8080:80"
     networks:
       - virtuoso
     #restart: always
@@ -44,7 +44,7 @@ services:
       container_name: pipeline
       build: ./pipeline
       ports:
-        - '0.0.0.0:5050:5050'
+        - '5050:5050'
       environment:
         API_PORT: 5050
         PLATFORM_IP: 'virtuoso'
@@ -60,7 +60,7 @@ services:
 
 networks:
   virtuoso:
-    #name: virtuoso_platform
+    name: virtuoso_platform
 
 volumes: 
   pipeline_input_data:
