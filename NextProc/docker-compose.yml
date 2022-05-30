@@ -60,7 +60,7 @@ services:
 
 networks:
   virtuoso:
-    name: virtuoso_platform
+    #name: virtuoso_platform
 
 volumes: 
   pipeline_input_data:
