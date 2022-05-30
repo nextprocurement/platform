@@ -8,7 +8,7 @@ import shutil
 from pathlib import Path
 import os 
 
-API_PORT = os.environ['API_PORT']
+API_PORT = float(os.environ['API_PORT'])
 LOG_LEVEL = os.environ['LOG_LEVEL']
 
 app = FastAPI()
