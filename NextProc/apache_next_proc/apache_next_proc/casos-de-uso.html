@@ -85,22 +85,22 @@
 				<div class="card-header" role="tab" id="headingOne">
 				  <h5 class="mb-0">
 					<a data-toggle="collapse" href="#collapseOne" role="button" aria-expanded="false" aria-controls="collapseOne">
-					  EJEMPLO: Pregunta: ¿Cuáles son los municipios de la provincia de Las Palmas?
+					  EJEMPLO: Pregunta: ¿Cuantas contrataciones publicas salieron a concurso publico en España en 2021?
 					</a>&nbsp;&nbsp;<a href="https://datos.ign.es/sparql?default-graph-uri=&query=PREFIX+esadm%3A+%3Chttp%3A%2F%2Fvocab.linkeddata.es%2Fdatosabiertos%2Fdef%2Fsector-publico%2Fterritorio%23%3E%0D%0A%09PREFIX+geosparql%3A+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23%3E%0D%0A%09PREFIX+dc%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0A%09%0D%0A%09SELECT+DISTINCT+%3FcodigoMunicipio+%3FnombreMunicipio+%0D%0A%09WHERE+%7B%0D%0A%09%09%3Fprovincia+a+esadm%3AProvincia+.%0D%0A%09%09%3Fprovincia+dc%3Atitle+%22Las+Palmas%22+.%0D%0A%09%09%3Fprovincia+dc%3Atitle+%3FnombreProvincia+.%0D%0A%09%09%3Fprovincia+geosparql%3AhasGeometry+%3FgeoProv+.%0D%0A%09%09%3FgeoProv+geosparql%3AasWKT+%3FgeoProvLocali+.%0D%0A%09%09%0D%0A%09%09%3Fmunicipio+a+esadm%3AMunicipio+.%0D%0A%09%09%3Fmunicipio+dc%3Atitle+%3FnombreMunicipio+.%0D%0A%09%09%3Fmunicipio+dc%3Aidentifier+%3FcodigoMunicipio+.%0D%0A%09%09%3Fmunicipio+geosparql%3AhasGeometry+%3FgeoMuni+.%0D%0A%09%09%3FgeoMuni+geosparql%3AasWKT+%3FgeoMuniLocali+.%0D%0A%09++FILTER+%28bif%3Ast_within%28%3FgeoMuniLocali%2C+%3FgeoProvLocali%29%29+.++%0D%0A%09%0D%0A%09%7D+ORDER+BY+ASC%28%3FnombreMunicipio%29&format=text%2Fhtml&timeout=0&debug=on" class="btn btn-secondary btn-sm" role="button" target="_blank">Ejecutar</a>
 				  </h5>
 				</div>
 
 				<div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
 				  <div class="card-body">
-				  <p align="justify">Para poder generar esta consulta, hay que recuperar el recurso que representa la provincia de "Las Palmas", recuperar todos los recursos que representan municipios y filtrar por aquellos que se encuentren dentro de la provincia.
+				  <p align="justify">Es un ejemplo.
 				  <br><br>
-				  El primero paso se realizar recuperando el recurso de tipo esadm:Provincia con la etiqueta "Las Palmas". Una vez identificado, se recupera su geometría.
+				  Cuando tengamos los datos podremos construir consultas de ejemplo explicadas ejecutables.
 				  <br><br>
-				  Después, se recuperan todos los recursos de tipo esadm:Municipio, así como las geometrías de cada uno de ellos.
+				  Despues de definirlas previamente.
 				  <br><br>
-				  Una vez se dispone de las geometrías de la provincia y de los municipios, se filtran usando la función geoespacial bif:st_within que indica si una geometría se encuentra dentro de otra. De esta manera, se recuperan los municipios que se encuentran "dentro" de la provincia de "Las Palmas".
+				  lore ipsum
 				  <br><br>
-				  A continuación se muestra la consulta generada para este caso de uso:
+				  lore ipsum:
 				  </p>
 					<pre><code>	PREFIX esadm: &lt;http://vocab.linkeddata.es/datosabiertos/def/sector-publico/territorio#&gt;
 	PREFIX geosparql: &lt;http://www.opengis.net/ont/geosparql#&gt;
@@ -133,21 +133,21 @@
 				<div class="card-header" role="tab" id="headingTwo">
 				  <h5 class="mb-0">
 					<a class="collapsed" data-toggle="collapse" href="#collapseTwo" role="button" aria-expanded="false" aria-controls="collapseTwo">
-					  EJEMPLO: Pregunta: Lugares de interés a 1km a la redonda del municipio "Las Rozas de Madrid"
+					  EJEMPLO: Pregunta: Otra pregunta tipo
 					</a>&nbsp;&nbsp;<a href="https://datos.ign.es/sparql?default-graph-uri=&query=PREFIX+dc%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0A%09PREFIX+geosparql%3A+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23%3E%0D%0A%09PREFIX+btn100%3A%3Chttps%3A%2F%2Fdatos.ign.es%2Fdef%2Fbtn100%23%3E%0D%0A%0D%0A%09SELECT+DISTINCT+%3Fnombre+%3FgeoLugarLocali++WHERE%7B%0D%0A%09%09%3FuriNucleo+a+btn100%3ANucleoPoblacionSuperficial+.%0D%0A%09%09%3FuriNucleo+dc%3Atitle+%22Las+Rozas+de+Madrid%22+.%0D%0A%09%09%3FuriNucleo+geosparql%3AhasGeometry+%3FgeoNucleo+.%0D%0A%09%09%3FgeoNucleo+geosparql%3AasWKT+%3FgeoNucleoLocali+.%0D%0A%0D%0A%09%09%3FuriLugar+a+btn100%3ALugarDeInteres+.%0D%0A%09%09%3FuriLugar+dc%3Atitle+%3Fnombre+.%0D%0A%09%09%3FuriLugar+geosparql%3AhasGeometry+%3FgeoLugar+.%0D%0A%09%09%3FgeoLugar+geosparql%3AasWKT+%3FgeoLugarLocali+.%0D%0A%0D%0A%09%09FILTER+%28bif%3Ast_intersects%28%3FgeoLugarLocali%2C%3FgeoNucleoLocali%2C1%29%29%0D%0A%0D%0A%09%7DORDER+by+%28%3Fnombre%29&format=text%2Fhtml&timeout=0&debug=on" class="btn btn-secondary btn-sm" role="button" target="_blank">Ejecutar</a>
 				  </h5>
 				</div>
 				<div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
 				  <div class="card-body">
 					  <p align="justify">Para poder generar esta consulta, hay que recuperar el recurso que representa el municipio de "Las Rozas de Madrid", recuperar todos los recursos que representan lugares de interés y filtrar por aquellos que se encuentren en un kilometro a la redonda del municipio.
+					  <<br><br>
+					  Cuando tengamos los datos podremos construir consultas de ejemplo explicadas ejecutables.
 					  <br><br>
-					  El primero paso se realizar recuperando el recurso de tipo esadm:Municipio con la etiqueta "Las Rozas de Madrid". Una vez identificado, se recupera su geometría.
+					  Despues de definirlas previamente.
 					  <br><br>
-					  Después, se recuperan todos los recursos de tipo btn100:LugarDeInteres, así como las geometrías de cada uno de ellos.
+					  lore ipsum
 					  <br><br>
-					  Una vez se dispone de las geometrías del municipio y los lugares de interés, se filtran usando la función geoespacial bif:st_intersects que indica si dos geometrías intersecan, tienen algún punto en común, indicando la distancia máxima, en este caso 1 kilómetro. De esta manera, se recuperan los lugares de interés a 1 kilómetro del municipio de "Las Rozas de Madrid".
-					  <br><br>
-					  A continuación se muestra la consulta generada para este caso de uso:
+					  lore ipsum:
 					  </p>
 					<pre><code>	PREFIX dc: &lt;http://purl.org/dc/terms/&gt;
 	PREFIX geosparql: &lt;http://www.opengis.net/ont/geosparql#&gt;
