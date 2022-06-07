@@ -46,7 +46,7 @@ services:
       ports:
         - '192.168.122.175:5000:5000'
       environment:
-        API_PORT: 5050
+        API_PORT: 5000
         PLATFORM_IP: 'virtuoso'
         LOG_DIR: "/mnt/log"
         LOG_LEVEL: "info"
