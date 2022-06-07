@@ -259,6 +259,42 @@ def publish_rdfAPI(start_date, end_date, input_folder):
         start = start + timedelta(days=1) # Increase date by one day
         return("publish_duration_in_seconds", str(duration_in_seconds))
 
+def publish_rdfAPI_noDate(input_folder):
+    global stats_publish
+
+    logging.basicConfig(level=config.logging["level"])
+
+    logging.debug("publish_rdf.py: input_folder = " + input_folder)
+
+    process_start_time = datetime.now()
+
+    dirPath = input_folder
+    
+    rdf_data = b''
+
+    if os.path.isdir(dirPath):
+        for filename in os.listdir(dirPath):
+            filePath = os.path.join(dirPath, filename)
+            ext = os.path.splitext(filePath)[-1].lower()
+            if (ext == ".nt"):
+                rdf_data = rdf_data + read_rdf_data(filePath)
+                
+                # Update statistics
+                tbfy.statistics.update_stats_count(stats_publish, "number_of_files")
+                tbfy.statistics.update_stats_add(stats_publish, "number_of_triples", number_of_triples(filePath))
+
+            logging.info("publish_rdf.py: " + filename)
+
+            publish_rdf(rdf_data)
+
+    process_end_time = datetime.now()
+    duration_in_seconds = (process_end_time - process_start_time).total_seconds()
+    tbfy.statistics.update_stats_value(stats_publish, "publish_duration_in_seconds", duration_in_seconds)
+    write_stats(dirPath) # Write statistics
+    reset_stats() # Reset statistics for next folder date
+
+    return("publish_duration_in_seconds", str(duration_in_seconds))
+
 # *****************
 # Run main function
 # *****************

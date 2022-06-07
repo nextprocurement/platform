@@ -3,6 +3,9 @@ from typing import Optional
 from json2xml import json2xmlAPI
 from xml2rdf_morph import xml2rdfAPI
 from publish_rdf import publish_rdfAPI
+from json2xml import json2xmlAPI_noDate
+from xml2rdf_morph import xml2rdfAPI_noDate
+from publish_rdf import publish_rdfAPI_noDate
 import uvicorn
 import shutil
 from pathlib import Path
@@ -21,6 +24,45 @@ app = FastAPI()
 #@app.get("/items/{item_id}")
 #def read_item(item_id: int, q: Optional[str] = None):
 #    return {"item_id": item_id, "q": q}
+
+@app.post("/pipeline/{item_id}")
+def pipeline(upload_files: list[UploadFile], destination: Path) -> None:
+    for upload_file in upload_files:
+        try:
+            destination_for_file = Path(str(destination) + "/files/" + upload_file.filename)
+            if not os.path.exists(destination):
+                try:
+                    os.mkdir(destination)
+                except OSError:
+                    print("Creation of the directory %s failed" % destination)
+                else:
+                    print("Successfully created the directory %s " % destination)
+
+            destination_file = Path(str(destination) + "/files/")
+            if not os.path.exists(destination_file):
+                try:
+                    os.mkdir(destination_file)
+                except OSError:
+                    print("Creation of the directory %s failed" % destination_file)
+                else:
+                    print("Successfully created the directory %s " % destination_file)
+            
+            with destination_for_file.open("wb") as buffer:
+                shutil.copyfileobj(upload_file.file, buffer)
+        finally:
+            upload_file.file.close()
+    
+    input_folder = str(destination) + "/files/"
+    output_folder = str(destination) + "/xml/"
+    value_json2xml = json2xmlAPI_noDate(input_folder, output_folder)
+    input_folder = output_folder
+    output_folder = str(destination) + "/rdf/"
+    value_xml2rdf = xml2rdfAPI_noDate(input_folder, output_folder)
+    input_folder = output_folder
+    value_publishrdf = publish_rdfAPI_noDate(input_folder)
+
+    return {"json2xml: " + str(value_json2xml) + " | xml2rdf: " + str(value_xml2rdf) + " | publish: " + str(value_publishrdf)}
+
 
 @app.post("/uploadfiles/{item_id}")
 def save_upload_file(upload_files: list[UploadFile], destination: Path) -> None:

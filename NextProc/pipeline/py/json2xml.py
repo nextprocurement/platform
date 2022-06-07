@@ -172,6 +172,44 @@ def json2xmlAPI(start_date, end_date, input_folder, output_folder):
         start = start + timedelta(days=1) # Increase date by one day
         return("files_processed_duration_in_seconds" + str(duration_in_seconds))
 
+
+
+def json2xmlAPI_noDate(input_folder, output_folder):
+    global stats_files
+
+    logging.basicConfig(level=config.logging["level"])
+    
+    logging.debug("json2xml.py: input_folder = " + input_folder)
+    logging.debug("json2xml.py: output_folder = " + output_folder)
+
+    process_start_time = datetime.now()
+
+    dirPath = input_folder
+    outputDirPath = output_folder
+    if os.path.isdir(dirPath):
+        if not os.path.exists(outputDirPath):
+            os.makedirs(outputDirPath)
+        for filename in os.listdir(dirPath):
+            inputFilePath = os.path.join(dirPath, filename)
+            ext = os.path.splitext(inputFilePath)[-1].lower()
+            if (ext == ".json"):
+                xml_filename = os.path.splitext(filename)[0] + '.xml'
+                outputFilePath = os.path.join(outputDirPath, xml_filename)
+                logging.info("json2xml.py: file = " + outputFilePath)
+                json_dict = tbfy.json_utils.read_jsonfile(inputFilePath)
+                json_dict_one_root = {'root': json_dict}
+                tbfy.json_utils.write_xmlfile(tbfy.json_utils.convert_to_xml(json_dict_one_root), outputFilePath)
+                tbfy.statistics.update_stats_count(stats_files, "number_of_files")
+
+        process_end_time = datetime.now()
+        duration_in_seconds = (process_end_time - process_start_time).total_seconds()
+        tbfy.statistics.update_stats_value(stats_files, "files_processed_duration_in_seconds", duration_in_seconds)
+        
+        write_stats(outputDirPath) # Write statistics
+        reset_stats() # Reset statistics for next folder date
+
+        return("files_processed_duration_in_seconds" + str(duration_in_seconds))
+
 # *****************
 # Run main function
 # *****************

@@ -216,7 +216,62 @@ def xml2rdfAPI(start_date, end_date, input_folder, output_folder):
         start = start + timedelta(days=1) # Increase date by one day
         return("files_processed_duration_in_seconds", str(duration_in_seconds))
 
+def xml2rdfAPI_noDate(input_folder, output_folder):
+    global stats_xml2rdf
 
+    rml_folder = "/pipeline/rml-mappings"
+
+    logging.basicConfig(level=config.logging["level"])
+
+    logging.debug("xml2rdf_morph.py: input_folder = " + input_folder)
+    logging.debug("xml2rdf_morph.py: output_folder = " + output_folder)
+
+    mapping_filename = config.rml["mapping_filename"]
+
+    logging.debug("xml2rdf_morph.py: mapping_filename = " + mapping_filename)
+
+    process_start_time = datetime.now()
+
+    dirPath = input_folder
+    outputDirPath = output_folder
+    if os.path.isdir(dirPath):
+        if not os.path.exists(outputDirPath):
+            os.makedirs(outputDirPath)
+        for filename in os.listdir(dirPath):
+            name, extension = os.path.splitext(filename)
+            if (not extension.lower() == ".txt"):
+                filePath = os.path.join(dirPath, filename)
+                outputFilePath = os.path.join(outputDirPath, str(filename).replace(".xml", ".nt"))
+                logging.info("xml2rdf_morph.py: file = " + outputFilePath)
+
+                release_start_time = datetime.now()
+
+                # configuration file
+                config_morph = """
+                        [DataSourceXML]
+                        file_path=""" + dirPath + "/" + filename +"""
+                        mappings=""" + rml_folder + "/" + mapping_filename
+
+                logging.debug(config_morph)
+
+                # generate the triples and load them to an RDFlib graph
+                graph = morph_kgc.materialize(config_morph)
+
+                graph.serialize(destination=outputFilePath, format='nt')
+
+                release_end_time = datetime.now()
+                release_duration_in_seconds = (release_end_time - release_start_time).total_seconds()
+                tbfy.statistics.update_stats_add(stats_xml2rdf, "release_files_processed_duration_in_seconds", release_duration_in_seconds)
+                tbfy.statistics.update_stats_count(stats_xml2rdf, "number_of_release_files")
+                tbfy.statistics.update_stats_count(stats_xml2rdf, "number_of_files")
+
+        process_end_time = datetime.now()
+        duration_in_seconds = (process_end_time - process_start_time).total_seconds()
+        tbfy.statistics.update_stats_value(stats_xml2rdf, "files_processed_duration_in_seconds", duration_in_seconds)
+        write_stats(outputDirPath) # Write statistics
+        reset_stats() # Reset statistics for next folder date
+
+        return("files_processed_duration_in_seconds", str(duration_in_seconds))
 
 
 # *****************
