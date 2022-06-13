@@ -14,7 +14,69 @@ import os
 API_PORT = float(os.environ['API_PORT'])
 LOG_LEVEL = os.environ['LOG_LEVEL']
 
-app = FastAPI()
+description = """
+Next Procurement es un proyecto que pretende reutilizar y armonizar
+las enormes cantidades de datos abiertos sobre contratación pública disponibles 
+en el portal de datos de la UE en combinación con los conjuntos de datos abiertos 
+sobre contratación pública de los portales de los Estados miembros.
+
+## Next Procurement API
+
+Esta API aloja el entrypoint de la pipeline de ingesta de documentos. Proporciona 
+servicio de subida y procesamiento de documentos para su porterior inclusion en
+el sistema de almacenamiento en formato rdf 
+
+## Servicios
+
+Los servicios disponibles son
+
+* **pipeline**: Este servicio permite subir, procesar y publicar datos en el servidor con una simple llamada y los datos.
+* **uploadfiles**: Servicio de subida de documentos.
+* **json2xmlAPI**: Servicio de transformacion de json a xml.
+* **xml3rdfAPI**: Servicio construccion del grafo de conocimiento empleando la herrmienta morph-kgc.
+* **publish_rdfAPI**: Servicio de publicacion de datos rdf en el servidor de almacenamiento de NextProcurement.
+"""
+
+tags_metadata = [
+    {
+        "name": "pipeline",
+        "description": "Este servicio permite subir, procesar y publicar datos en el servidor con una simple llamada y los datos.",
+    },
+    {
+        "name": "uploadfiles",
+        "description": "Servicio de subida de documentos.",
+    },
+    {
+        "name": "json2xmlAPI",
+        "description": "Servicio de transformacion de json a xml.",
+    },
+    {
+        "name": "xml2rdfAPI",
+        "description": "Servicio construccion del grafo de conocimiento empleando la herrmienta morph-kgc.",
+    },
+    {
+        "name": "publish_rdfAPI",
+        "description": "Servicio de publicacion de datos rdf en el servidor de almacenamiento de NextProcurement.",
+    },
+]
+
+app = FastAPI(
+    title="Next Procurement",
+    description=description,
+    version="0.0.1",
+    
+    #terms_of_service="http://example.com/terms/",
+    #contact={
+    #    "name": "Deadpoolio the Amazing",
+    #    "url": "http://x-force.example.com/contact/",
+    #    "email": "dp@x-force.example.com",
+    #},
+    #license_info={
+    #    "name": "Apache 2.0",
+    #    "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
+    #},
+    openapi_tags=tags_metadata,
+)
 
 #
 #@app.get("/")
@@ -25,7 +87,7 @@ app = FastAPI()
 #def read_item(item_id: int, q: Optional[str] = None):
 #    return {"item_id": item_id, "q": q}
 
-@app.post("/pipeline/{item_id}")
+@app.post("/pipeline/{item_id}",  tags=["pipeline"])
 def pipeline(upload_files: list[UploadFile], destination: Path) -> None:
     for upload_file in upload_files:
         try:
@@ -64,7 +126,7 @@ def pipeline(upload_files: list[UploadFile], destination: Path) -> None:
     return {"json2xml: " + str(value_json2xml) + " | xml2rdf: " + str(value_xml2rdf) + " | publish: " + str(value_publishrdf)}
 
 
-@app.post("/uploadfiles/{item_id}")
+@app.post("/uploadfiles/{item_id}",  tags=["uploadfiles"])
 def save_upload_file(upload_files: list[UploadFile], destination: Path) -> None:
     for upload_file in upload_files:
         try:
@@ -81,17 +143,17 @@ def save_upload_file(upload_files: list[UploadFile], destination: Path) -> None:
         finally:
             upload_file.file.close()
 
-@app.get("/json2xmlAPI/{item_id}")
+@app.get("/json2xmlAPI/{item_id}",  tags=["json2xmlAPI"])
 def read_item(start_date: str, end_date: str, input_folder:str, output_folder:str):
     value = json2xmlAPI(start_date, end_date, input_folder, output_folder)
     return {"json2xml final value": value}
 
-@app.get("/xml2rdfAPI/{item_id}")
+@app.get("/xml2rdfAPI/{item_id}",  tags=["xml2rdfAPI"])
 def read_item(start_date: str, end_date: str, input_folder:str, output_folder:str):
     value = xml2rdfAPI(start_date, end_date, input_folder, output_folder)
     return {"xml2rdf final value": value}
 
-@app.get("/publish_rdfAPI/{item_id}")
+@app.get("/publish_rdfAPI/{item_id}",  tags=["publish_rdfAPI"])
 def read_item(start_date: str, end_date: str, input_folder:str):
     value = publish_rdfAPI(start_date, end_date, input_folder)
     return {"publish_rdf final value": value}

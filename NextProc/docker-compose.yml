@@ -44,7 +44,7 @@ services:
       container_name: pipeline
       build: ./pipeline
       ports:
-        - '192.168.122.175:5000:5000'
+        - '5000:5000'
       environment:
         API_PORT: 5000
         PLATFORM_IP: 'virtuoso'
