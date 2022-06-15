@@ -47,7 +47,7 @@
 				<a class="nav-link active" href="#">Casos de uso</a>
 			  </li>
 			  <li class="nav-item">
-				<a class="nav-link" href="cpv.html">CPV Classificator</a>
+				<a class="nav-link" href="servicios.html">Servicios</a>
 			  </li>
 			  <li class="nav-item">
 				<a class="nav-link" href="contacto.html">Contacto</a>
@@ -86,7 +86,7 @@
 				  <h5 class="mb-0">
 					<a data-toggle="collapse" href="#collapseOne" role="button" aria-expanded="false" aria-controls="collapseOne">
 					  EJEMPLO: Pregunta: ¿Cuantas contrataciones publicas salieron a concurso publico en España en 2021?
-					</a>&nbsp;&nbsp;<a href="https://datos.ign.es/sparql?default-graph-uri=&query=PREFIX+esadm%3A+%3Chttp%3A%2F%2Fvocab.linkeddata.es%2Fdatosabiertos%2Fdef%2Fsector-publico%2Fterritorio%23%3E%0D%0A%09PREFIX+geosparql%3A+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23%3E%0D%0A%09PREFIX+dc%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0A%09%0D%0A%09SELECT+DISTINCT+%3FcodigoMunicipio+%3FnombreMunicipio+%0D%0A%09WHERE+%7B%0D%0A%09%09%3Fprovincia+a+esadm%3AProvincia+.%0D%0A%09%09%3Fprovincia+dc%3Atitle+%22Las+Palmas%22+.%0D%0A%09%09%3Fprovincia+dc%3Atitle+%3FnombreProvincia+.%0D%0A%09%09%3Fprovincia+geosparql%3AhasGeometry+%3FgeoProv+.%0D%0A%09%09%3FgeoProv+geosparql%3AasWKT+%3FgeoProvLocali+.%0D%0A%09%09%0D%0A%09%09%3Fmunicipio+a+esadm%3AMunicipio+.%0D%0A%09%09%3Fmunicipio+dc%3Atitle+%3FnombreMunicipio+.%0D%0A%09%09%3Fmunicipio+dc%3Aidentifier+%3FcodigoMunicipio+.%0D%0A%09%09%3Fmunicipio+geosparql%3AhasGeometry+%3FgeoMuni+.%0D%0A%09%09%3FgeoMuni+geosparql%3AasWKT+%3FgeoMuniLocali+.%0D%0A%09++FILTER+%28bif%3Ast_within%28%3FgeoMuniLocali%2C+%3FgeoProvLocali%29%29+.++%0D%0A%09%0D%0A%09%7D+ORDER+BY+ASC%28%3FnombreMunicipio%29&format=text%2Fhtml&timeout=0&debug=on" class="btn btn-secondary btn-sm" role="button" target="_blank">Ejecutar</a>
+					</a>&nbsp;&nbsp;<a href="https://NextProcurement/sparql?default-graph-uri=&query=PREFIX+esadm%3A+%3Chttp%3A%2F%2Fvocab.linkeddata.es%2Fdatosabiertos%2Fdef%2Fsector-publico%2Fterritorio%23%3E%0D%0A%09PREFIX+geosparql%3A+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23%3E%0D%0A%09PREFIX+dc%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0A%09%0D%0A%09SELECT+DISTINCT+%3FcodigoMunicipio+%3FnombreMunicipio+%0D%0A%09WHERE+%7B%0D%0A%09%09%3Fprovincia+a+esadm%3AProvincia+.%0D%0A%09%09%3Fprovincia+dc%3Atitle+%22Las+Palmas%22+.%0D%0A%09%09%3Fprovincia+dc%3Atitle+%3FnombreProvincia+.%0D%0A%09%09%3Fprovincia+geosparql%3AhasGeometry+%3FgeoProv+.%0D%0A%09%09%3FgeoProv+geosparql%3AasWKT+%3FgeoProvLocali+.%0D%0A%09%09%0D%0A%09%09%3Fmunicipio+a+esadm%3AMunicipio+.%0D%0A%09%09%3Fmunicipio+dc%3Atitle+%3FnombreMunicipio+.%0D%0A%09%09%3Fmunicipio+dc%3Aidentifier+%3FcodigoMunicipio+.%0D%0A%09%09%3Fmunicipio+geosparql%3AhasGeometry+%3FgeoMuni+.%0D%0A%09%09%3FgeoMuni+geosparql%3AasWKT+%3FgeoMuniLocali+.%0D%0A%09++FILTER+%28bif%3Ast_within%28%3FgeoMuniLocali%2C+%3FgeoProvLocali%29%29+.++%0D%0A%09%0D%0A%09%7D+ORDER+BY+ASC%28%3FnombreMunicipio%29&format=text%2Fhtml&timeout=0&debug=on" class="btn btn-secondary btn-sm" role="button" target="_blank">Ejecutar</a>
 				  </h5>
 				</div>
 
@@ -134,7 +134,7 @@
 				  <h5 class="mb-0">
 					<a class="collapsed" data-toggle="collapse" href="#collapseTwo" role="button" aria-expanded="false" aria-controls="collapseTwo">
 					  EJEMPLO: Pregunta: Otra pregunta tipo
-					</a>&nbsp;&nbsp;<a href="https://datos.ign.es/sparql?default-graph-uri=&query=PREFIX+dc%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0A%09PREFIX+geosparql%3A+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23%3E%0D%0A%09PREFIX+btn100%3A%3Chttps%3A%2F%2Fdatos.ign.es%2Fdef%2Fbtn100%23%3E%0D%0A%0D%0A%09SELECT+DISTINCT+%3Fnombre+%3FgeoLugarLocali++WHERE%7B%0D%0A%09%09%3FuriNucleo+a+btn100%3ANucleoPoblacionSuperficial+.%0D%0A%09%09%3FuriNucleo+dc%3Atitle+%22Las+Rozas+de+Madrid%22+.%0D%0A%09%09%3FuriNucleo+geosparql%3AhasGeometry+%3FgeoNucleo+.%0D%0A%09%09%3FgeoNucleo+geosparql%3AasWKT+%3FgeoNucleoLocali+.%0D%0A%0D%0A%09%09%3FuriLugar+a+btn100%3ALugarDeInteres+.%0D%0A%09%09%3FuriLugar+dc%3Atitle+%3Fnombre+.%0D%0A%09%09%3FuriLugar+geosparql%3AhasGeometry+%3FgeoLugar+.%0D%0A%09%09%3FgeoLugar+geosparql%3AasWKT+%3FgeoLugarLocali+.%0D%0A%0D%0A%09%09FILTER+%28bif%3Ast_intersects%28%3FgeoLugarLocali%2C%3FgeoNucleoLocali%2C1%29%29%0D%0A%0D%0A%09%7DORDER+by+%28%3Fnombre%29&format=text%2Fhtml&timeout=0&debug=on" class="btn btn-secondary btn-sm" role="button" target="_blank">Ejecutar</a>
+					</a>&nbsp;&nbsp;<a href="https://NextProcurement/sparql?default-graph-uri=&query=PREFIX+dc%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0A%09PREFIX+geosparql%3A+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23%3E%0D%0A%09PREFIX+btn100%3A%3Chttps%3A%2F%2FNextProcurement%2Fdef%2Fbtn100%23%3E%0D%0A%0D%0A%09SELECT+DISTINCT+%3Fnombre+%3FgeoLugarLocali++WHERE%7B%0D%0A%09%09%3FuriNucleo+a+btn100%3ANucleoPoblacionSuperficial+.%0D%0A%09%09%3FuriNucleo+dc%3Atitle+%22Las+Rozas+de+Madrid%22+.%0D%0A%09%09%3FuriNucleo+geosparql%3AhasGeometry+%3FgeoNucleo+.%0D%0A%09%09%3FgeoNucleo+geosparql%3AasWKT+%3FgeoNucleoLocali+.%0D%0A%0D%0A%09%09%3FuriLugar+a+btn100%3ALugarDeInteres+.%0D%0A%09%09%3FuriLugar+dc%3Atitle+%3Fnombre+.%0D%0A%09%09%3FuriLugar+geosparql%3AhasGeometry+%3FgeoLugar+.%0D%0A%09%09%3FgeoLugar+geosparql%3AasWKT+%3FgeoLugarLocali+.%0D%0A%0D%0A%09%09FILTER+%28bif%3Ast_intersects%28%3FgeoLugarLocali%2C%3FgeoNucleoLocali%2C1%29%29%0D%0A%0D%0A%09%7DORDER+by+%28%3Fnombre%29&format=text%2Fhtml&timeout=0&debug=on" class="btn btn-secondary btn-sm" role="button" target="_blank">Ejecutar</a>
 				  </h5>
 				</div>
 				<div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
@@ -151,7 +151,7 @@
 					  </p>
 					<pre><code>	PREFIX dc: &lt;http://purl.org/dc/terms/&gt;
 	PREFIX geosparql: &lt;http://www.opengis.net/ont/geosparql#&gt;
-	PREFIX btn100:&lt;https://datos.ign.es/def/btn100#&gt;
+	PREFIX btn100:&lt;https://NextProcurement/def/btn100#&gt;
 
 	SELECT DISTINCT ?nombre ?geoLugarLocali  WHERE{
 		?uriNucleo a btn100:NucleoPoblacionSuperficial .
