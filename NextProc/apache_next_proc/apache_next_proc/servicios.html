@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <title>CPV Classifier</title>
+    <title>Servicios</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Esta página recoge las caracteristicas del classificador de códigos CPV desarrollado para el proyecto Next Procurement">
+    <meta name="description" content="Esta página recoge los servicios desarrollados para el proyecto Next Procurement">
     <meta name="languaje" content="Spanish">
     <meta name="author" content="Pedro Hernández">
     <!-- Required meta tags -->
@@ -47,7 +47,7 @@
 				<a class="nav-link" href="casos-de-uso.html">Casos de uso</a>
 			  </li>
 			  <li class="nav-item">
-				<a class="nav-link active" href="cpv.html">CPV Classificator</a>
+				<a class="nav-link active" href="servicios.html">Servicios</a>
 			  </li>
 			  <li class="nav-item">
 				<a class="nav-link" href="contacto.html">Contacto</a>
@@ -58,32 +58,56 @@
 		<nav aria-label="breadcrumb">
 		  <ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-			<li class="breadcrumb-item active" aria-current="page">CPV Classificator</li>
+			<li class="breadcrumb-item active" aria-current="page">Servicios</li>
 		  </ol>
 		</nav>
 	<div class="row">
 		<div class="col-12">
-		  <h1>CPV Classifier</h1>
+		  <h1>Servicios desarrollados</h1>
+		  <p align="justify">En el contexto del proyecto NextProcurement, hemos desarrollado distintas herramientas para procesar la información relativa a las licitaciones. A continuación se listan las distintas contribuciones.<br></p>
 		</div>
+		
 	</div>
 	<hr>
 	<div class="row">
 		<div class="col-12">
+			<h2>CPV Classifier</h2>
+			<p align="justify">El clasificador de códigos CPV recibe la descripción de una oferta de licitación y devuelve las divisiones más probables con las que anotarla. El modelo que obtiene mejores resultados por el momento es un fine-tuning del modelo RoBERTa entrenado con el corpus de la BNE, y está disponible en <a href="https://huggingface.co/oeg/roberta-finetuned-CPV_Spanish">HuggingFace</a>, y se irá actualizando a medida que se refine la tarea. Asimismo, el listado con los notebooks y los datasets utilizados se puede encontrar en el <a href="https://github.com/mnavasloro/CPVClassifier">repositorio de GitHub</a>. En la siguiente demo puede probarse el servicio.<br>
 			
-			<p align="justify">Una de las contribuciones realizadas en el contexto del proyecto Next Procurement es un clasificador de códigos CPV. Este clasificador recibe la descripción de una oferta de licitación y devuelve las divisiones más probables con las que anotarla. El modelo que obtiene mejores resultados por el momento es un fine-tuning del modelo RoBERTa entrenado con el corpus de la BNE, y está disponible en <a href="https://huggingface.co/mnavas/roberta-finetuned-CPV_Spanish">HuggingFace</a>, y se irá actualizando a medida que se refine la tarea. Asimismo, el listado con los notebooks y los datasets utilizados se puede encontrar en el <a href="https://github.com/mnavasloro/CPVClassifier">repositorio de GitHub</a>.
+			<iframe src="https://hf.space/embed/mnavas/CPVClassifier/+?__theme=lightapi/predict+" frameBorder="0" height="600" title="Gradio app" class="container p-0 flex-grow space-iframe" allow="accelerometer; ambient-light-sensor; autoplay; battery; camera; document-domain; encrypted-media; fullscreen; geolocation; gyroscope; layout-animations; legacy-image-formats; magnetometer; microphone; midi; oversized-images; payment; picture-in-picture; publickey-credentials-get; sync-xhr; usb; vr ; wake-lock; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"></iframe>
+			</p>
+			
+		
+		<hr>
+		<div class="col-12">
+			<h2>Búsqueda de licitaciones</h2>
+			<p align="justify">
+			
+			Esta herramienta permite buscar licitaciones similares presentes en el grafo de conocimiento a la descripción introducida por el usuario.
+			
 			</p>
 			
 		</div>
-		
+		<hr>
+		<div class="col-12">
+			<h2>Servicio de clustering</h2>
+			<p align="justify">
+			
+			El servicio <a href="https://librairy.github.io/">LibrAIry</a> clasifica las licitaciones en distintos clusters entrenados sobre el corpus JCR-Acquis.	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+			
+			</p>
+			
+		</div>
 	</div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+
+	<div>
+	<br></div>
 	<div id="footer" class="fixed-bottom bg-footer" style="background-color: #F9F9F9; bottom: 0; height:60px">
 		<!--    <hr>-->
 		<!--    <div class="container">-->
