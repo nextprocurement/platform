@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <title>BTN100 - NextProcurement</title>
+    <title>BTN100 - nextProcurement</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Esta página describe la información semántica de los diferentes catálogos geográficos del IGN.">
+    <meta name="description" content="Esta página describe el proyecto nextProcurement.">
     <meta name="languaje" content="Spanish">
-    <meta name="author" content="Miguel García">
+    <meta name="author" content="Pedro Hernández y María Navas">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -79,9 +79,9 @@
 			<p align="justify">Base Topográfica Nacional 1:100.000 (BTN100) es un catálogo de datos geográficos agrupados por temáticas: unidades administrativas y zonas protegidas, relieve, hidrografía, poblaciones y construcciones, transportes, conducciones y energía y puntos de control.
 			Para más información sobre BTN100, puede descargar la <a href="http://centrodedescargas.cnig.es/CentroDescargas/documentos/Doc_auxiliar_BTN100.zip" target="_blank">información adicional</a> disponible en el <a href="http://centrodedescargas.cnig.es" target="_blank">Centro de Descargas del CNIG</a>.
 			</p>
-			<p align="justify">La ontología para la representación de los datos de la Base Topográfica Nacional a escala 1:100.000 fue generada en base al conjunto de datos BTN100 publicado por el IGN, las especificaciones del Catálogo de Objetos Geográficos para esta base topográfica y los requerimientos que fueron consensuados con los expertos del dominio. A partir de los insumos mencionados se detectaron las clases, relaciones e instancias que serían representados, tomando en consideración, en lo posible, la reutilización de ontologías existentes que permitan representar los elementos detectados y en caso contrario la generación de los restantes en la ontología. Como resultado de este proceso se generaron dos ontologías: <a href="https://NextProcurement/def/geo_core" target="_blank">geo_core</a> y <a href="https://NextProcurement/def/btn100" target="_blank">btn100</a>. La primera permite la representación de los atributos comunes a todos los objetos geográficos tomando como base a la ontología estándar GeoSPARQL. La segunda reutiliza geo_core y representa los diferentes tipos de objetos del catálogo, sus relaciones y tipos de datos. Para finalizar este proceso se generó la documentación de las dos ontologías en la que se explican, mediante diagramas y ejemplos, todos los elementos involucrados y su utilización.
-			Puede consultar la documentación completa sobre las ontologías en los siguientes enlaces: <a href="https://NextProcurement/def/geo_core" target="_blank">geo_core</a> y <a href="https://NextProcurement/def/btn100" target="_blank">btn100</a>.</p>
-			<p align="justify">Los recursos semánticos generados están disponibles en el siguiente <a href="https://NextProcurement/sparql" target="_blank">SPARQL Endpoint</a> para su consulta y reutilización. Se pueden consultar los diferentes <b>casos de uso</b> disponibles en el siguiente <a href="casos-de-uso.html">enlace</a>. A continuación, se muestran unas consulta básicas de ejemplo, para consultas más complejas se recomienda visitar el apartado <a href="casos-de-uso.html">casos de uso</a>:</p>
+			<p align="justify">La ontología para la representación de los datos de la Base Topográfica Nacional a escala 1:100.000 fue generada en base al conjunto de datos BTN100 publicado por el IGN, las especificaciones del Catálogo de Objetos Geográficos para esta base topográfica y los requerimientos que fueron consensuados con los expertos del dominio. A partir de los insumos mencionados se detectaron las clases, relaciones e instancias que serían representados, tomando en consideración, en lo posible, la reutilización de ontologías existentes que permitan representar los elementos detectados y en caso contrario la generación de los restantes en la ontología. Como resultado de este proceso se generaron dos ontologías: <a href="https://nextProcurement/def/geo_core" target="_blank">geo_core</a> y <a href="https://nextProcurement/def/btn100" target="_blank">btn100</a>. La primera permite la representación de los atributos comunes a todos los objetos geográficos tomando como base a la ontología estándar GeoSPARQL. La segunda reutiliza geo_core y representa los diferentes tipos de objetos del catálogo, sus relaciones y tipos de datos. Para finalizar este proceso se generó la documentación de las dos ontologías en la que se explican, mediante diagramas y ejemplos, todos los elementos involucrados y su utilización.
+			Puede consultar la documentación completa sobre las ontologías en los siguientes enlaces: <a href="https://nextProcurement/def/geo_core" target="_blank">geo_core</a> y <a href="https://nextProcurement/def/btn100" target="_blank">btn100</a>.</p>
+			<p align="justify">Los recursos semánticos generados están disponibles en el siguiente <a href="https://nextProcurement/sparql" target="_blank">SPARQL Endpoint</a> para su consulta y reutilización. Se pueden consultar los diferentes <b>casos de uso</b> disponibles en el siguiente <a href="casos-de-uso.html">enlace</a>. A continuación, se muestran unas consulta básicas de ejemplo, para consultas más complejas se recomienda visitar el apartado <a href="casos-de-uso.html">casos de uso</a>:</p>
 					
 			<div id="accordion" role="tablist">
 			  <div class="card">
@@ -94,18 +94,18 @@
 				<div id="collapseZero" class="collapse show" role="tabpanel" aria-labelledby="headingZero" data-parent="#accordion">
 				  <div class="card-body">
 					  <ul>
-						<li><a href="https://NextProcurement/sparql?default-graph-uri=&query=select+distinct+%3Fmunicipio+where+%7B%3Fmunicipio+a+%3Chttp%3A%2F%2Fvocab.linkeddata.es%2Fdatosabiertos%2Fdef%2Fsector-publico%2Fterritorio%23Municipio%3E%7D+LIMIT+100&format=text%2Fhtml&timeout=0&debug=on">Recuperar 100 municipios</a>
+						<li><a href="https://nextProcurement/sparql?default-graph-uri=&query=select+distinct+%3Fmunicipio+where+%7B%3Fmunicipio+a+%3Chttp%3A%2F%2Fvocab.linkeddata.es%2Fdatosabiertos%2Fdef%2Fsector-publico%2Fterritorio%23Municipio%3E%7D+LIMIT+100&format=text%2Fhtml&timeout=0&debug=on">Recuperar 100 municipios</a>
 						<pre><code>   select distinct ?municipio where <br>      {?municipio a &lt;http://vocab.linkeddata.es/datosabiertos/def/sector-publico/territorio#Municipio&gt;} LIMIT 100</code></pre>
 						</li>
-						<li><a href="https://NextProcurement/sparql?default-graph-uri=&query=select+distinct+%3Fy+%3FConcept+where+%7B%3Chttps%3A%2F%2FNextProcurement%2Frecurso%2Fbtn100%2Fmunicipio%2F06002%3E+%3Fy+%3FConcept%7D+LIMIT+100&format=text%2Fhtml&timeout=0&debug=on" >Recuperar el detalle de un municipio</a>
-						<pre><code>   select distinct ?obj ?pred where {&lt;https://NextProcurement/recurso/btn100/municipio/06002&gt; ?obj ?pred}</code></pre>
+						<li><a href="https://nextProcurement/sparql?default-graph-uri=&query=select+distinct+%3Fy+%3FConcept+where+%7B%3Chttps%3A%2F%2FnextProcurement%2Frecurso%2Fbtn100%2Fmunicipio%2F06002%3E+%3Fy+%3FConcept%7D+LIMIT+100&format=text%2Fhtml&timeout=0&debug=on" >Recuperar el detalle de un municipio</a>
+						<pre><code>   select distinct ?obj ?pred where {&lt;https://nextProcurement/recurso/btn100/municipio/06002&gt; ?obj ?pred}</code></pre>
 						</li>
-						<li><a href="https://NextProcurement/sparql?default-graph-uri=&query=select+distinct+%3Fy+%3FConcept+where+%7B%3Chttps%3A%2F%2FNextProcurement%2Frecurso%2Fbtn100%2Fmunicipio%2F06002%3E+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23hasGeometry%3E+%3Fgeo.%0D%0A%3Fgeo+%3Fy+%3FConcept%7D+LIMIT+100&format=text%2Fhtml&timeout=0&debug=on">Recuperar la geometría del municipio anterior</a>
-						<pre><code>   select distinct ?obj ?pred where {&lt;https://NextProcurement/recurso/btn100/municipio/06002/geometry&gt; ?obj ?pred}</code></pre>
+						<li><a href="https://nextProcurement/sparql?default-graph-uri=&query=select+distinct+%3Fy+%3FConcept+where+%7B%3Chttps%3A%2F%2FnextProcurement%2Frecurso%2Fbtn100%2Fmunicipio%2F06002%3E+%3Chttp%3A%2F%2Fwww.opengis.net%2Font%2Fgeosparql%23hasGeometry%3E+%3Fgeo.%0D%0A%3Fgeo+%3Fy+%3FConcept%7D+LIMIT+100&format=text%2Fhtml&timeout=0&debug=on">Recuperar la geometría del municipio anterior</a>
+						<pre><code>   select distinct ?obj ?pred where {&lt;https://nextProcurement/recurso/btn100/municipio/06002/geometry&gt; ?obj ?pred}</code></pre>
 						</li>
-						<li><a href="https://NextProcurement/sparql?default-graph-uri=&query=SELECT+DISTINCT+%3Fs+%3Fo+WHERE+%7B%3Fs+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2Ftitle%3E+%3Fo+.+FILTER+%28regex%28%3Fo%2C+%27Ciudad+Real%27%2C+%27i%27%29%29%7D&format=text%2Fhtml&timeout=0&debug=on">Recursos que contienen un texto, por ejemplo "Ciudad Real"</a>
+						<li><a href="https://nextProcurement/sparql?default-graph-uri=&query=SELECT+DISTINCT+%3Fs+%3Fo+WHERE+%7B%3Fs+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2Ftitle%3E+%3Fo+.+FILTER+%28regex%28%3Fo%2C+%27Ciudad+Real%27%2C+%27i%27%29%29%7D&format=text%2Fhtml&timeout=0&debug=on">Recursos que contienen un texto, por ejemplo "Ciudad Real"</a>
 						<pre><code>   select ?s ?o  <br>	where {?s &lt;http://purl.org/dc/terms/title&gt; ?o . <br>	FILTER (regex(?o, 'Ciudad Real', 'i'))}</code></pre>	
-<form id="form_sparql" action="https://NextProcurement/sparql" method="GET" onsubmit="send(this)";> 
+<form id="form_sparql" action="https://nextProcurement/sparql" method="GET" onsubmit="send(this)";> 
 					<input id="format" name="format" type="hidden" value="text/html"/>
 					<input id="query" name="query" type="hidden" value=""/>
 					Puedes buscar recursos que contengan, por ejemplo, el texto Ciudad Real:

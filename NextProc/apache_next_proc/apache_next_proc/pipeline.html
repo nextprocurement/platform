@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <title>CPV Classifier</title>
+    <title>Procesamiento</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Esta página recoge las caracteristicas del classificador de códigos CPV desarrollado para el proyecto Next Procurement">
+    <meta name="description" content="Esta página recoge los servicios desarrollados para el proyecto nextProcurement">
     <meta name="languaje" content="Spanish">
     <meta name="author" content="Pedro Hernández">
     <!-- Required meta tags -->
@@ -58,7 +58,7 @@
 		<nav aria-label="breadcrumb">
 		  <ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-			<li class="breadcrumb-item active" aria-current="page">CPV Classificator</li>
+			<li class="breadcrumb-item active" aria-current="page">Procesamiento</li>
 		  </ol>
 		</nav>
 	<div class="row">
@@ -77,22 +77,23 @@
 		<div class="col-3">
 			
 			<p align="justify">
-				Para alimentar la red de datos ontológica se ha diseñado un procesamiento de datos que, tomando los datos de origen de las plataformas de datos abiertos PLACE & TED, fuera capaz de generar una base de datos RDF sobre la que poder realizar consultas.
+				Para alimentar el grafo de conocimiento se ha diseñado una pipeline de procesamiento de datos que, tomando los datos de origen de las plataformas de datos abiertos PLACE y TED, es capaz de generar una base de datos RDF sobre la que poder realizar consultas.
 			</p>
 			
 			<p align="justify">
-				Para la realización de este procesamiento de datos se ha tomado como partida el proyecto <a target="_blank" href="https://theybuyforyou.eu/">They Buy For You</a>, reutilizando el procesamiento de datos orientándolo a las necesidades de NextProcurement.
+				Para la realización de este procesamiento de datos se ha tomado como partida el proyecto <a target="_blank" href="https://theybuyforyou.eu/">They Buy For You</a>, reutilizando el procesamiento de datos orientándolo a las necesidades de nextProcurement.
 			</p>
 
 		</div>
 
 		<div class="col-12">
 			<p align="justify">
-				El procesamiento de datos de They Buy For You fue modificao incorporando el motor para la construcción de grafos de conocimiento <a target="_blank" href="https://github.com/oeg-upm/morph-kgc">Morph-KGC</a>, el servidor para el almacenamiento de los datos enlazados <a target="_blank" href="https://virtuoso.openlinksw.com/">Virtuoso Open Source</a>, y empleando la herramienta para la generacion de archivos de mapeado <a target="_blank" href="https://github.com/oeg-upm/morph-kgc">YARRRML</a>.
+				El procesamiento de datos de They Buy For You fue modificado incorporando el motor para la construcción de grafos de conocimiento <a target="_blank" href="https://github.com/oeg-upm/morph-kgc">Morph-KGC</a> y el servidor para el almacenamiento de los datos enlazados <a target="_blank" href="https://virtuoso.openlinksw.com/">Virtuoso Open Source</a>, así como empleando la herramienta para la generacion de archivos de mapeado <a target="_blank" href="https://github.com/oeg-upm/morph-kgc">YARRRML</a>.
 			</p>
 
 			<p align="justify">
-				El resultado es una pipeline (tuberia - cadena de procesos conectados) con una <a target="_blank" href="https://api.nextprocurement.linkeddata.es/docs"> API </a> que permite su adaptacion a nuevas entradas de datos de fuentes diversas. El resultado puede observarse en el servidor de Virtuoso, o en su <a target="_blank" href="https://nextprocurement.linkeddata.es/sparql">Sparql Endpoint</a>.
+				El resultado es una pipeline con una <a target="_blank" href="https://api.nextProcurement.linkeddata.es/docs"> 
+				API</a> que permite su adaptacion a nuevas entradas de datos de fuentes diversas. El resultado puede observarse en el servidor de Virtuoso y en su <a target="_blank" href="https://nextProcurement.linkeddata.es/sparql">Sparql Endpoint</a>.
 			</p>
 		</div>
 
