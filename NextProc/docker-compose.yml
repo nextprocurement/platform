@@ -77,21 +77,6 @@ services:
           max-file: "3"
           labels: "pipeline-log"
 
-#  yasgui:
-#    image: erikap/yasgui
-#    container_name: yasgui
-#    ports:
-#      - "3040:80"
-#    environment:
-#      #DEFAULT_SPARQL_ENDPOINT: "https://nextprocurement.linkeddata.es/sparql"
-#      DEFAULT_SPARQL_ENDPOINT: "http://localhost:8890/sparql"
-#    logging:
-#      driver: "json-file"
-#      options:
-#        max-size: "10m"
-#        max-file: "3"
-#        labels: "yasgui-log"
-
 networks:
   virtuoso:
     #name: virtuoso_platform

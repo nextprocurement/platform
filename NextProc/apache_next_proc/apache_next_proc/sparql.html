@@ -22,54 +22,6 @@
 	<script src="js/cookies.js" type="text/javascript"></script>
 	<link href="https://unpkg.com/@triply/yasgui/build/yasgui.min.css" rel="stylesheet" type="text/css" />
 	<script src="https://unpkg.com/@triply/yasgui/build/yasgui.min.js"></script>
-	<!--<script language="JavaScript"> 
-	var last_format = 1;
-	function format_select(query_obg)
-	{
-	  var query = query_obg.value; 
-	  var format = query_obg.form.format;
-	 
-	  if ((query.match(/construct/i) || query.match(/describe/i)) && last_format == 1) {
-		for(var i = format.options.length; i > 0; i--)
-		  format.options[i] = null;    format.options[1] = new Option('N3/Turtle','text/rdf+n3');
-		format.options[2] = new Option('JSON','application/rdf+json');
-		format.options[3] = new Option('RDF/XML','application/rdf+xml');
-		format.options[4] = new Option('NTriples','text/plain');
-		format.options[5] = new Option('XHTML+RDFa','application/xhtml+xml');
-		format.selectedIndex = 1;
-		last_format = 2;
-	  }
-	 
-	  if (!(query.match(/construct/i) || query.match(/describe/i)) && last_format == 2) {
-		for(var i = format.options.length; i > 0; i--)
-		  format.options[i] = null;
-		format.options[1] = new Option('HTML','text/html');
-		format.options[2] = new Option('Spreadsheet','application/vnd.ms-excel');
-		format.options[3] = new Option('XML','application/sparql-results+xml');
-		format.options[4] = new Option('JSON','application/sparql-results+json');
-		format.options[5] = new Option('Javascript','application/javascript');
-		format.options[6] = new Option('N3/Turtle','text/rdf+n3');
-		format.options[7] = new Option('RDF/XML','application/rdf+xml');
-		format.options[8] = new Option('NTriples','text/plain');
-		format.selectedIndex = 1;
-		last_format = 1;
-	  }
-	}
-			</script> 
-	<script>
-	function send(f) {
-	  if(f.format.value=='text/html') {
-		f.action='web_sparqlJSON.html';
-		return true;
-	  }
-	  else{
-		f.action='https://nextProcurement.linkeddata.es/sparql';
-		return false;
-	  }
-	}
-
-	</script>
-	-->
   </head>
   <body>
 
@@ -122,40 +74,6 @@
 			<p align="justify">A continuación, podrá realizar consultas contra el SPARQL endpoint donde se almacenan los datos de los conjuntos de datos disponibles. </a>
 			</p>
 			<p align="justify"><p>Más información sobre <a href="http://www.w3.org/TR/rdf-sparql-query/">SPARQL Query Language for RDF</a></p>
-			<form id="form_sparql" action="https://nextProcurement.linkeddata.es/sparql" method="GET" > 
-			<fieldset> 
-			<legend>Consultar</legend> 
-<!--	  <label for="default-graph-uri">URI del grafo a consultar (no necesario)</label> 
-			  <br /> 
-			  <input type="text" name="default-graph-uri" id="default-graph-uri"
-				  	value="" size="80"/>
-			  <br /><br /> 
-			  <label for="query">Consulta a realizar</label> 
-			  <br /> 
-			  <textarea rows="10" cols="80" name="query" id="query" onchange="format_select(this)" onkeyup="format_select(this)">select distinct ?Concept where {[] a ?Concept}</textarea> 
-			  <br /><br /> 
-			  <label for="format" class="n">Mostrar los resultados como:</label> 
-			  <select name="format" id="formatId"> 
-			    <option value="auto">Auto</option> 
-			    <option value="text/html" selected="selected">HTML</option> 
-			    <option value="application/vnd.ms-excel">Spreadsheet</option> 
-			    <option value="application/sparql-results+xml">XML</option> 
-			    <option value="application/sparql-results+json">JSON</option> 
-			    <option value="application/javascript">Javascript</option> 
-			    <option value="text/plain">NTriples</option> 
-			    <option value="application/rdf+xml">RDF/XML</option> 
-			  </select> 
-
-&nbsp;&nbsp;&nbsp;
-<input name="debug" type="checkbox" checked/>&nbsp;<label for="debug" class="n"><nobr>Control riguroso de la consulta</nobr></label> 
-&nbsp;&nbsp;&nbsp;
-<br>
-<input name="timeout" type="text"0/>&nbsp;<label for="timeout" class="n"><nobr>Tiempo máximo de ejecución, en milisegundos, se ignorarán valores menores de 1000</nobr></label> 
-&nbsp;&nbsp;&nbsp;
-<br>
-			  <input type="submit" value="Ejecutar consulta"/>&nbsp;<input type="reset" value="Reset"/> -->		
-			</fieldset> 
-			</form>
 			</p>
 		</div>
 
