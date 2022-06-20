@@ -20,7 +20,9 @@
 	<!-- cookies -->
 	<link rel="stylesheet" href="css/cookie.css">
 	<script src="js/cookies.js" type="text/javascript"></script>
-	<script language="JavaScript"> 
+	<link href="https://unpkg.com/@triply/yasgui/build/yasgui.min.css" rel="stylesheet" type="text/css" />
+	<script src="https://unpkg.com/@triply/yasgui/build/yasgui.min.js"></script>
+	<!--<script language="JavaScript"> 
 	var last_format = 1;
 	function format_select(query_obg)
 	{
@@ -67,9 +69,7 @@
 	}
 
 	</script>
-
-	<link href="https://unpkg.com/@triply/yasgui/build/yasgui.min.css" rel="stylesheet" type="text/css" />
-	<script src="https://unpkg.com/@triply/yasgui/build/yasgui.min.js"></script>
+	-->
   </head>
   <body>
 
@@ -125,14 +125,6 @@
 			<form id="form_sparql" action="https://nextProcurement.linkeddata.es/sparql" method="GET" > 
 			<fieldset> 
 			<legend>Consultar</legend> 
-
-			<div id="yasgui"></div>
-			<script>
-				const yasgui = new Yasgui(document.getElementById("yasgui"),{
-				requestConfig: { endpoint: "https://nextprocurement.linkeddata.es/sparql" },
-				copyEndpointOnNewTab: false,
-			});
-			</script>
 <!--	  <label for="default-graph-uri">URI del grafo a consultar (no necesario)</label> 
 			  <br /> 
 			  <input type="text" name="default-graph-uri" id="default-graph-uri"
@@ -166,6 +158,14 @@
 			</form>
 			</p>
 		</div>
+
+		<div id="yasgui" class="col-12"></div>
+		<script>
+			const yasgui = new Yasgui(document.getElementById("yasgui"),{
+			requestConfig: { endpoint: "https://nextprocurement.linkeddata.es/sparql" },
+			copyEndpointOnNewTab: false,
+		});
+		</script>
 		
 	</div>
 	<br>
