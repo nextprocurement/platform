@@ -67,6 +67,9 @@
 	}
 
 	</script>
+
+	<link href="https://unpkg.com/@triply/yasgui/build/yasgui.min.css" rel="stylesheet" type="text/css" />
+	<script src="https://unpkg.com/@triply/yasgui/build/yasgui.min.js"></script>
   </head>
   <body>
 
@@ -122,7 +125,15 @@
 			<form id="form_sparql" action="https://nextProcurement.linkeddata.es/sparql" method="GET" > 
 			<fieldset> 
 			<legend>Consultar</legend> 
-			  <label for="default-graph-uri">URI del grafo a consultar (no necesario)</label> 
+
+			<div id="yasgui"></div>
+			<script>
+				const yasgui = new Yasgui(document.getElementById("yasgui"),{
+				requestConfig: { endpoint: "https://nextprocurement.linkeddata.es/sparql" },
+				copyEndpointOnNewTab: false,
+			});
+			</script>
+<!--	  <label for="default-graph-uri">URI del grafo a consultar (no necesario)</label> 
 			  <br /> 
 			  <input type="text" name="default-graph-uri" id="default-graph-uri"
 				  	value="" size="80"/>
@@ -150,7 +161,7 @@
 <input name="timeout" type="text"0/>&nbsp;<label for="timeout" class="n"><nobr>Tiempo máximo de ejecución, en milisegundos, se ignorarán valores menores de 1000</nobr></label> 
 &nbsp;&nbsp;&nbsp;
 <br>
-			  <input type="submit" value="Ejecutar consulta"/>&nbsp;<input type="reset" value="Reset"/> 
+			  <input type="submit" value="Ejecutar consulta"/>&nbsp;<input type="reset" value="Reset"/> -->		
 			</fieldset> 
 			</form>
 			</p>
