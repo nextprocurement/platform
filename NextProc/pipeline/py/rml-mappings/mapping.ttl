@@ -1,12 +1,11 @@
 ###################################################################################################
 # RML mapping rules for OCDS 1.0 (https://standard.open-contracting.org/1.0/en/release-schema.json)
 # 
-# Copyright: SINTEF 2018-2021
-# Author   : Brian Elvesæter (brian.elvesater@sintef.no)
+# Author   : María Navas-Loro
 # License  : Apache License 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
-# Project  : Developed as part of the TheyBuyForYou project (https://theybuyforyou.eu/)
+# Project  : Developed as part of the nextProcurement project (http://nextprocurement-project.com/)
 # Funding  : TheyBuyForYou has received funding from the European Union's Horizon 2020
-#            research and innovation programme under grant agreement No 780247
+#            research and innovation programme under grant agreement No 
 ###################################################################################################
 
 
@@ -28,129 +27,9 @@
 @prefix schema:   <http://schema.org/> .
 @prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema:   <http://schema.org/> .
 
 
-# *********************
-# Release mapping rules
-# *********************
-
-<ReleaseMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contractingProcess/{releases/ocid}/release/{releases/id}" ;
-    rr:class tbfy:Release
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate tbfy:releaseURI ;
-    rr:objectMap [
-      rml:reference "uri" ;
-      rr:datatype xsd:anyURI
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate tbfy:releasePublishedDate ;
-    rr:objectMap [
-      rml:reference "publishedDate" ;
-      rr:datatype xsd:dateTime
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate tbfy:releasePublisherUID ;
-    rr:objectMap [
-      rml:reference "publisher/uid" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate tbfy:releasePublisherURI ;
-    rr:objectMap [
-      rml:reference "publisher/uri" ;
-      rr:datatype xsd:anyURI
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate tbfy:releasePublisherName ;
-    rr:objectMap [
-      rml:reference "publisher/name" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate tbfy:releasePublisherScheme ;
-    rr:objectMap [
-      rml:reference "publisher/scheme" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate tbfy:releaseLicense ;
-    rr:objectMap [
-      rml:reference "license" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate tbfy:releasePublicationPolicy ;
-    rr:objectMap [
-      rml:reference "publicationPolicy" ;
-      rr:datatype xsd:string 
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate tbfy:releaseId ;
-    rr:objectMap [
-      rml:reference "releases/id" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate tbfy:releaseDate ;
-    rr:objectMap [
-      rml:reference "releases/date" ;
-      rr:datatype xsd:dateTime
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate tbfy:releaseTag ;
-    rr:objectMap [
-      rml:reference "releases/tag" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate dc:language ;
-    rr:objectMap [
-      rml:reference "releases/language" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate tbfy:releaseInitiationType ;
-    rr:objectMap [
-      rml:reference "releases/initiationType" ;
-      rr:datatype xsd:string
-    ]
-  ].
 
 
 # *********************************
@@ -161,415 +40,38 @@
   a rr:TriplesMap ;
 
   rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contractingProcess/{ocid}" ;
-    rr:class ocds:ContractingProcess
+    rml:source: "../data/outsiders_2021.parquet" 
   ];
   
-  rr:predicateObjectMap [
-    rr:predicate ocds:ocid ;
-    rr:objectMap [
-      rml:reference "ocid" ;
-      rr:datatype xsd:string
-    ]
+  rr:subjectMap [
+    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}" ;
+    rr:class ocds:contractingProcess
   ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:isFundedBy ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/plan/{ocid}_{id}/project/{planning/budget/projectID}"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasRelease ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contractingProcess/{ocid}/release/{id}"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasPlan ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/plan/{ocid}_{id}"
-    ]
-  ];
-
+  
   rr:predicateObjectMap [
     rr:predicate ocds:hasTender ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasAward ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasContract ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}"
+      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}" ;
     ]
   ].
-
-<ContractingProcessBuyerMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contractingProcess/{ocid}/buyer" ;
-    rr:class ocds:Organisation
-  ];
-      
-  rr:predicateObjectMap [
-    rr:predicate ocds:legalName ;
-    rr:objectMap [
-      rml:reference "name" ;
-      rr:datatype xsd:string
-    ]
-  ];
-      
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasContactPoint ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contractingProcess/{ocid}/buyer/contactPoint"
-    ]
-  ];
-      
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasAddress ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contractingProcess/{ocid}/buyer/address"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:isBuyerFor ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contractingProcess/{ocid}"
-    ]
-  ];
-          
-  rr:predicateObjectMap [
-    rr:predicate ocds:playsRoleIn ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contractingProcess/{ocid}"
-    ]
-  ].
-
-<ContractProcessBuyerAddressMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contractingProcess/{ocid}/buyer/address";
-    rr:class ocds:Address
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate schema:addressLocality ;
-    rr:objectMap [
-      rml:reference "locality" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate schema:postalCode ;
-    rr:objectMap [
-      rml:reference "postalCode" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate schema:addressCountry ;
-    rr:objectMap [
-      rml:reference "countryName" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate schema:streetAddress ;
-    rr:objectMap [
-      rml:reference "streetAddress" ;
-      rr:datatype xsd:string
-    ]
-  ].
-
-<ContractProcessBuyerContactpointMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contractingProcess/{ocid}/buyer/contactPoint" ;
-    rr:class ocds:ContactPoint ;
-    rr:class ocds:Person
-  ];
   
-  rr:predicateObjectMap [
-    rr:predicate schema:email ;
-    rr:objectMap [
-      rml:reference "email" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate schema:name ;
-    rr:objectMap [
-      rml:reference "name" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate schema:faxNumber ;
-    rr:objectMap [
-      rml:reference "faxNumber" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate schema:telephone ;
-    rr:objectMap [
-      rml:reference "telephone" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate schema:URL ;
-    rr:objectMap [
-      rml:reference "url" ;
-      rr:datatype xsd:string
-    ]
-  ].
-
-
-# ******************
-# Plan mapping rules
-# ******************
-
-<PlanMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/plan/{ocid}_{id}" ;
-    rr:class ocds:Plan
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasBudget ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/plan/{ocid}_{id}/budget/{planning/budget/id}"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:procurementRationale ;
-    rr:objectMap [
-      rml:reference "rationale" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasDocument ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/plan/{ocid}_{id}/document/{planning/documents/id}"
-    ]
-  ].
-
-<PlanBudgetMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/plan/{ocid}_{id}/budget/{planning/budget/id}" ;
-    rr:class ocds:Budget
-  ];
   
-  rr:predicateObjectMap [
-    rr:predicate ocds:budgetId ;
-    rr:objectMap [
-      rml:reference "id" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasReservedValue ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/plan/{ocid}_{id}/budget/{planning/budget/id}/reservedValue"
-    ]
-  ].
-
-<PlanBudgetValueMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/plan/{ocid}_{id}/budget/{planning/budget/id}/reservedValue" ;
-    rr:class ocds:Value
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:valueAmount ;
-    rr:objectMap [
-      rml:reference "amount" ;
-      rr:datatype xsd:decimal
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:valueCurrency;
-    rr:objectMap [
-      rml:reference "currency" ;
-      rr:datatype xsd:string
-    ]
-  ].
-
-<PlanProjectMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/plan/{ocid}_{id}/project/{planning/budget/projectID}" ;
-    rr:class ocds:Project
-  ];
-      
-  rr:predicateObjectMap [
-    rr:predicate ocds:projectId ;
-    rr:objectMap [
-      rml:reference "projectID" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate dc:title ;
-    rr:objectMap [
-      rml:reference "project" ;
-      rr:datatype xsd:string
-    ]
-  ].
-
-<PlanDocumentMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/plan/{ocid}_{id}/document/{planning/documents/id}" ;
-    rr:class ocds:Document
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate ocds:documentId ;
-    rr:objectMap [
-      rml:reference "id" ;
-      rr:datatype xsd:string
-    ]
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate schema:URL ;
-    rr:objectMap [
-      rml:reference "url" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate dc:language ;
-    rr:objectMap [
-      rml:reference "language" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:documentType ;
-    rr:objectMap [
-      rml:reference "documentType"
-    ]
-  ].
-
-
-# ********************
-# Tender mapping rules
-# ********************
-
 <TenderMap>
   a rr:TriplesMap ;
 
   rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
+    rml:source: "../data/outsiders_2021.parquet" 
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}" ;
+    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}" ;
     rr:class ocds:Tender
   ];
       
   rr:predicateObjectMap [
     rr:predicate ocds:tenderId ;
     rr:objectMap [
-      rml:reference "id" ;
+      rml:reference "Número de Expediente" ;
       rr:datatype xsd:string
     ]
   ];
@@ -585,7 +87,7 @@
   rr:predicateObjectMap [
     rr:predicate dc:description ;
     rr:objectMap [ 
-      rml:reference "description" ;
+      rml:reference "Objeto del Contrato" ;
       rr:datatype xsd:string
     ]
   ];
@@ -593,125 +95,54 @@
   rr:predicateObjectMap [
     rr:predicate ocds:tenderStatus ;
     rr:objectMap [
-      rml:reference "status"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasItemToBeProcured ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/item/{tender/items/id}"
+      rml:reference "Estado" ;
+      rr:datatype xsd:string
     ]
   ];
 
   rr:predicateObjectMap [
     rr:predicate ocds:hasMinEstimatedValue ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/minValue"
+      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/minValue"
     ]
   ];
 
  rr:predicateObjectMap [
     rr:predicate ocds:hasMaxEstimatedValue ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/maxValue"
+      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/maxValue"
     ]
   ];
  
   rr:predicateObjectMap [
-    rr:predicate ocds:procurementMethod ;
+    rr:predicate ocds:mainProcurementCategory ;
     rr:objectMap [
-      rml:reference "procurementMethod"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:procurementMethodDetails ;
-    rr:objectMap [
-      rml:reference "procurementMethodDetails" ;
+      rml:reference "Tipo de Contrato" ;
       rr:datatype xsd:string
     ]
   ];
 
-  rr:predicateObjectMap [
-    rr:predicate ocds:procurementMethodRationale ;
-    rr:objectMap [
-      rml:reference "procurementMethodRationale" ;
-      rr:datatype xsd:string
-    ]
-  ];
+  
 
   rr:predicateObjectMap [
-    rr:predicate ocds:awardCriteria ;
+    rr:predicate ocds:hasContractPeriod ;
     rr:objectMap [
-      rml:reference "awardCriteria"
+      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/contractPeriod"
     ]
   ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:awardCriteriaDetails ;
-    rr:objectMap [
-      rml:reference "awardCriteriaDetails" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:submissionMethod ;
-    rr:objectMap [
-      rml:reference "submissionMethod"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:submissionMethodDetails ;
-    rr:objectMap [
-      rml:reference "submissionMethodDetails" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
+  
+  
   rr:predicateObjectMap [
     rr:predicate ocds:hasTenderPeriod ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/period"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasEnquiryPeriod ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/enquiryPeriod"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:enquiry ;
-    rr:objectMap [
-      rml:reference "hasEnquiries" ;
-      rr:datatype xsd:boolean
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:eligibilityCriteria ;
-    rr:objectMap [
-      rml:reference "eligibilityCriteria" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasAwardPeriod ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/awardPeriod"
+      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/tenderPeriod"
     ]
   ];
 
   rr:predicateObjectMap [
     rr:predicate ocds:numberOfTenderers ;
     rr:objectMap [
-      rml:reference "numberOfTenderers" ;
+      rml:reference "Número de Licitadores Participantes" ;
       rr:datatype xsd:integer
     ]
   ];
@@ -719,100 +150,50 @@
   rr:predicateObjectMap [
     rr:predicate ocds:hasDocument ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/document/{tender/documents/id}"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasMilestone ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/milestone/{tender/milestones/id}"
+      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/document/technicalSpecifications"
     ]
   ];
   
   rr:predicateObjectMap [
-    rr:predicate ocds:hasAmendment ;
+    rr:predicate ocds:hasDocument ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/amendment/"
+      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/document/evaluationCriteria"
+    ]
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate ocds:isProcuringEntityFor ;
+    rr:objectMap [
+      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/Organization/{ID}" ;
+    ]
+  ];    
+  
+  rr:predicateObjectMap [
+    rr:predicate ocds:hasAward ;
+    rr:objectMap [
+      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/award"
     ]
   ].
 
-<TenderItemMap>
+
+
+
+<#TenderMinValueMap>
   a rr:TriplesMap ;
 
   rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
+    rml:source: "../data/outsiders_2021.parquet" 
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/item/{tender/items/id}" ;
-    rr:class ocds:Item
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:itemId ;
-    rr:objectMap [
-      rml:reference "id" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate dc:description ;
-    rr:objectMap [ 
-      rml:reference "description" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasClassification ;
-    rr:objectMap [
-      rml:reference "classification/id"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:classificationScheme ;
-    rr:objectMap [
-      rml:reference "classification/scheme"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasAdditionalItemClassification ;
-    rr:objectMap [
-      rml:reference "additionalClassifications/id"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:additionalItemClassificationScheme ;
-    rr:objectMap [
-      rml:reference "additionalClassifications/scheme"
-    ]
-  ].
-
-<TenderMinValueMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/minValue" ;
+    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/minValue" ;
     rr:class ocds:Value
   ];
       
   rr:predicateObjectMap [
     rr:predicate ocds:valueAmount ;
     rr:objectMap [
-      rml:reference "amount" ;
+      rml:reference "Valor estimado del contrato" ;
       rr:datatype xsd:decimal
     ]
   ];
@@ -820,29 +201,27 @@
   rr:predicateObjectMap [
     rr:predicate ocds:valueCurrency ;
     rr:objectMap [
-      rml:reference "currency" ;
+      rr:constant "Euro" ;
       rr:datatype xsd:string
     ]
   ].
 
-<TenderMaxValueMap>
+<#TenderMaxValueMap>
   a rr:TriplesMap ;
 
   rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
+    rml:source: "../data/outsiders_2021.parquet" 
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/maxValue" ;
+    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/maxValue" ;
     rr:class ocds:Value
   ];
       
   rr:predicateObjectMap [
     rr:predicate ocds:valueAmount ;
     rr:objectMap [
-      rml:reference "amount" ;
+      rml:reference "Valor estimado del contrato" ;
       rr:datatype xsd:decimal
     ]
   ];
@@ -850,29 +229,48 @@
   rr:predicateObjectMap [
     rr:predicate ocds:valueCurrency ;
     rr:objectMap [
-      rml:reference "currency" ;
+      rr:constant "Euro" ;
       rr:datatype xsd:string
     ]
   ].
 
-<TenderPeriodMap>
+<#TenderPeriodMap>
   a rr:TriplesMap ;
 
   rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
+    rml:source: "../data/outsiders_2021.parquet" 
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/period" ;
+    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/tenderPeriod" ;
     rr:class ocds:Period
   ];
+  
+  rr:predicateObjectMap [
+    rr:predicate ocds:periodEndDate ;
+    rr:objectMap [
+      rml:reference "Presentación de Solicitudes (Fecha)" ;
+      rr:datatype xsd:dateTime
+    ]
+  ].
+  
+<#ContractPeriodMap>
+  a rr:TriplesMap ;
+
+  rml:logicalSource [
+    rml:source: "../data/outsiders_2021.parquet" 
+  ];
+
+  rr:subjectMap [
+    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/contractPeriod" ;
+    rr:class ocds:Period
+  ];
+  
      
   rr:predicateObjectMap [
     rr:predicate ocds:periodStartDate ;
     rr:objectMap [
-      rml:reference "startDate" ;
+      rml:reference "Plazo de Ejecución (Comienzo)" ;
       rr:datatype xsd:dateTime
     ]
   ];
@@ -880,1423 +278,273 @@
   rr:predicateObjectMap [
     rr:predicate ocds:periodEndDate ;
     rr:objectMap [
-      rml:reference "endDate" ;
+      rml:reference "Plazo de Ejecución (Fin)" ;
       rr:datatype xsd:dateTime
     ]
+  ];
+
+  rr:predicateObjectMap [
+	rr:predicate ocds:periodDurationInDays ;
+      rr:objectMap [
+		rml:reference "Plazo de Ejecución (Duración)" ;
+		rr:datatype xsd:integer
+	]
   ].
+  
 
-<TenderAwardPeriodMap>
+<#TenderPPT>
+
   a rr:TriplesMap ;
 
   rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
+    rml:source: "../data/outsiders_2021.parquet" 
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/awardPeriod" ;
-    rr:class ocds:Period
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate ocds:periodStartDate ;
-    rr:objectMap [
-      rml:reference "startDate" ;
-      rr:datatype xsd:dateTime
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:periodEndDate;
-    rr:objectMap [
-      rml:reference "endDate" ;
-      rr:datatype xsd:dateTime
-    ]
-  ].      
-
-<TenderDocumentMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/document/{tender/documents/id}" ;
+    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/document/technicalSpecifications" ;
     rr:class ocds:Document
   ];
-    
-  rr:predicateObjectMap [
-    rr:predicate ocds:documentId ;
-    rr:objectMap [
-      rml:reference "id" ;
-      rr:datatype xsd:string
-    ]
-  ];
-    
+  
   rr:predicateObjectMap [
     rr:predicate ocds:documentType ;
     rr:objectMap [
-      rml:reference "documentType"
-    ]
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate dc:language ;
-    rr:objectMap [
-      rml:reference "language" ;
+      rr:constant "technicalSpecifications" ;
       rr:datatype xsd:string
     ]
   ];
-    
+  
   rr:predicateObjectMap [
-    rr:predicate schema:URL ;
-    rr:objectMap [
-      rml:reference "url" ;
-      rr:datatype xsd:string
-    ]
+	rr:predicate schema:URL ;
+      rr:objectMap [
+		rml:reference "Pliego de Prescripciones técnicas (URI)" ;
+		rr:datatype xsd:string
+	]
   ].
+  
+<#TenderPPA>
 
-<TenderMilestoneMap>
   a rr:TriplesMap ;
 
   rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
+    rml:source: "../data/outsiders_2021.parquet" 
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/milestone/{tender/milestones/id}" ;
-    rr:class ocds:Milestone
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:milestoneId ;
-    rr:objectMap [
-      rml:reference "id" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate dc:title ;
-    rr:objectMap [
-      rml:reference "title" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:milestoneDueDate ;
-    rr:objectMap [
-      rml:reference "dueDate" ;
-      rr:datatype xsd:dateTime
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate dc:description ;
-    rr:objectMap [
-      rml:reference "description" ;
-      rr:datatype xsd:string
-    ]
-  ].
-
-<TenderMilestoneDocumentMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/milestone/{tender/milestones/id}/document/{tender/milestones/documents/id}" ;
+    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/document/evaluationCriteria" ;
     rr:class ocds:Document
   ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:documentId ;
-    rr:objectMap [
-      rml:reference "id" ;
-      rr:datatype xsd:string
-    ]
-  ];
-    
+  
   rr:predicateObjectMap [
     rr:predicate ocds:documentType ;
     rr:objectMap [
-      rml:reference "documentType"
-    ]
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate dc:language ;
-    rr:objectMap [
-      rml:reference "language" ;
+      rr:constant "evaluationCriteria" ;
       rr:datatype xsd:string
     ]
   ];
-    
+  
   rr:predicateObjectMap [
-    rr:predicate schema:URL ;
-    rr:objectMap [
-      rml:reference "url" ;
-      rr:datatype xsd:string
-    ]
+	rr:predicate schema:URL ;
+      rr:objectMap [
+		rml:reference "Pliego de cláusulas administrativas (URI)" ;
+		rr:datatype xsd:string
+	]
   ].
+  
+<#TenderItem>
 
-<TenderAmendmentMap>
   a rr:TriplesMap ;
 
   rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
+    rml:source: "../data/outsiders_2021.parquet" 
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/amendment" ;
-    rr:class ocds:Amendment 
+    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/Item/" ;
+    rr:class ocds:Item
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ocds:amendmentDate ;
+    rr:predicate ocds:hasAdditionalClassification ;
     rr:objectMap [
-      rml:reference "date" ;
-      rr:datatype xsd:dateTime
+      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/Classification/NUTS/{Código de Subentidad Nacional}" ;
+      rr:datatype xsd:URI
     ]
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ocds:hasChange ;
+    rr:predicate ocds:hasClassification ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/amendment/change/{tender/amendment/changes/property}"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:amendmentRationale ;
-    rr:objectMap [
-      rml:reference "rationale" ;
-      rr:datatype xsd:string
+      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/Classification/CPV/{Clasificación CPV}" ;
+      rr:datatype xsd:URI
     ]
   ].
+  
+  
+<#CPVConcept>
 
-<TenderAmendmentChangePropertyMap>
   a rr:TriplesMap ;
 
   rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
+    rml:source: "../data/outsiders_2021.parquet" 
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}/amendment/change/{tender/amendment/changes/property}" ;
-    rr:class ocds:Change 
+    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/Classification/CPV/{Clasificación CPV}" ;
+    rr:class skos:Concept
   ];
 
-  rr:predicateObjectMap [
-    rr:predicate ocds:changeProperty ;
-    rr:objectMap [
-      rml:reference "property" ;
-      rr:datatype xsd:string
-    ]
-  ];
 
   rr:predicateObjectMap [
-    rr:predicate ocds:changeFormerValue ;
+    rr:predicate  dc:title ;
     rr:objectMap [
-      rml:reference "former_value" ;
-      rr:datatype xsd:string
-    ]
+      rml:reference "Clasificación CPV" ;
+	  rr:datatype xsd:string
+    ] 
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate  skos:inScheme ;
+    rr:objectMap [
+      rr:constant "http://data.nextprocurement.linkeddata.es/contractingProcess/Classification/CPV" ;
+	  rr:datatype xsd:URI
+    ] 
   ].
+  
+  
+  
+<#NUTSConcept>
 
-
-# *******************
-# Award mapping rules
-# *******************
-
-<AwardMap>
   a rr:TriplesMap ;
 
   rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
+    rml:source: "../data/outsiders_2021.parquet" 
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}" ;
+    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/Classification/NUTS/{Código de Subentidad Nacional}" ;
+    rr:class skos:Concept
+  ];
+
+
+  rr:predicateObjectMap [
+    rr:predicate  dc:title ;
+    rr:objectMap [
+      rml:reference "Código de Subentidad Nacional" ;
+	  rr:datatype xsd:string
+    ] 
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate  skos:inScheme ;
+    rr:objectMap [
+      rr:constant "http://data.nextprocurement.linkeddata.es/contractingProcess/Classification/NUTS" ;
+	  rr:datatype xsd:URI
+    ] 
+  ].
+  
+<#award>
+
+
+  a rr:TriplesMap ;
+
+  rml:logicalSource [
+    rml:source: "../data/outsiders_2021.parquet" 
+  ];
+
+  rr:subjectMap [
+    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/award" ;
     rr:class ocds:Award
   ];
 
-  rr:predicateObjectMap [
-    rr:predicate ocds:awardId ;
-    rr:objectMap [
-      rml:reference "id" ;
-      rr:datatype xsd:string
-    ]
-  ];
 
   rr:predicateObjectMap [
-    rr:predicate ocds:awardDate ;
+    rr:predicate  ocds:hasAwardValue ;
     rr:objectMap [
-      rml:reference "date" ;
-      rr:datatype xsd:dateTime
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate dc:title ;
-    rr:objectMap [ 
-      rml:reference "title" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasAwardValue ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}/value"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:awardStatus ;
-    rr:objectMap [
-      rml:reference "status"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate dc:description ;
-    rr:objectMap [ 
-      rml:reference "description" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasAwardedContractPeriod ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}/contractPeriod"
-    ]
-  ];
-  
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasAwardedItem ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}/item/{awards/items/id}"
-    ]
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasDocument ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}/document/{awards/documents/id}"
-    ]
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasAmendment ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}/amendment/"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:isIssuedForTender ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/tender/{ocid}_{tender/id}"
-    ]
+      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/award/hasContractValue" ;
+    ] 
   ].
-   
-<AwardValueMap>
+  
+  
+<#ContractValue>
   a rr:TriplesMap ;
 
   rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
+    rml:source: "../data/outsiders_2021.parquet" 
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}/value" ;
+    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/award/hasContractValue" ;
     rr:class ocds:Value
   ];
-
+      
   rr:predicateObjectMap [
     rr:predicate ocds:valueAmount ;
     rr:objectMap [
-      rml:reference "amount" ;
+      rml:reference "Importe total ofertado (sin impuestos)" ;
       rr:datatype xsd:decimal
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:valueCurrency ;
-    rr:objectMap [
-      rml:reference "currency" ;
-      rr:datatype xsd:string
-    ]
-  ].
-
-<AwardSupplierMap>  
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}/supplier/{awards/suppliers/tbfy_id}" ;
-    rr:class ocds:Organisation
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate ocds:legalName ;
-    rr:objectMap [
-      rml:reference "name" ;
-      rr:datatype xsd:string
     ]
   ];
       
   rr:predicateObjectMap [
-    rr:predicate ocds:hasAddress ;
+    rr:predicate ocds:valueCurrency ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}/supplier/{awards/suppliers/tbfy_id}/address"
+      rr:constant "Euro" ;
+      rr:datatype xsd:string
     ]
+  ].
+  
+  
+<#OrganizationContract>
+  a rr:TriplesMap ;
+
+  rml:logicalSource [
+    rml:source: "../data/outsiders_2021.parquet" 
   ];
 
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasContactPoint ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}/supplier/{awards/suppliers/tbfy_id}/contactPoint"
-    ]
+  rr:subjectMap [
+    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/Organization/{Identificador (+ Tipo: mod schemeName)}" ;
+    rr:class ocds:Organisation ;
   ];
-
+      
   rr:predicateObjectMap [
     rr:predicate ocds:isSupplierFor ;
     rr:objectMap [
-      rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}"
+      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/award" ;
     ]
   ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:playsRoleIn ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contractingProcess/{ocid}"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate owl:sameAs ;
-    rr:objectMap [
-      rr:template  "http://data.tbfy.eu/organisation/{tbfy_company_jurisdiction_code}-{tbfy_company_number}"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate tbfy:correspondsToRegOrg ;
-    rr:objectMap [
-      rr:template  "http://data.tbfy.eu/organisation/{tbfy_company_jurisdiction_code}-{tbfy_company_number}"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate tbfy:companyReconciliationScore ;
-    rr:objectMap [
-      rml:reference "tbfy_company_reconciliation_score" ;
-      rr:datatype xsd:decimal
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate tbfy:companyReconciliationSource ;
-    rr:objectMap [
-      rml:reference "tbfy_company_reconciliation_source" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate tbfy:companyReconciliationDate ;
-    rr:objectMap [
-      rml:reference "tbfy_company_reconciliation_date" ;
-      rr:datatype xsd:date
-    ]
-  ].
-
-<AwardSupplierAddressMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}/supplier/{awards/suppliers/tbfy_id}/address" ;
-    rr:class ocds:Address
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate schema:addressLocality ;
-    rr:objectMap [
-      rml:reference "locality" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate schema:postalCode ;
-    rr:objectMap [
-      rml:reference "postalCode" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate schema:addressCountry ;
-    rr:objectMap [
-      rml:reference "countryName" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate schema:streetAddress ;
-    rr:objectMap [
-      rml:reference "streetAddress" ;
-      rr:datatype xsd:string
-    ]
-  ].
-
-<AwardSupplierContactpointMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/award/{ocid}_{awards//id}/supplier/{awards/suppliers/tbfy_id}/contactPoint" ;
-    rr:class ocds:ContactPoint ;
-    rr:class ocds:Person
-  ];
-  
+      
   rr:predicateObjectMap [
     rr:predicate schema:name ;
     rr:objectMap [
-      rml:reference "name" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate schema:email ;
-    rr:objectMap [
-      rml:reference "email" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate schema:faxNumber ;
-    rr:objectMap [
-      rml:reference "faxNumber" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate schema:telephone ;
-    rr:objectMap [
-      rml:reference "telephone" ;
+      rml:reference "Nombre del Adjudicatario" ;
       rr:datatype xsd:string
     ]
   ].
-
-<AwardItemMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}/item/{awards/items/id}" ;
-    rr:class ocds:Item
-  ];
-     
-  rr:predicateObjectMap [
-    rr:predicate ocds:itemId ;
-    rr:objectMap [
-      rml:reference "id" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate dc:description ;
-    rr:objectMap [ 
-      rml:reference "description" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasClassification ;
-    rr:objectMap [
-      rml:reference "classification/id"
-    ]
-  ];
-      
-  rr:predicateObjectMap [
-    rr:predicate ocds:classificationScheme ;
-    rr:objectMap [
-      rml:reference "classification/scheme"
-    ]
-  ];
-        
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasAdditionalItemClassification ;
-    rr:objectMap [
-      rml:reference "additionalClassifications/id"
-    ]
-  ];
-      
-  rr:predicateObjectMap [
-    rr:predicate ocds:additionalItemClassificationScheme ;
-    rr:objectMap [
-      rml:reference "additionalClassifications/scheme"
-    ]
-  ].
-
-<AwardContractPeriodMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}/contractPeriod" ;
-    rr:class ocds:Period
-  ];
-      
-  rr:predicateObjectMap [
-    rr:predicate ocds:durationInDays ;
-    rr:objectMap [
-      rml:reference "durationInDays"
-    ]
-  ];
-      
-  rr:predicateObjectMap [
-    rr:predicate ocds:periodEndDate ;
-    rr:objectMap [
-      rml:reference "endDate" ;
-      rr:datatype xsd:dateTime
-    ]
-  ];
-      
-  rr:predicateObjectMap [
-    rr:predicate ocds:periodStartDate ;
-    rr:objectMap [
-      rml:reference "startDate" ;
-      rr:datatype xsd:dateTime
-    ]
-  ].
-
-<AwardDocumentMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}/document/{awards/documents/id}" ;
-    rr:class ocds:Document
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate ocds:documentId ;
-    rr:objectMap [
-      rml:reference "id" ;
-      rr:datatype xsd:string
-    ]
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate ocds:documentType ;
-    rr:objectMap [
-      rml:reference "documentType"
-    ]
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate dc:language ;
-    rr:objectMap [
-      rml:reference "language" ;
-      rr:datatype xsd:string
-    ]
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate schema:URL ;
-    rr:objectMap [
-      rml:reference "url" ;
-      rr:datatype xsd:string
-    ]
-  ].
-
-<AwardAmendmentMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}/amendment" ;
-    rr:class ocds:Amendment 
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:amendmentDate ;
-    rr:objectMap [
-      rml:reference "date" ;
-      rr:datatype xsd:dateTime
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasChange ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}/amendment/change/{awards/amendment/changes/property}"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:amendmentRationale ;
-    rr:objectMap [
-      rml:reference "rationale" ;
-      rr:datatype xsd:string
-    ]
-  ].
-
-<AwardAmendmentChangePropertyMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/award/{ocid}_{awards/id}/amendment/change/{awards/amendment/changes/property}" ;
-    rr:class ocds:Change 
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:changeProperty ;
-    rr:objectMap [
-      rml:reference "property" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:changeFormerValue ;
-    rr:objectMap [
-      rml:reference "former_value" ;
-      rr:datatype xsd:string
-    ]
-  ].
-
-
-# **********************
-# Contract mapping rules
-# **********************
-
-<ContractMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}" ;
-    rr:class ocds:Contract
-  ];
   
-  rr:predicateObjectMap [
-    rr:predicate ocds:contractId ;
-    rr:objectMap [
-      rml:reference "id" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:isIssuedForAward ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/award/{ocid}_{contracts/awardID}"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate dc:title ;
-    rr:objectMap [ 
-      rml:reference "title" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate dc:description ;
-    rr:objectMap [ 
-      rml:reference "description" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:contractStatus ;
-    rr:objectMap [ 
-      rml:reference "status" 
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasContractPeriod ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/contractPeriod"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasContractValue ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/contractValue"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasContractedItem ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/item/{contracts/items/id}"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:dateContractSigned ;
-    rr:objectMap [ 
-      rml:reference "dateSigned" ;
-      rr:datatype xsd:dateTime
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasDocument ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/document/{contracts/documents/id}"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasAmendment ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/amendment/"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasContractImplementation ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/implementation"
-    ]
-  ].
-
-<ContractPeriodMap>
+<#OrganizationContratante>
   a rr:TriplesMap ;
 
   rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
+    rml:source: "../data/outsiders_2021.parquet" 
   ];
 
   rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/contractPeriod" ;
-    rr:class ocds:Period
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate ocds:periodStartDate ;
-    rr:objectMap [
-      rml:reference "startDate" ;
-      rr:datatype xsd:dateTime
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:periodEndDate ;
-    rr:objectMap [
-      rml:reference "endDate" ;
-      rr:datatype xsd:dateTime
-    ]
-  ].      
-
-<ContractValueMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/value" ;
-    rr:class ocds:Value
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:valueAmount ;
-    rr:objectMap [
-      rml:reference "amount" ;
-      rr:datatype xsd:decimal
-    ]
+    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/Organization/{ID}" ;
+    rr:class ocds:Organisation ;
   ];
       
-  rr:predicateObjectMap [
-    rr:predicate ocds:valueCurrency ;
-    rr:objectMap [
-      rml:reference "currency" ;
-      rr:datatype xsd:string
-    ]
-  ].
-
-<ContractItemMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/item/{contracts/items/id}" ;
-    rr:class ocds:Item
-  ];
-     
-  rr:predicateObjectMap [
-    rr:predicate ocds:itemId ;
-    rr:objectMap [
-      rml:reference "id" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate dc:description ;
-    rr:objectMap [ 
-      rml:reference "description" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasClassification ;
-    rr:objectMap [
-      rml:reference "classification/id"
-    ]
-  ];
-      
-  rr:predicateObjectMap [
-    rr:predicate ocds:classificationScheme ;
-    rr:objectMap [
-      rml:reference "classification/scheme"
-    ]
-  ];
-        
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasAdditionalItemClassification ;
-    rr:objectMap [
-      rml:reference "additionalClassifications/id"
-    ]
-  ];
-      
-  rr:predicateObjectMap [
-    rr:predicate ocds:additionalItemClassificationScheme ;
-    rr:objectMap [
-      rml:reference "additionalClassifications/scheme"
-    ]
-  ].
-
-<ContractDocumentMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/document/{contracts/documents/id}" ;
-    rr:class ocds:Document
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate ocds:documentId ;
-    rr:objectMap [
-      rml:reference "id" ;
-      rr:datatype xsd:string
-    ]
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate ocds:documentType ;
-    rr:objectMap [
-      rml:reference "documentType"
-    ]
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate dc:language ;
-    rr:objectMap [
-      rml:reference "language" ;
-      rr:datatype xsd:string
-    ]
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate schema:URL ;
-    rr:objectMap [
-      rml:reference "url" ;
-      rr:datatype xsd:string
-    ]
-  ].
-
-<ContractAmendmentMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/amendment" ;
-    rr:class ocds:Amendment 
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:amendmentDate ;
-    rr:objectMap [
-      rml:reference "date" ;
-      rr:datatype xsd:dateTime
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasChange ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/amendment/change/{contracts/amendment/changes/property}"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:amendmentRationale ;
-    rr:objectMap [
-      rml:reference "rationale" ;
-      rr:datatype xsd:string
-    ]
-  ].
-
-<ContractAmendmentChangePropertyMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/amendment/change/{contracts/amendment/changes/property}" ;
-    rr:class ocds:Change 
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:changeProperty ;
-    rr:objectMap [
-      rml:reference "property" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:changeFormerValue ;
-    rr:objectMap [
-      rml:reference "former_value" ;
-      rr:datatype xsd:string
-    ]
-  ].
-
-<ContractImplementationMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/implementation" ;
-    rr:class ocds:Implementation
-  ];
-   
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasTransaction ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/implementation/transaction/{contracts/implementation/transaction/id}"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasMilestone ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/implementation/milestone/{contracts/implementation/milestone/id}"
-    ]
-  ];
-     
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasDocument ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/implementation/document/{contracts/implementation/document/id}"
-    ]
-  ].
-
-<ContractImplementationTransactionMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/implementation/transaction/{contracts/implementation/transactions/id}" ;
-    rr:class ocds:Value
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:transactionId ;
-    rr:objectMap [
-      rml:reference "id" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:transactionDataSource ;
-    rr:objectMap [
-      rml:reference "source" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:transactionDate ;
-    rr:objectMap [
-      rml:reference "date" ;
-      rr:datatype xsd:dateTime
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:hasTransactionValue ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/implementation/transaction/{contracts/implementation/transactions/id}/value"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:transactionId ;
-    rr:objectMap [
-      rml:reference "id" ;
-      rr:datatype xsd:string
-    ]
-  ].
-
-<ContractImplementationTransactionValueMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/implementation/transaction/{contracts/implementation/transactions/id}/value" ;
-    rr:class ocds:Value
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:valueAmount ;
-    rr:objectMap [
-      rml:reference "amount" ;
-      rr:datatype xsd:decimal
-    ]
-  ];
-      
-  rr:predicateObjectMap [
-    rr:predicate ocds:valueCurrency ;
-    rr:objectMap [
-      rml:reference "currency" ;
-      rr:datatype xsd:string
-    ]
-  ].
-
-<ContractImplementationTransactionPayerMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/implementation/transaction/{contracts/implementation/transactions/id}/payer" ;
-    rr:class ocds:Organisation
-  ];
-
   rr:predicateObjectMap [
     rr:predicate ocds:legalName ;
     rr:objectMap [
-      rml:reference "legalName" ;
+      rml:reference "ID" ;
       rr:datatype xsd:string
     ]
   ];
-
+      
   rr:predicateObjectMap [
     rr:predicate ocds:URI ;
     rr:objectMap [
-      rml:reference "uri" ;
+      rml:reference "URL perfil de contratante" ;
       rr:datatype xsd:anyURI
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:isPayerFor ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/implementation/transaction/{contracts/implementation/transactions/id}"
-    ]
-  ].
-
-<ContractImplementationTransactionPayeeMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/implementation/transaction/{contracts/implementation/transactions/id}/payee" ; #No soy un experto pero en lugar de payee es payer*
-    rr:class ocds:Organisation
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:legalName ;
-    rr:objectMap [
-      rml:reference "legalName" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:URI ;
-    rr:objectMap [
-      rml:reference "uri" ;
-      rr:datatype xsd:anyURI
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:isPayeeFor ;
-    rr:objectMap [
-      rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/implementation/transaction/{contracts/implementation/transactions/id}"
-    ]
-  ].
-
-<ContractImplementationMilestoneMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/milestone/{contracts/implementation/milestones/id}" ;
-    rr:class ocds:Milestone
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:milestoneId ;
-    rr:objectMap [
-      rml:reference "id" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate dc:title ;
-    rr:objectMap [
-      rml:reference "title" ;
-      rr:datatype xsd:string
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:milestoneDueDate ;
-    rr:objectMap [
-      rml:reference "dueDate" ;
-      rr:datatype xsd:dateTime
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate dc:description ;
-    rr:objectMap [
-      rml:reference "description" ;
-      rr:datatype xsd:string
-    ]
-  ].
-
-<ContractImplementationMilestoneDocumentMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/milestone/{contracts/implementation/milestones/id}/document/{contracts/implementation/milestones/documents/id}" ;
-    rr:class ocds:Document
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ocds:documentId ;
-    rr:objectMap [
-      rml:reference "id" ;
-      rr:datatype xsd:string
-    ]
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate ocds:documentType ;
-    rr:objectMap [
-      rml:reference "documentType"
-    ]
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate dc:language ;
-    rr:objectMap [
-      rml:reference "language" ;
-      rr:datatype xsd:string
-    ]
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate schema:URL ;
-    rr:objectMap [
-      rml:reference "url" ;
-      rr:datatype xsd:string
-    ]
-  ].
-
-<ContractImplementationDocumentMap>
-  a rr:TriplesMap ;
-
-  rml:logicalSource [
-    rml:source "input.xml" ; 
-    rml:referenceFormulation ql:XPath ;
-    rml:iterator "/root/releases"
-  ];
-
-  rr:subjectMap [
-    rr:template "http://data.tbfy.eu/contract/{ocid}_{contracts/id}/document/{contracts/implementation/documents/id}" ;
-    rr:class ocds:Document
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate ocds:documentId ;
-    rr:objectMap [
-      rml:reference "id" ;
-      rr:datatype xsd:string
-    ]
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate ocds:documentType ;
-    rr:objectMap [
-      rml:reference "documentType"
-    ]
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate dc:language ;
-    rr:objectMap [
-      rml:reference "language" ;
-      rr:datatype xsd:string
-    ]
-  ];
-    
-  rr:predicateObjectMap [
-    rr:predicate schema:URL ;
-    rr:objectMap [
-      rml:reference "url" ;
-      rr:datatype xsd:string
     ]
   ].

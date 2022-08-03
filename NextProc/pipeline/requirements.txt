@@ -6,3 +6,4 @@ morph-kgc
 fastAPI
 uvicorn
 python-multipart
+pyarrow

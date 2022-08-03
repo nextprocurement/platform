@@ -32,7 +32,7 @@ def main(argv):
 
     api_dir = 'http://localhost:5050'
 
-    #filepath = "D:/Documentos/TBFY_data/TBFY_DATA_DUMP_JSON/3_JSON_Enriched/2019-01-01/*.json"
+    #filepath = "D:/Documentos/TBFY_data/TBFY_DATA_DUMP_JSON/3_JSON_Enriched/2019-01-01/*.parquet"
     filepath = input_folder
 
     #param = 'input_07-06-2022'
