@@ -28,7 +28,6 @@ logging = {
 rml = {
     "rml_filename": "rmlmapper.jar",
     "mapping_filename": "mapping.rml.ttl",
-    # "rml_input_filename": "input.xml",
     "rml_input_filename": "outsiders_2021.parquet",
     "rml_output_filename": "output.nt"
 }
