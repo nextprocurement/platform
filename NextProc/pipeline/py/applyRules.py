@@ -68,138 +68,106 @@ def main(argv):
 
     logging.basicConfig(level=config.logging["level"])
     
-    start_date = ""
-    end_date = ""
     input_folder = ""
     output_folder = ""
 
     try:
         opts, args = getopt.getopt(argv, "hs:e:r:i:o:")
     except getopt.GetoptError:
-        print("applyRules.py -s <start_date> -e <end_date> -i <input_folder> -o <output_folder>")
+        print("applyRules.py -i <input_folder> -o <output_folder>")
         sys.exit(2)
     for opt, arg in opts:
         if opt == "-h":
-            print("applyRules.py -s <start_date> -e <end_date> -i <input_folder> -o <output_folder>")
+            print("applyRules.py -i <input_folder> -o <output_folder>")
             sys.exit()
-        elif opt in ("-s"):
-            start_date = arg
-        elif opt in ("-e"):
-            end_date = arg
         elif opt in ("-i"):
-            input_folder = arg
+            dirPath = arg
         elif opt in ("-o"):
-            output_folder = arg
+            outputDirPath = arg
 
-    logging.debug("applyRules.py: start_date = " + start_date)
-    logging.debug("applyRules.py: end_date = " + end_date)
-    logging.debug("applyRules.py: input_folder = " + input_folder)
-    logging.debug("applyRules.py: output_folder = " + output_folder)
-
-    start = datetime.strptime(start_date, "%Y-%m-%d")
-    stop = datetime.strptime(end_date, "%Y-%m-%d")
-
-    while start <= stop:
-        process_start_time = datetime.now()
-
-        created_date = datetime.strftime(start, "%Y-%m-%d")
+    logging.debug("applyRules.py: input_folder = " + dirPath)
+    logging.debug("applyRules.py: output_folder = " + outputDirPath)
+    
+    process_start_time = datetime.datetime.now()
         
-        dirname = created_date
-        # Functionality Starts
-        dirPath = os.path.join(input_folder, dirname)
-        outputDirPath = os.path.join(output_folder, dirname)
-        if os.path.isdir(dirPath):
-            if not os.path.exists(outputDirPath):
-                os.makedirs(outputDirPath)
-            for filename in os.listdir(dirPath):
-                inputFilePath = os.path.join(dirPath, filename)
-                ext = os.path.splitext(inputFilePath)[-1].lower()
-                if (ext == ".parquet"):
-                    output_filename = os.path.splitext(filename)[0] + '_output.parquet'
-                    outputFilePath = os.path.join(outputDirPath, output_filename)
-                    output_filename2 = os.path.splitext(filename)[0] + '.nt'
-                    outputFilePath2 = os.path.join(outputDirPath, output_filename)
-                    logging.info("applyRules.py: file = " + outputFilePath)
-                    logging.info("applyRules.py: file = " + outputFilePath2)
+    # Functionality Starts
+    if os.path.isdir(dirPath):
+        if not os.path.exists(outputDirPath):
+            os.makedirs(outputDirPath)
+        for filename in os.listdir(dirPath):
+            inputFilePath = os.path.join(dirPath, filename)
+            ext = os.path.splitext(inputFilePath)[-1].lower()
+            if (ext == ".parquet"):
+                output_filename = os.path.splitext(filename)[0] + '_output.parquet'
+                outputFilePath = os.path.join(outputDirPath, output_filename)
+                output_filename2 = os.path.splitext(filename)[0] + '.nt'
+                outputFilePath2 = os.path.join(outputDirPath, output_filename)
+                logging.info("applyRules.py: file = " + outputFilePath)
+                logging.info("applyRules.py: file = " + outputFilePath2)
                     
-                    prepareAndApply(inputFilePath, outputFilePath, outputFilePath2)
+                prepareAndApply(inputFilePath, outputFilePath, outputFilePath2)
                                         
-                    tbfy.statistics.update_stats_count(stats_files, "number_of_files")
+                tbfy.statistics.update_stats_count(stats_files, "number_of_files")
 
-        process_end_time = datetime.now()
-        duration_in_seconds = (process_end_time - process_start_time).total_seconds()
-        tbfy.statistics.update_stats_value(stats_files, "files_processed_duration_in_seconds", duration_in_seconds)
-        write_stats(outputDirPath) # Write statistics
-        reset_stats() # Reset statistics for next folder date
-
-        start = start + timedelta(days=1) # Increase date by one day
+    process_end_time = datetime.datetime.now()
+    duration_in_seconds = (process_end_time - process_start_time).total_seconds()
+    tbfy.statistics.update_stats_value(stats_files, "files_processed_duration_in_seconds", duration_in_seconds)
+    write_stats(outputDirPath) # Write statistics
+    reset_stats() # Reset statistics for next folder date
 
 
-def processingAPI(start_date, end_date, input_folder, output_folder):
+def processingAPI(start_date, end_date, dirPath, outputDirPath):
     global stats_files
 
     logging.basicConfig(level=config.logging["level"])
     
-    logging.debug("applyRules.py: start_date = " + start_date)
-    logging.debug("applyRules.py: end_date = " + end_date)
-    logging.debug("applyRules.py: input_folder = " + input_folder)
-    logging.debug("applyRules.py: output_folder = " + output_folder)
+    logging.debug("applyRules.py: input_folder = " + dirPath)
+    logging.debug("applyRules.py: output_folder = " + outputDirPath)
 
-    start = datetime.strptime(start_date, "%Y-%m-%d")
-    stop = datetime.strptime(end_date, "%Y-%m-%d")
-
-    while start <= stop:
-        process_start_time = datetime.now()
-
-        created_date = datetime.strftime(start, "%Y-%m-%d")
-        
-        dirname = created_date
-        # Functionality Starts
-        dirPath = os.path.join(input_folder, dirname)
-        outputDirPath = os.path.join(output_folder, dirname)
-        if os.path.isdir(dirPath):
-            if not os.path.exists(outputDirPath):
-                os.makedirs(outputDirPath)
-            for filename in os.listdir(dirPath):
-                inputFilePath = os.path.join(dirPath, filename)
-                ext = os.path.splitext(inputFilePath)[-1].lower()
-                if (ext == ".parquet"):
-                    output_filename = os.path.splitext(filename)[0] + '_output.parquet'
-                    outputFilePath = os.path.join(outputDirPath, output_filename)
-                    output_filename2 = os.path.splitext(filename)[0] + '.nt'
-                    outputFilePath2 = os.path.join(outputDirPath, output_filename)
-                    logging.info("applyRules.py: file = " + outputFilePath)
-                    logging.info("applyRules.py: file = " + outputFilePath2)
+    process_start_time = datetime.datetime.now()
+     
+    
+    # Functionality Starts
+    if os.path.isdir(dirPath):
+        if not os.path.exists(outputDirPath):
+            os.makedirs(outputDirPath)
+        for filename in os.listdir(dirPath):
+            inputFilePath = os.path.join(dirPath, filename)
+            ext = os.path.splitext(inputFilePath)[-1].lower()
+            if (ext == ".parquet"):
+                output_filename = os.path.splitext(filename)[0] + '_output.parquet'
+                outputFilePath = os.path.join(outputDirPath, output_filename)
+                output_filename2 = os.path.splitext(filename)[0] + '.nt'
+                outputFilePath2 = os.path.join(outputDirPath, output_filename)
+                logging.info("applyRules.py: file = " + outputFilePath)
+                logging.info("applyRules.py: file = " + outputFilePath2)
                     
-                    prepareAndApply(inputFilePath, outputFilePath, outputFilePath2)
+                prepareAndApply(inputFilePath, outputFilePath, outputFilePath2)
                                         
-                    tbfy.statistics.update_stats_count(stats_files, "number_of_files")
+                tbfy.statistics.update_stats_count(stats_files, "number_of_files")
 
-        process_end_time = datetime.now()
-        duration_in_seconds = (process_end_time - process_start_time).total_seconds()
-        tbfy.statistics.update_stats_value(stats_files, "files_processed_duration_in_seconds", duration_in_seconds)
+    process_end_time = datetime.datetime.now()
+    duration_in_seconds = (process_end_time - process_start_time).total_seconds()
+    tbfy.statistics.update_stats_value(stats_files, "files_processed_duration_in_seconds", duration_in_seconds)
         
-        write_stats(outputDirPath) # Write statistics
-        reset_stats() # Reset statistics for next folder date
+    write_stats(outputDirPath) # Write statistics
+    reset_stats() # Reset statistics for next folder date
 
-        start = start + timedelta(days=1) # Increase date by one day
-        return("files_processed_duration_in_seconds" + str(duration_in_seconds))
-
+    return("files_processed_duration_in_seconds" + str(duration_in_seconds))
 
 
-def processingAPI_noDate(input_folder, output_folder):
+
+def processingAPI_noDate(dirPath, outputDirPath):
     global stats_files
 
     logging.basicConfig(level=config.logging["level"])
     
-    logging.debug("applyRules.py: input_folder = " + input_folder)
-    logging.debug("applyRules.py: output_folder = " + output_folder)
+    logging.debug("applyRules.py: input_folder = " + dirPath)
+    logging.debug("applyRules.py: output_folder = " + outputDirPath)
 
-    process_start_time = datetime.now()
+    process_start_time = datetime.datetime.now()
 
     # Functionality Starts
-    dirPath = os.path.join(input_folder, dirname)
-    outputDirPath = os.path.join(output_folder, dirname)
     if os.path.isdir(dirPath):
         if not os.path.exists(outputDirPath):
             os.makedirs(outputDirPath)
@@ -219,7 +187,7 @@ def processingAPI_noDate(input_folder, output_folder):
                 tbfy.statistics.update_stats_count(stats_files, "number_of_files")
     
 
-        process_end_time = datetime.now()
+        process_end_time = datetime.datetime.now()
         duration_in_seconds = (process_end_time - process_start_time).total_seconds()
         tbfy.statistics.update_stats_value(stats_files, "files_processed_duration_in_seconds", duration_in_seconds)
         
@@ -277,14 +245,15 @@ def prepareAndApply(input, output, output_nt):
 
 
 def applyRules(input, output):
-    rml = "rml-mappings/mappings.ttl"
-
+    rml = "pipeline/py/rml-mappings/mappings.rml.ttl"
+    print(os.getcwd())
     # configuration file
     config_morph = """
                                 [DataSource1]
                                 file_path=""" + input + """
                                 mappings=""" + rml
 
+    print(config_morph)
     # generate the triples and load them to an RDFlib graph
     graph = morph_kgc.materialize(config_morph)
     # work with the graph

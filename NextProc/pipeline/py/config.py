@@ -13,12 +13,8 @@ import os
 #VAR_NAME = os.environ['PLATFORM_IP']
 #ip = socket.gethostbyname(VAR_NAME)
 
-# Para conectarse con virtuoso
-VAR_NAME = os.environ['PLATFORM_IP']
-ip = socket.gethostbyname(VAR_NAME)
-
 #Para conectarse con Virtuoso en local
-#ip = "127.0.0.1"
+ip = "127.0.0.1"
 
 logging = {
     "level": "INFO"
@@ -30,21 +26,22 @@ openopps = {
     "sleep": 5
 }
 
-opencorporates = {
-    "reconcile_api_url": "https://reconcile.opencorporates.com",
-    "reconcile_score": 60,
-    "companies_api_url": "http://api.opencorporates.com",
-    "smart_address_check": False,
-    "country_name_codes_simulation": False,
-    "use_cached_company_database": True,
-    "cached_company_database_retention_days": 100,
-    "cached_company_database_filename": "shelve/company_database_dict"
-}
+# opencorporates = {
+#     "reconcile_api_url": "https://reconcile.opencorporates.com",
+#     "reconcile_score": 60,
+#     "companies_api_url": "http://api.opencorporates.com",
+#     "smart_address_check": False,
+#     "country_name_codes_simulation": False,
+#     "use_cached_company_database": True,
+#     "cached_company_database_retention_days": 100,
+#     "cached_company_database_filename": "shelve/company_database_dict"
+# }
 
 rml = {
     "rml_filename": "rmlmapper.jar",
     "mapping_filename": "mapping.ttl",
-    "rml_input_filename": "input.xml",
+    # "rml_input_filename": "input.xml",
+    "rml_input_filename": "outsiders_2021.parquet",
     "rml_output_filename": "output.nt"
 }
 
