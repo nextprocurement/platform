@@ -7,3 +7,4 @@ fastAPI
 uvicorn
 python-multipart
 pyarrow
+dpath
