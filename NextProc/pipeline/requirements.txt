@@ -1,3 +1,4 @@
+pandas
 requests 
 dpath 
 xmltodict 
@@ -8,3 +9,4 @@ uvicorn
 python-multipart
 pyarrow
 dpath
+rdflib
