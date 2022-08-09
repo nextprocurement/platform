@@ -70,7 +70,7 @@ def main(argv):
     
     input_folder = ""
     output_folder = ""
-    output_folder = ""
+    rml = ""
 
     try:
         opts, args = getopt.getopt(argv, "hs:e:r:i:o:")
@@ -109,7 +109,7 @@ def main(argv):
                 logging.info("applyRules.py: file = " + outputFilePath)
                 logging.info("applyRules.py: file = " + outputFilePath2)
                     
-                prepareAndApply(inputFilePath, outputFilePath, outputFilePath2)
+                prepareAndApply(inputFilePath, outputFilePath, outputFilePath2, rml)
                                         
                 tbfy.statistics.update_stats_count(stats_files, "number_of_files")
 
@@ -127,6 +127,7 @@ def processingAPI(start_date, end_date, dirPath, outputDirPath, rml):
     
     logging.debug("applyRules.py: input_folder = " + dirPath)
     logging.debug("applyRules.py: output_folder = " + outputDirPath)
+    logging.debug("applyRules.py: rule_file_path = " + rml)
 
     process_start_time = datetime.datetime.now()
      
@@ -146,7 +147,7 @@ def processingAPI(start_date, end_date, dirPath, outputDirPath, rml):
                 logging.info("applyRules.py: file = " + outputFilePath)
                 logging.info("applyRules.py: file = " + outputFilePath2)
                     
-                prepareAndApply(inputFilePath, outputFilePath, outputFilePath2)
+                prepareAndApply(inputFilePath, outputFilePath, outputFilePath2, rml)
                                         
                 tbfy.statistics.update_stats_count(stats_files, "number_of_files")
 
@@ -168,6 +169,7 @@ def processingAPI_noDate(dirPath, outputDirPath, rml):
     
     logging.debug("applyRules.py: input_folder = " + dirPath)
     logging.debug("applyRules.py: output_folder = " + outputDirPath)
+    logging.debug("applyRules.py: rule_file_path = " + rml)
 
     process_start_time = datetime.datetime.now()
 
@@ -186,7 +188,7 @@ def processingAPI_noDate(dirPath, outputDirPath, rml):
                 logging.info("applyRules.py: file = " + outputFilePath)
                 logging.info("applyRules.py: file = " + outputFilePath2)
                     
-                prepareAndApply(inputFilePath, outputFilePath, outputFilePath2)
+                prepareAndApply(inputFilePath, outputFilePath, outputFilePath2, rml)
                                         
                 tbfy.statistics.update_stats_count(stats_files, "number_of_files")
     
