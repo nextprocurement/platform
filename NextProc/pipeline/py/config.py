@@ -1,45 +1,33 @@
 # -*- coding: utf-8 -*-
 
 # #####################################################################################################
-# Data ingestion script for the TBFY Knowledge Graph (http://data.tbfy.eu/). 
-# Modified for the project Next Procurement.
+# Data ingestion config file for the nextProcurement project, adapted from TBFY.
 # 
 # This file contains configuration parameters for the data ingestion process.
+#
+# Author   : mnavas (UPM) [based on previous code]
+# License  : Apache License 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+# Project  : Developed as part of the nextProcurement project
+# Funding  : nextProcurement has received funding from the European Union
 #####################################################################################################
+
 import socket 
 import os
 
-# Para conectarse con Fuseki
+# To conect to Fuseki
 #VAR_NAME = os.environ['PLATFORM_IP']
 #ip = socket.gethostbyname(VAR_NAME)
 
-#Para conectarse con Virtuoso en local
+# To conect to Virtuoso locally
 ip = "127.0.0.1"
 
 logging = {
     "level": "INFO"
 }
 
-openopps = {
-    "api_url": "https://api.openopps.com/api/",
-    "page_size": 1000,
-    "sleep": 5
-}
-
-# opencorporates = {
-#     "reconcile_api_url": "https://reconcile.opencorporates.com",
-#     "reconcile_score": 60,
-#     "companies_api_url": "http://api.opencorporates.com",
-#     "smart_address_check": False,
-#     "country_name_codes_simulation": False,
-#     "use_cached_company_database": True,
-#     "cached_company_database_retention_days": 100,
-#     "cached_company_database_filename": "shelve/company_database_dict"
-# }
-
 rml = {
     "rml_filename": "rmlmapper.jar",
-    "mapping_filename": "mapping.ttl",
+    "mapping_filename": "mapping.rml.ttl",
     # "rml_input_filename": "input.xml",
     "rml_input_filename": "outsiders_2021.parquet",
     "rml_output_filename": "output.nt"

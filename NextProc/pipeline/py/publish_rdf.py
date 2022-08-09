@@ -2,16 +2,14 @@
 # -*- coding: utf-8 -*-
 
 #####################################################################################################
-# Data ingestion script for the TBFY Knowledge Graph (http://data.tbfy.eu/)
+# Data ingestion script for the nextProcurement project, based on code from TBFY
 # 
-# This file contains a script that publishes the RDF (N-Triples) files to the triplestore database.
+# This file contains a script that publishes nt files to the triplestore database.
 # 
-# Copyright: SINTEF 2018-2021
-# Author   : Brian Elvesæter (brian.elvesater@sintef.no)
+# Author   : mnavas (UPM) [based on a script by Brian Elvesæter (brian.elvesater@sintef.no)]
 # License  : Apache License 2.0 (http://www.apache.org/licenses/LICENSE-2.0)
-# Project  : Developed as part of the TheyBuyForYou project (https://theybuyforyou.eu/)
-# Funding  : TheyBuyForYou has received funding from the European Union's Horizon 2020
-#            research and innovation programme under grant agreement No 780247
+# Project  : Developed as part of the nextProcurement project
+# Funding  : nextProcurement has received funding from the European Union
 #####################################################################################################
 
 import config
@@ -88,25 +86,6 @@ def number_of_triples(rdf_file):
 # ****************************************
 # Publish RDF data to triplestore database
 # ****************************************
-"""
-def publish_rdf(rdf_data):
-    url = jena_fuseki_url + "/" + jena_fuseki_dataset + "/data?default"
-
-    body = rdf_data
-
-    headers = {
-        "Content-Type": "text/turtle;charset=utf-8"
-    }
-
-    response = requests.post(url, data=body, headers=headers)
-
-    if response.status_code != 200:
-        logging.info("publish_rdf(): ERROR: " + json.dumps(response.json()))
-        return None
-    else:
-        return response
-
-"""
 def publish_rdf(rdf_data):
     url = virtuoso_url + "/sparql-graph-crud-auth?graph-uri=" + virtuoso_url +"/" + virtuoso_dataset
 
@@ -118,7 +97,7 @@ def publish_rdf(rdf_data):
         "Content-Type": "text/turtle;charset=utf-8"
     }
 
-    timeout = 15
+    timeout = 150
     tries = 3
     for i in range(tries):
         try:
@@ -151,113 +130,88 @@ def main(argv):
 
     logging.basicConfig(level=config.logging["level"])
     
-    start_date = ""
-    end_date = ""
     input_folder = ""
 
     try:
         opts, args = getopt.getopt(argv, "hs:e:i:")
     except getopt.GetoptError:
-        print("publish_rdf.py -s <start_date> -e <end_date> -i <input_folder>")
+        print("publish_rdf.py -i <input_folder>")
         sys.exit(2)
     for opt, arg in opts:
         if opt == "-h":
-            print("publish_rdf.py -s <start_date> -e <end_date> -i <input_folder>")
+            print("publish_rdf.py -i <input_folder>")
             sys.exit()
-        elif opt in ("-s"):
-            start_date = arg
-        elif opt in ("-e"):
-            end_date = arg
         elif opt in ("-i"):
             input_folder = arg
 
-    logging.debug("publish_rdf.py: start_date = " + start_date)
-    logging.debug("publish_rdf.py: end_date = " + end_date)
+    # input_folder = "../../out"
+    
     logging.debug("publish_rdf.py: input_folder = " + input_folder)
-
-    start = datetime.strptime(start_date, "%Y-%m-%d")
-    stop = datetime.strptime(end_date, "%Y-%m-%d")
-
-    while start <= stop:
-        process_start_time = datetime.now()
-
-        created_date = datetime.strftime(start, "%Y-%m-%d")
-        dirname = created_date
-        dirPath = os.path.join(input_folder, dirname)
+    
+    process_start_time = datetime.now()
         
-        rdf_data = b''
+    rdf_data = b''
 
-        logging.info("publish_rdf.py: date = " + created_date + " reading")
+    logging.info("publish_rdf.py: " + input_folder + " reading")
 
-        if os.path.isdir(dirPath):
-            for filename in os.listdir(dirPath):
-                filePath = os.path.join(dirPath, filename)
-                ext = os.path.splitext(filePath)[-1].lower()
-                if (ext == ".nt"):
-                    rdf_data = rdf_data + read_rdf_data(filePath)
+    if os.path.isdir(input_folder):
+        for filename in os.listdir(input_folder):
+            filePath = os.path.join(input_folder, filename)
+            ext = os.path.splitext(filePath)[-1].lower()
+            if (ext == ".nt"):
+                logging.info("publish_rdf.py: " + filename + " reading")
+                rdf_data = rdf_data + read_rdf_data(filePath)
                     
-                    # Update statistics
-                    tbfy.statistics.update_stats_count(stats_publish, "number_of_files")
-                    tbfy.statistics.update_stats_add(stats_publish, "number_of_triples", number_of_triples(filePath))
+                # Update statistics
+                tbfy.statistics.update_stats_count(stats_publish, "number_of_files")
+                tbfy.statistics.update_stats_add(stats_publish, "number_of_triples", number_of_triples(filePath))
 
-        logging.info("publish_rdf.py: date = " + created_date + " publishing")
+    logging.info("publish_rdf.py: " + input_folder + " publishing")
+    
+    publish_rdf(rdf_data)
 
-        publish_rdf(rdf_data)
-
-        process_end_time = datetime.now()
-        duration_in_seconds = (process_end_time - process_start_time).total_seconds()
-        tbfy.statistics.update_stats_value(stats_publish, "publish_duration_in_seconds", duration_in_seconds)
-        logging.info(str(stats_publish))
-        write_stats(dirPath) # Write statistics
-        reset_stats() # Reset statistics for next folder date
-
-        start = start + timedelta(days=1) # Increase date by one day
+    process_end_time = datetime.now()
+    duration_in_seconds = (process_end_time - process_start_time).total_seconds()
+    tbfy.statistics.update_stats_value(stats_publish, "publish_duration_in_seconds", duration_in_seconds)
+    logging.info(str(stats_publish))
+    write_stats(input_folder) # Write statistics
+    reset_stats() # Reset statistics for next folder date
 
 
-def publish_rdfAPI(start_date, end_date, input_folder):
+def publish_rdfAPI(input_folder):
     global stats_publish
 
     logging.basicConfig(level=config.logging["level"])
 
-    logging.debug("publish_rdf.py: start_date = " + start_date)
-    logging.debug("publish_rdf.py: end_date = " + end_date)
     logging.debug("publish_rdf.py: input_folder = " + input_folder)
 
-    start = datetime.strptime(start_date, "%Y-%m-%d")
-    stop = datetime.strptime(end_date, "%Y-%m-%d")
+    process_start_time = datetime.now()
+    rdf_data = b''
 
-    while start <= stop:
-        process_start_time = datetime.now()
-
-        created_date = datetime.strftime(start, "%Y-%m-%d")
-        dirname = created_date
-        dirPath = os.path.join(input_folder, dirname)
-        
-        rdf_data = b''
-
-        if os.path.isdir(dirPath):
-            for filename in os.listdir(dirPath):
-                filePath = os.path.join(dirPath, filename)
-                ext = os.path.splitext(filePath)[-1].lower()
-                if (ext == ".nt"):
-                    rdf_data = rdf_data + read_rdf_data(filePath)
+    if os.path.isdir(input_folder):
+        for filename in os.listdir(input_folder):
+            filePath = os.path.join(input_folder, filename)
+            ext = os.path.splitext(filePath)[-1].lower()
+            if (ext == ".nt"):
+                logging.info("publish_rdf.py: " + filename + " reading")
+                rdf_data = rdf_data + read_rdf_data(filePath)
                     
-                    # Update statistics
-                    tbfy.statistics.update_stats_count(stats_publish, "number_of_files")
-                    tbfy.statistics.update_stats_add(stats_publish, "number_of_triples", number_of_triples(filePath))
+                # Update statistics
+                tbfy.statistics.update_stats_count(stats_publish, "number_of_files")
+                tbfy.statistics.update_stats_add(stats_publish, "number_of_triples", number_of_triples(filePath))
 
-        logging.info("publish_rdf.py: date = " + created_date)
+    logging.info("publish_rdf.py: " + input_folder)
 
-        publish_rdf(rdf_data)
+    publish_rdf(rdf_data)
 
-        process_end_time = datetime.now()
-        duration_in_seconds = (process_end_time - process_start_time).total_seconds()
-        tbfy.statistics.update_stats_value(stats_publish, "publish_duration_in_seconds", duration_in_seconds)
-        write_stats(dirPath) # Write statistics
-        reset_stats() # Reset statistics for next folder date
+    process_end_time = datetime.now()
+    duration_in_seconds = (process_end_time - process_start_time).total_seconds()
+    tbfy.statistics.update_stats_value(stats_publish, "publish_duration_in_seconds", duration_in_seconds)
+    write_stats(input_folder) # Write statistics
+    reset_stats() # Reset statistics for next folder date
 
-        start = start + timedelta(days=1) # Increase date by one day
-        return("publish_duration_in_seconds", str(duration_in_seconds))
+    return("publish_duration_in_seconds", str(duration_in_seconds))
+
 
 def publish_rdfAPI_noDate(input_folder):
     global stats_publish
@@ -277,6 +231,7 @@ def publish_rdfAPI_noDate(input_folder):
             filePath = os.path.join(dirPath, filename)
             ext = os.path.splitext(filePath)[-1].lower()
             if (ext == ".nt"):
+                logging.info("publish_rdf.py: " + filename + " reading")
                 rdf_data = rdf_data + read_rdf_data(filePath)
                 
                 # Update statistics
