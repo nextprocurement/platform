@@ -70,23 +70,27 @@ def main(argv):
     
     input_folder = ""
     output_folder = ""
+    output_folder = ""
 
     try:
         opts, args = getopt.getopt(argv, "hs:e:r:i:o:")
     except getopt.GetoptError:
-        print("applyRules.py -i <input_folder> -o <output_folder>")
+        print("applyRules.py -i <input_folder> -o <output_folder> -r <rule_file_path>")
         sys.exit(2)
     for opt, arg in opts:
         if opt == "-h":
-            print("applyRules.py -i <input_folder> -o <output_folder>")
+            print("applyRules.py -i <input_folder> -o <output_folder> -r <rule_file_path>")
             sys.exit()
         elif opt in ("-i"):
             dirPath = arg
         elif opt in ("-o"):
             outputDirPath = arg
+        elif opt in ("-r"):
+            rml = arg
 
     logging.debug("applyRules.py: input_folder = " + dirPath)
     logging.debug("applyRules.py: output_folder = " + outputDirPath)
+    logging.debug("applyRules.py: rule_file_path = " + rml)
     
     process_start_time = datetime.datetime.now()
         
@@ -101,7 +105,7 @@ def main(argv):
                 output_filename = os.path.splitext(filename)[0] + '_output.parquet'
                 outputFilePath = os.path.join(outputDirPath, output_filename)
                 output_filename2 = os.path.splitext(filename)[0] + '.nt'
-                outputFilePath2 = os.path.join(outputDirPath, output_filename)
+                outputFilePath2 = os.path.join(outputDirPath, output_filename2)
                 logging.info("applyRules.py: file = " + outputFilePath)
                 logging.info("applyRules.py: file = " + outputFilePath2)
                     
@@ -116,7 +120,7 @@ def main(argv):
     reset_stats() # Reset statistics for next folder date
 
 
-def processingAPI(start_date, end_date, dirPath, outputDirPath):
+def processingAPI(start_date, end_date, dirPath, outputDirPath, rml):
     global stats_files
 
     logging.basicConfig(level=config.logging["level"])
@@ -138,7 +142,7 @@ def processingAPI(start_date, end_date, dirPath, outputDirPath):
                 output_filename = os.path.splitext(filename)[0] + '_output.parquet'
                 outputFilePath = os.path.join(outputDirPath, output_filename)
                 output_filename2 = os.path.splitext(filename)[0] + '.nt'
-                outputFilePath2 = os.path.join(outputDirPath, output_filename)
+                outputFilePath2 = os.path.join(outputDirPath, output_filename2)
                 logging.info("applyRules.py: file = " + outputFilePath)
                 logging.info("applyRules.py: file = " + outputFilePath2)
                     
@@ -157,7 +161,7 @@ def processingAPI(start_date, end_date, dirPath, outputDirPath):
 
 
 
-def processingAPI_noDate(dirPath, outputDirPath):
+def processingAPI_noDate(dirPath, outputDirPath, rml):
     global stats_files
 
     logging.basicConfig(level=config.logging["level"])
@@ -178,7 +182,7 @@ def processingAPI_noDate(dirPath, outputDirPath):
                 output_filename = os.path.splitext(filename)[0] + '_output.parquet'
                 outputFilePath = os.path.join(outputDirPath, output_filename)
                 output_filename2 = os.path.splitext(filename)[0] + '.nt'
-                outputFilePath2 = os.path.join(outputDirPath, output_filename)
+                outputFilePath2 = os.path.join(outputDirPath, output_filename2)
                 logging.info("applyRules.py: file = " + outputFilePath)
                 logging.info("applyRules.py: file = " + outputFilePath2)
                     
@@ -197,7 +201,7 @@ def processingAPI_noDate(dirPath, outputDirPath):
         return("files_processed_duration_in_seconds" + str(duration_in_seconds))
 
 
-def prepareAndApply(input, output, output_nt):
+def prepareAndApply(input, output, output_nt, rml):
     # We preprocess the data
     df = pd.read_parquet(input, engine='pyarrow')
 
@@ -239,13 +243,12 @@ def prepareAndApply(input, output, output_nt):
     table = pa.Table.from_pandas(df)
     pq.write_table(table, output)
     
-    applyRules(output, output_nt)
+    applyRules(output, output_nt, rml)
     
 
 
 
-def applyRules(input, output):
-    rml = "pipeline/py/rml-mappings/mappings.rml.ttl"
+def applyRules(input, output, rml):
     print(os.getcwd())
     # configuration file
     config_morph = """
