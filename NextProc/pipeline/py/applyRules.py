@@ -34,6 +34,8 @@ import pyarrow.parquet as pq
 import datetime
 from rdflib.plugin import register, Serializer, Parser
 import morph_kgc
+from filesplit.split import Split
+
 
 # **********
 # Statistics
@@ -109,7 +111,7 @@ def main(argv):
                 logging.info("applyRules.py: file = " + outputFilePath)
                 logging.info("applyRules.py: file = " + outputFilePath2)
                     
-                prepareAndApply(inputFilePath, outputFilePath, outputFilePath2, rml)
+                prepareAndApply(inputFilePath, outputFilePath, outputFilePath2, rml, outputDirPath)
                                         
                 tbfy.statistics.update_stats_count(stats_files, "number_of_files")
 
@@ -147,7 +149,7 @@ def processingAPI(start_date, end_date, dirPath, outputDirPath, rml):
                 logging.info("applyRules.py: file = " + outputFilePath)
                 logging.info("applyRules.py: file = " + outputFilePath2)
                     
-                prepareAndApply(inputFilePath, outputFilePath, outputFilePath2, rml)
+                prepareAndApply(inputFilePath, outputFilePath, outputFilePath2, rml, outputDirPath)
                                         
                 tbfy.statistics.update_stats_count(stats_files, "number_of_files")
 
@@ -161,49 +163,7 @@ def processingAPI(start_date, end_date, dirPath, outputDirPath, rml):
     return("files_processed_duration_in_seconds" + str(duration_in_seconds))
 
 
-
-def processingAPI_noDate(dirPath, outputDirPath, rml):
-    global stats_files
-
-    logging.basicConfig(level=config.logging["level"])
-    
-    logging.debug("applyRules.py: input_folder = " + dirPath)
-    logging.debug("applyRules.py: output_folder = " + outputDirPath)
-    logging.debug("applyRules.py: rule_file_path = " + rml)
-
-    process_start_time = datetime.datetime.now()
-
-    # Functionality Starts
-    if os.path.isdir(dirPath):
-        if not os.path.exists(outputDirPath):
-            os.makedirs(outputDirPath)
-        for filename in os.listdir(dirPath):
-            inputFilePath = os.path.join(dirPath, filename)
-            ext = os.path.splitext(inputFilePath)[-1].lower()
-            if (ext == ".parquet"):
-                output_filename = os.path.splitext(filename)[0] + '_output.parquet'
-                outputFilePath = os.path.join(outputDirPath, output_filename)
-                output_filename2 = os.path.splitext(filename)[0] + '.nt'
-                outputFilePath2 = os.path.join(outputDirPath, output_filename2)
-                logging.info("applyRules.py: file = " + outputFilePath)
-                logging.info("applyRules.py: file = " + outputFilePath2)
-                    
-                prepareAndApply(inputFilePath, outputFilePath, outputFilePath2, rml)
-                                        
-                tbfy.statistics.update_stats_count(stats_files, "number_of_files")
-    
-
-        process_end_time = datetime.datetime.now()
-        duration_in_seconds = (process_end_time - process_start_time).total_seconds()
-        tbfy.statistics.update_stats_value(stats_files, "files_processed_duration_in_seconds", duration_in_seconds)
-        
-        write_stats(outputDirPath) # Write statistics
-        reset_stats() # Reset statistics for next folder date
-
-        return("files_processed_duration_in_seconds" + str(duration_in_seconds))
-
-
-def prepareAndApply(input, output, output_nt, rml):
+def prepareAndApply(input, output, output_nt, rml, outputDirPath):
     # We preprocess the data
     df = pd.read_parquet(input, engine='pyarrow')
 
@@ -247,6 +207,16 @@ def prepareAndApply(input, output, output_nt, rml):
     
     applyRules(output, output_nt, rml)
     
+    # We split the nt file, that can be large
+    LINES_PER_FILE = 10000 
+    Split(output_nt, outputDirPath).bylinecount(LINES_PER_FILE)
+    logging.info("applyRules.py: file = " + output + " correctly split")
+    
+    # We delete the two intermediate files
+    os.remove(output_nt)
+    logging.info("applyRules.py: file = " + output_nt + " correctly deleted")
+    os.remove(output)
+    logging.info("applyRules.py: file = " + output + " correctly deleted")
 
 
 
