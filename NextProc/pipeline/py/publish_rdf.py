@@ -160,15 +160,14 @@ def main(argv):
             ext = os.path.splitext(filePath)[-1].lower()
             if (ext == ".nt"):
                 logging.info("publish_rdf.py: " + filename + " reading")
-                rdf_data = rdf_data + read_rdf_data(filePath)
+                rdf_data = read_rdf_data(filePath)
                     
                 # Update statistics
                 tbfy.statistics.update_stats_count(stats_publish, "number_of_files")
                 tbfy.statistics.update_stats_add(stats_publish, "number_of_triples", number_of_triples(filePath))
+                logging.info("publish_rdf.py: " + input_folder)
+                publish_rdf(rdf_data)
 
-    logging.info("publish_rdf.py: " + input_folder + " publishing")
-    
-    publish_rdf(rdf_data)
 
     process_end_time = datetime.now()
     duration_in_seconds = (process_end_time - process_start_time).total_seconds()
@@ -194,15 +193,15 @@ def publish_rdfAPI(input_folder):
             ext = os.path.splitext(filePath)[-1].lower()
             if (ext == ".nt"):
                 logging.info("publish_rdf.py: " + filename + " reading")
-                rdf_data = rdf_data + read_rdf_data(filePath)
+                rdf_data = read_rdf_data(filePath)
                     
                 # Update statistics
                 tbfy.statistics.update_stats_count(stats_publish, "number_of_files")
                 tbfy.statistics.update_stats_add(stats_publish, "number_of_triples", number_of_triples(filePath))
+                logging.info("publish_rdf.py: " + input_folder)
+                publish_rdf(rdf_data)
 
-    logging.info("publish_rdf.py: " + input_folder)
-
-    publish_rdf(rdf_data)
+    
 
     process_end_time = datetime.now()
     duration_in_seconds = (process_end_time - process_start_time).total_seconds()
