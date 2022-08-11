@@ -165,8 +165,8 @@ def main(argv):
                 # Update statistics
                 tbfy.statistics.update_stats_count(stats_publish, "number_of_files")
                 tbfy.statistics.update_stats_add(stats_publish, "number_of_triples", number_of_triples(filePath))
-                logging.info("publish_rdf.py: " + input_folder)
-                publish_rdf(rdf_data)
+                if publish_rdf(rdf_data) != None:
+                    logging.info("publish_rdf.py: " + filePath + " published")
 
 
     process_end_time = datetime.now()
@@ -198,8 +198,9 @@ def publish_rdfAPI(input_folder):
                 # Update statistics
                 tbfy.statistics.update_stats_count(stats_publish, "number_of_files")
                 tbfy.statistics.update_stats_add(stats_publish, "number_of_triples", number_of_triples(filePath))
-                logging.info("publish_rdf.py: " + input_folder)
                 publish_rdf(rdf_data)
+                if publish_rdf(rdf_data) != None:
+                    logging.info("publish_rdf.py: " + filePath + " published")
 
     
 
