@@ -16,18 +16,16 @@ Easy deployment of nextProcurement tools and services into a local environment.
 
 	```
 	git clone https://github.com/nextprocurement/platform.git
-1. Run the platform by:
+1. Enter to the folder NextProc and run the platform by:
     ```
+	cd platform/NextProc
     sudo docker-compose up --build -d
-
     ```
-1. Wait for all services to be available (e.g. `Started Application in xx.xx seconds`). The first time it may take a few minutes to download the Docker images.
+If there is a problem with virtuoso, you must add your folder to Docker file sharing and retry.
+
+1. Wait for all services to be available. The first time it may take a few minutes to download the Docker images.
     ```
     sudo docker-compose logs -f
-	```
-1. Enter to NextProc folder: 
-    ```
-    cd NextProc
 	```
 1. Process preprocess the parquet file (that must be placed in the data folder): 
     ```
@@ -44,7 +42,7 @@ Easy deployment of nextProcurement tools and services into a local environment.
 		```
 		CREATE GRAPH <http://127.0.0.1:8890/tbfy>
 		```
-1. Upload the triples to the graph (depending on the size it may take time; timeout is set to 150s): 
+1. Upload the triples to the graph (depending on the size it may take time; timeout is set to 300s): 
     ```
     sudo python3 ./pipeline/py/publish_rdf.py -i out
 	```

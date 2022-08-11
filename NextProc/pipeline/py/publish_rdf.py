@@ -97,7 +97,7 @@ def publish_rdf(rdf_data):
         "Content-Type": "text/turtle;charset=utf-8"
     }
 
-    timeout = 150
+    timeout = 300
     tries = 3
     for i in range(tries):
         try:
