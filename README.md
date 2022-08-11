@@ -47,5 +47,5 @@ If there is a problem with virtuoso, you must add your folder to Docker file sha
     sudo python3 ./pipeline/py/publish_rdf.py -i out
 	```
 
-1. That's all! 
+1. That's all! The graph will be available at http://127.0.0.1:8890/tbfy, and you will be able to query it from http://localhost:8890/sparql/
 

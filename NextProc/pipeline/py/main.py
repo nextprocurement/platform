@@ -5,8 +5,8 @@ from xml2rdf_morph import xml2rdfAPI
 from publish_rdf import publish_rdfAPI
 from json2xml import json2xmlAPI_noDate
 from xml2rdf_morph import xml2rdfAPI_noDate
-from publish_rdf import publish_rdfAPI_noDate
-from applyRules import processingAPI_noDate
+from publish_rdf import publish_rdfAPI
+from applyRules import processingAPI
 import uvicorn
 import shutil
 from pathlib import Path
@@ -161,9 +161,9 @@ def pipeline(upload_files: list[UploadFile], destination: Path) -> None:
     
     input_folder = str(destination) + "/files/"
     output_folder = str(destination) + "/parquet/"
-    value_parquet = processingAPI_noDate(input_folder, output_folder)
+    value_parquet = processingAPI(input_folder, output_folder)
     input_folder = output_folder
-    value_publishrdf = publish_rdfAPI_noDate(input_folder)
+    value_publishrdf = publish_rdfAPI(input_folder)
 
     return {"processingParquet: " + str(value_parquet) + " | publish: " + str(value_publishrdf)}
 
