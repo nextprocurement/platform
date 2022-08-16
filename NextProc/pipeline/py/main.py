@@ -11,6 +11,7 @@ import uvicorn
 import shutil
 from pathlib import Path
 import os 
+import config
 
 API_PORT = float(os.environ['API_PORT'])
 LOG_LEVEL = os.environ['LOG_LEVEL']
@@ -33,10 +34,12 @@ Los servicios disponibles son
 
 * **pipeline**: Este servicio permite subir, procesar y publicar datos en el servidor con una simple llamada y los datos.
 * **uploadfiles**: Servicio de subida de documentos.
-* **json2xmlAPI**: Servicio de transformacion de json a xml.
-* **xml3rdfAPI**: Servicio construccion del grafo de conocimiento empleando la herrmienta morph-kgc.
+* **processingAPI**: Conversion de los documentos a rdf.
 * **publish_rdfAPI**: Servicio de publicacion de datos rdf en el servidor de almacenamiento de NextProcurement.
 """
+
+# * **json2xmlAPI**: Servicio de transformacion de json a xml.
+# * **xml2rdfAPI**: Servicio construccion del grafo de conocimiento empleando la herrmienta morph-kgc.
 
 tags_metadata = [
     {
@@ -47,14 +50,14 @@ tags_metadata = [
         "name": "uploadfiles",
         "description": "Servicio de subida de documentos.",
     },
-    {
-        "name": "json2xmlAPI",
-        "description": "Servicio de transformacion de json a xml.",
-    },
-    {
-        "name": "xml2rdfAPI",
-        "description": "Servicio construccion del grafo de conocimiento empleando la herrmienta morph-kgc.",
-    },
+    # {
+    #     "name": "json2xmlAPI",
+    #     "description": "Servicio de transformacion de json a xml.",
+    # },
+    # {
+    #     "name": "xml2rdfAPI",
+    #     "description": "Servicio construccion del grafo de conocimiento empleando la herrmienta morph-kgc.",
+    # },
     {
         "name": "processingAPI",
         "description": "Traducción parquet a nt.",
@@ -136,34 +139,36 @@ app = FastAPI(
 def pipeline(upload_files: list[UploadFile], destination: Path) -> None:
     for upload_file in upload_files:
         try:
-            destination_for_file = Path(str(destination) + "/files/" + upload_file.filename)
+            destination_for_file = Path(str(destination) + "/" + upload_file.filename)
             if not os.path.exists(destination):
                 try:
                     os.mkdir(destination)
                 except OSError:
-                    print("Creation of the directory %s failed" % destination)
+                    print("Creation of the directory " + str(destination) + " failed")
                 else:
-                    print("Successfully created the directory %s " % destination)
+                    print("Successfully created the directory " + str(destination))
 
-            destination_file = Path(str(destination) + "/files/")
+            destination_file = Path(str(destination) + "/")
             if not os.path.exists(destination_file):
                 try:
                     os.mkdir(destination_file)
                 except OSError:
-                    print("Creation of the directory %s failed" % destination_file)
+                    print("Creation of the directory" + str(destination_file) + "failed")
                 else:
-                    print("Successfully created the directory %s " % destination_file)
+                    print("Successfully created the directory " + str(destination_file))
             
             with destination_for_file.open("wb") as buffer:
                 shutil.copyfileobj(upload_file.file, buffer)
         finally:
             upload_file.file.close()
     
-    input_folder = str(destination) + "/files/"
-    output_folder = str(destination) + "/parquet/"
-    value_parquet = processingAPI(input_folder, output_folder)
+    input_folder = str(destination) + "/"
+    output_folder = str(destination) + "/out"
+    value_parquet = processingAPI(input_folder, output_folder, config.rml["mapping_filename"])
     input_folder = output_folder
+    print("Successfully processed " + input_folder)
     value_publishrdf = publish_rdfAPI(input_folder)
+    print("Successfully published " + str(value_publishrdf))
 
     return {"processingParquet: " + str(value_parquet) + " | publish: " + str(value_publishrdf)}
 
@@ -178,27 +183,33 @@ def save_upload_file(upload_files: list[UploadFile], destination: Path) -> None:
                 try:
                     os.mkdir(destination)
                 except OSError:
-                    print("Creation of the directory %s failed" % destination)
+                    print("Creation of the directory " + str(destination) + " failed")
                 else:
-                    print("Successfully created the directory %s " % destination)
+                    print("Successfully created the directory " + str(destination))
             with destination_for_file.open("wb") as buffer:
                 shutil.copyfileobj(upload_file.file, buffer)
         finally:
             upload_file.file.close()
 
-@app.get("/json2xmlAPI/{item_id}",  tags=["json2xmlAPI"])
-def read_item(start_date: str, end_date: str, input_folder:str, output_folder:str):
-    value = json2xmlAPI(start_date, end_date, input_folder, output_folder)
-    return {"json2xml final value": value}
+# @app.get("/json2xmlAPI/{item_id}",  tags=["json2xmlAPI"])
+# def read_item(start_date: str, end_date: str, input_folder:str, output_folder:str):
+#     value = json2xmlAPI(start_date, end_date, input_folder, output_folder)
+#     return {"json2xml final value": value}
 
-@app.get("/xml2rdfAPI/{item_id}",  tags=["xml2rdfAPI"])
-def read_item(start_date: str, end_date: str, input_folder:str, output_folder:str):
-    value = xml2rdfAPI(start_date, end_date, input_folder, output_folder)
-    return {"xml2rdf final value": value}
+# @app.get("/xml2rdfAPI/{item_id}",  tags=["xml2rdfAPI"])
+# def read_item(start_date: str, end_date: str, input_folder:str, output_folder:str):
+#     value = xml2rdfAPI(start_date, end_date, input_folder, output_folder)
+#     return {"xml2rdf final value": value}
+
+@app.get("/processingAPI/{item_id}",  tags=["processingAPI"])
+def read_item(input_folder:str):
+    value = processingAPI(input_folder, input_folder + "/out", config.rml["mapping_filename"])
+    return {"processing final value": value}
+
 
 @app.get("/publish_rdfAPI/{item_id}",  tags=["publish_rdfAPI"])
-def read_item(start_date: str, end_date: str, input_folder:str):
-    value = publish_rdfAPI(start_date, end_date, input_folder)
+def read_item(input_folder:str):
+    value = publish_rdfAPI(input_folder + "/out")
     return {"publish_rdf final value": value}
 
 if __name__ == "__main__":

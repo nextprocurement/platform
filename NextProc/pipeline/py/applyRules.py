@@ -93,6 +93,7 @@ def main(argv):
     logging.debug("applyRules.py: input_folder = " + dirPath)
     logging.debug("applyRules.py: output_folder = " + outputDirPath)
     logging.debug("applyRules.py: rule_file_path = " + rml)
+    logging.debug("applyRules.py: CurrentDir = " + os.getcwd())
     
     process_start_time = datetime.datetime.now()
         
@@ -122,7 +123,7 @@ def main(argv):
     reset_stats() # Reset statistics for next folder date
 
 
-def processingAPI(start_date, end_date, dirPath, outputDirPath, rml):
+def processingAPI(dirPath, outputDirPath, rml):
     global stats_files
 
     logging.basicConfig(level=config.logging["level"])
@@ -130,6 +131,7 @@ def processingAPI(start_date, end_date, dirPath, outputDirPath, rml):
     logging.debug("applyRules.py: input_folder = " + dirPath)
     logging.debug("applyRules.py: output_folder = " + outputDirPath)
     logging.debug("applyRules.py: rule_file_path = " + rml)
+    logging.debug("applyRules.py: CurrentDir = " + os.path.abspath(os.getcwd()))
 
     process_start_time = datetime.datetime.now()
      
@@ -166,26 +168,36 @@ def processingAPI(start_date, end_date, dirPath, outputDirPath, rml):
 def prepareAndApply(input, output, output_nt, rml, outputDirPath):
     # We preprocess the data
     df = pd.read_parquet(input, engine='pyarrow')
-
+    
+    logging.info("applyRules.py: parquet file read")
+    
     # Tipo de Contrato
     tipos_contrato = {1: 'goods' , 2: 'services' , 3:'works' , 21: 'services' , 31:'works'}
     df["Tipo de Contrato"] = df["Tipo de Contrato"].map(tipos_contrato)
 
+    logging.info("applyRules.py: prepare and apply type contract")
+    
     def datetimeNone(x,y):
         try:
             if(type(y)==str):
                 z = x + 'T' + y
                 d = datetime.datetime.strptime(z, '%Y-%m-%dT%H:%M:%S')
-                return z + '.000000+01:00'
+                return d + '.000000+01:00'
             else:
                 z = x + 'T00:00:00'
                 d = datetime.datetime.strptime(z, '%Y-%m-%dT%H:%M:%S')
-                return z + '.000000+01:00'
+                return d + '.000000+01:00'
         except (TypeError, ValueError):
             return '1111-11-11T11:11:11.111111+01:00'
         
     df["Presentación de Solicitudes (Fecha)"] = df.apply(lambda x: datetimeNone(x["Presentación de Solicitudes (Fecha)"],["Presentación de Solicitudes (Hora)"]), axis=1)
 
+    df['Plazo de Ejecución (Duración)'] = df['Plazo de Ejecución (Duración)'].astype(int)
+    df['Tipo de Procedimiento'] = df['Tipo de Procedimiento'].astype(int)
+    df['Número de Licitadores Participantes'] = df['Número de Licitadores Participantes'].astype(int)
+    
+    
+    logging.info("applyRules.py: prepare and apply date")
     # Estado
     # estado = {'ANUL': "cancelled" , 2: 'services' , 3:'works' , 21: 'services' , 31:'works'}
     # df["Estado"] = df["Estado"].map(estado)
