@@ -20,46 +20,94 @@
 	<!-- cookies -->
 	<link rel="stylesheet" href="css/cookie.css">
 	<script src="js/cookies.js" type="text/javascript"></script>
-  </head>
-  <body>
-
-
-	<div class="container">
-		<div class="card text-center">
-		  <div class="card-header">
-			<ul class="nav nav-pills card-header-pills">
-			  <li class="nav-item">
-				<a class="nav-link active" href="#">Inicio</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="pipeline.html">Procesamiento</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="catalogo.html">Catálogo de datos</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="sparql.html">Punto SPARQL</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="vocabularios.html">Vocabularios</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="casos-de-uso.html">Casos de uso</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="servicios.html">Servicios</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="contacto.html">Contacto</a>
-			  </li>
-			</ul>
-		  </div>
-		</div>
-		<nav aria-label="breadcrumb">
-		  <ol class="breadcrumb">
-			<li class="breadcrumb-item active" aria-current="page">Inicio</li>
-		  </ol>
-		</nav>
+	<script>
+		$(document).ready ( function(){
+			if(getCookie("lang")=="en"){
+			$('.es').hide();
+		} else{
+		  $('.en').hide();
+		  document.cookie = "lang=es";
+		}
+});
+	</script>
+	<script>
+		function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+</script>
+<script>
+		$(function() {
+	  $('#en').click(function() {
+		$('.es').hide();
+		$('.en').show();
+		document.cookie = "lang=en";
+	  });
+	  $('#es').click(function() {
+		$('.es').show();
+		$('.en').hide();
+		document.cookie = "lang=es";
+	  });
+	});
+		</script>
+		</head>
+	  <body>
+	
+	
+		<div class="container">
+			<div class="card text-center">
+			  <div class="card-header">
+				<ul class="nav nav-pills card-header-pills">
+				  <li class="nav-item">
+					<a class="nav-link active" href="#"><span class="es">Inicio</span><span class="en">Home</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="pipeline.html" class="es"><span class="es">Procesamiento</span><span class="en">Pipeline</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="catalogo.html"><span class="es">Catálogo de datos</span><span class="en">Data Catalogue</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="sparql.html"><span class="es">Punto SPARQL</span><span class="en">SPARQL Endpoint</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="vocabularios.html"><span class="es">Vocabularios</span><span class="en">Vocabularies</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link"  href="casos-de-uso.html"><span class="es">Casos de uso</span><span class="en">Use cases</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="servicios.html"><span class="es">Servicios</span><span class="en">Services</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="contacto.html"><span class="es">Contacto</span><span class="en">Contact</span></a>
+				  </li>
+				  <div class="nav-item" style="right: 1rem; position: absolute;"> 				
+					<input class="btn translate" type="button" id="en" value="🇬🇧" style="padding: 0.01rem 0.29rem; font-size: 1.5rem;"/>
+					<input class="btn translate" type="button" id="es" value="🇪🇸" style="padding: 0.01rem 0.29rem; font-size: 1.5rem;"/>
+				</div>
+				</ul>
+				
+				
+			  </div>
+			</div>
+			<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+					  <li class="breadcrumb-item"><a href="index.html"><span class="es">Inicio</span><span class="en">Home</span></a></li>
+					  <li class="breadcrumb-item active" aria-current="page"><span class="es">Catálogo de datos</span><span class="en">Data Catalogue</span></li>
+					</ol>
+				</nav>
   <!-- Jumbotron -->
       
 			<div class="jumbotron" align="center">
@@ -68,7 +116,8 @@
 			  <div class="col-12">
 			  <h1>nextProcurement</h1>
 			  <h3>Open Harmonized and Enriched Procurement Data Platform</h3>
-			  <p class="lead">El proyecto europeo nextProcurement pretende reutilizar y armonizar las enormes cantidades de datos abiertos sobre contratación pública disponibles en el portal de datos de la UE en combinación con los conjuntos de datos abiertos sobre contratación pública de los portales de los Estados miembros.</p></div>
+			  <p class="lead"><span class="es">El proyecto europeo nextProcurement pretende reutilizar y armonizar las enormes cantidades de datos abiertos sobre contratación pública disponibles en el portal de datos de la UE en combinación con los conjuntos de datos abiertos sobre contratación pública de los portales de los Estados miembros.</span>
+				<span class="en">The European project nextProcurement aims to re-use and harmonise the vast amounts of open public procurement data available on the EU data portal in combination with the open public procurement datasets of the Member States' portals.</span></p></div>
 			  
 			</div>
 			</div>
@@ -77,19 +126,19 @@
 		<div class="col-8">
 			<h1>nextProcurement</h1>
 			<hr>
-			<p align="justify">El objetivo de este proyecto es reutilizar y armonizar las enormes cantidades de datos abiertos sobre contratación pública disponibles en el portal de datos de la UE, <a href="Tender Electronic Daily">TED</a>, en combinación con los datos de los portales de los Estados miembros que contienen conjuntos adicionales de contratos de las administraciones públicas nacionales, regionales y locales que no están actualmente disponibles en TED, como el Portal Español de Datos sobre Contratación Pública (<a href="https://contrataciondelestado.es/wps/portal/plataforma">PLACE</a>). Esta mejor integración de las fuentes de datos de contratación pública de diferentes Estados miembros, enriquecida con servicios de <b>NLP</b> y <b>búsqueda semántica</b>, conformará un <b>grafo de conocimiento</b> que facilitará la consulta y explotación integrada de los datos. <!-- Para ello se desarrollarán una serie de servicios en cooperación con las Administraciones Públicas incluidas como miembros del consorcio: 
+			<p align="justify"><span class="en">The aim of this project is to re-use and harmonise the vast amounts of open public procurement data available on the EU data portal, <a href="Tender Electronic Daily">TED</a>, in combination with data from Member States' portals containing additional sets of national, regional and local government contracts that are not currently available on TED, such as the Spanish Public Procurement Data Portal (<a href="https://contrataciondelestado.es/wps/portal/plataforma">PLACE</a>). This better integration of public procurement data sources from different Member States, enriched with <b>NLP</b> and <b>semantic search</b> services, will form a <b>knowledge graph</b> that will facilitate integrated data consultation and exploitation.</span><span class="es">El objetivo de este proyecto es reutilizar y armonizar las enormes cantidades de datos abiertos sobre contratación pública disponibles en el portal de datos de la UE, <a href="Tender Electronic Daily">TED</a>, en combinación con los datos de los portales de los Estados miembros que contienen conjuntos adicionales de contratos de las administraciones públicas nacionales, regionales y locales que no están actualmente disponibles en TED, como el Portal Español de Datos sobre Contratación Pública (<a href="https://contrataciondelestado.es/wps/portal/plataforma">PLACE</a>). Esta mejor integración de las fuentes de datos de contratación pública de diferentes Estados miembros, enriquecida con servicios de <b>NLP</b> y <b>búsqueda semántica</b>, conformará un <b>grafo de conocimiento</b> que facilitará la consulta y explotación integrada de los datos.</span> <!-- Para ello se desarrollarán una serie de servicios en cooperación con las Administraciones Públicas incluidas como miembros del consorcio: 
 				<ol>
 					<li>Una herramienta de búsqueda de contratación pública basada en la semántica y en la información temática o en la búsqueda por ejemplo.</li>
 					<li>Una herramienta de visualización de la contratación pública que proporciona acceso web a herramientas de navegación y paneles que integran la información temática extraída de los algoritmos de IA con los metadatos disponibles.</li>
 				</ol>
 			</p>-->
-			<p align="justify">La presente página centraliza los resultados del proyecto obtenidos por el Ontology Engineering Group.</p>
+			<p align="justify"><span class="en">The present page centralises the results of the project obtained by the Ontology Engineering Group.</span><span class="es">La presente página centraliza los resultados del proyecto obtenidos por el Ontology Engineering Group.</span></p>
 		</div>
 		<div class="col-4">
 			<table class="table">
 			  <thead class="thead-dark">
 				<tr>
-				  <th scope="col">Enlaces de interés</th>
+				  <th scope="col"><span class="en">Links of interest</span><span class="es">Enlaces de interés</span></th>
 				</tr>
 			  </thead>
 			  <tbody>
@@ -97,10 +146,10 @@
 					<th scope="row"><a href="http://nextProcurement-project.com"  target=”_blank”>nextProcurement-project.com</a></th>  
 				</tr>
 				<tr>
-				  <th scope="row"><a href="https://zenodo.org/communities/nextProcurement/?page=1&size=20">Comunidad en Zenodo</a></th>  
+				  <th scope="row"><a href="https://zenodo.org/communities/nextProcurement/?page=1&size=20"><span class="en">Zenodo Comunity</span><span class="es">Comunidad en Zenodo</span></a></th>  
 				</tr>
 				<tr>
-					<th scope="row"><a href="https://github.com/nextProcurement" target=”_blank”>Repositorio en GitHub</a></th>
+					<th scope="row"><a href="https://github.com/nextProcurement" target=”_blank”><span class="en">GitHub repository</span><span class="es">Repositorio en GitHub</span></a></th>
 				</tr>
 				<tr>
 					<th scope="row"><a href="http://tbfy.librairy.linkeddata.es/search-api/api.html" target=”_blank”>They Buy For You Search API</a></th>
@@ -145,11 +194,11 @@
 					<div class="col-md-4 col-xs-4 " align="left">
 						<p style="font-size: small">
 							<!--Latest revision November, 2017<br>-->
-							Desarrollado por <a href="http://www.oeg-upm.net" target="_blank">Ontology Engineering Group</a>
+							<span class="es">Desarrollado por </span><span class="en">Developed by </span><a href="http://www.oeg-upm.net" target="_blank">Ontology Engineering Group</a>
 							<br>
-							Desarrollado usando <a target="_blank" href="http://getbootstrap.com/">Bootstrap</a>
+							<span class="es">Desarrollado usando </span><span class="en">Developed using </span><a target="_blank" href="http://getbootstrap.com/">Bootstrap</a>
 							<br>
-							Última revisión - mayo 2022
+							<span class="es">Última revisión - Agosto </span><span class="en">Last updated - August  </span> 2022
            					<br>
 							<p><image src="images/logos/ccby4.png" alt="CC-BY 4.0"/>   Creative Commons Attribution 4.0 International License.</p>
 						</p>
@@ -177,14 +226,13 @@
 			</div>
 		-->
 	</div>
-
 	</div> <!-- Container -->
 	<!-- cookies -->
 	<div id="overbox3">
 		<div id="infobox3">
-			<p>Esta web utiliza cookies para obtener datos estadísticos de la navegación de sus usuarios. Si continúas navegando consideramos que aceptas su uso.
-			<a href="http://www.ign.es/web/ign/portal/info-aviso-legal">Más información</a>
-			<a onclick="aceptar_cookies();" style="cursor:pointer;">X Cerrar</a></p>
+			<p><span class="es">Esta web utiliza cookies para obtener datos estadísticos de la navegación de sus usuarios. Si continúas navegando consideramos que aceptas su uso.</span>
+				<span class="en">This website uses cookies in order to get statistical navigation data from its users. If you continue navigating, we assume you agree on this.</span>
+			<a onclick="aceptar_cookies();" style="cursor:pointer;">X <span class="en">Close</span><span class="es">Cerrar</span></a></p>
 		</div>
 	</div>
   </body>
