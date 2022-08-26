@@ -3,7 +3,7 @@
   <head>
     <title>Procesamiento</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Esta página recoge los servicios desarrollados para el proyecto nextProcurement">
+    <meta name="description" content="Esta página describe el procesamiento">
     <meta name="languaje" content="Spanish">
     <meta name="author" content="María Navas y Pedro Hernández">
     <!-- Required meta tags -->
@@ -79,16 +79,19 @@
 					<a class="nav-link" href="catalogo.html"><span class="es">Catálogo de datos</span><span class="en">Data Catalogue</span></a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-link" href="sparql.html"><span class="es">Punto SPARQL</span><span class="en">SPARQL Endpoint</span></a>
+					<a class="nav-link" href="sparql.html"><span class="es">SPARQL</span><span class="en">SPARQL Endpoint</span></a>
 				  </li>
 				  <li class="nav-item">
 					<a class="nav-link" href="vocabularios.html"><span class="es">Vocabularios</span><span class="en">Vocabularies</span></a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-link"  href="casos-de-uso.html"><span class="es">Casos de uso</span><span class="en">Use cases</span></a>
+					<a class="nav-link"  href="casos-de-uso.html"><span class="es">Casos uso</span><span class="en">Use cases</span></a>
 				  </li>
 				  <li class="nav-item">
 					<a class="nav-link" href="servicios.html"><span class="es">Servicios</span><span class="en">Services</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="publications.html"><span class="es">Publicaciones</span><span class="en">Publications</span></a>
 				  </li>
 				  <li class="nav-item">
 					<a class="nav-link" href="contacto.html"><span class="es">Contacto</span><span class="en">Contact</span></a>
@@ -110,27 +113,28 @@
 		</nav>
 	<div class="row">
 		<div class="col-12">
-		  <h1><span class="en">Data Pipeline</span><span class="es">Procesamiento de datos</span></h1>
+		  <h1><span class="en">KG Creation Pipeline</span><span class="es">Pipeline de creación del KG</span></h1>
 		</div>
 	</div>
 	<hr>
 	<div class="row">
 		<div class="col-9">
 			
-			<img src="images/pipeline.png" alt="IGN logo" class="img-rounded" class="img-responsive" /></a>
+			<span class="es"><img src="images/pipeline.png" alt="pipeline" class="img-rounded" class="img-responsive" style="width:100%;"/></span><span class="en"><img src="images/pipelineEN.png" alt="pipeline" class="img-rounded" class="img-responsive" style="width:100%; padding:1rem;"/></span></a>
 
 		</div>
 		
 		<div class="col-3">
 			
 			<p align="justify">
-				<span class="en">To feed the knowledge graph, a data processing pipeline has been designed. This pipeline takes the source data from the PLACE and TED open data platforms and is able to generate an RDF database on which queries can be made.</span>
-				<span class="es">Para alimentar el grafo de conocimiento se ha diseñado una pipeline de procesamiento de datos que, tomando los datos de origen de las plataformas de datos abiertos PLACE y TED, es capaz de generar una base de datos RDF sobre la que poder realizar consultas.
-				</span>
+				<span class="es">Para la realización del procesamiento de datos se ha tomado como punto de partida el realizado en el proyecto <a target="_blank" href="https://theybuyforyou.eu/">They Buy For You</a>, reutilizando <a href="https://github.com/TBFY/platform" target="_blank">el procesamiento de datos</a> orientándolo a nuevas necesidades.</span>
+                <span class="en">For building the data processing pipeline, the data from the project <a target="_blank" href="https://theybuyforyou.eu/">They Buy For You</a> was taken as starting point, adapting <a href="https://github.com/TBFY/platform" target="_blank">the structure</a> to new requirements.</span>
 			</p>
 			
 			<p align="justify">
-				Para la realización de este procesamiento de datos se ha tomado como partida el proyecto <a target="_blank" href="https://theybuyforyou.eu/">They Buy For You</a>, reutilizando el procesamiento de datos orientándolo a las necesidades de nextProcurement.
+				<span class="en">To feed the knowledge graph, a data processing pipeline has been designed. This pipeline takes the source data from the PLACE and TED open data platforms and is able to generate an RDF database on which queries can be made.</span>
+				<span class="es">Para alimentar el grafo de conocimiento se ha diseñado una pipeline de procesamiento de datos que, tomando los datos de origen de las plataformas de datos abiertos PLACE y TED, es capaz de generar una base de datos RDF sobre la que poder realizar consultas.
+				</span>
 			</p>
 
 		</div>

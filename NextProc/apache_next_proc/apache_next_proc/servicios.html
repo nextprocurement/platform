@@ -3,7 +3,7 @@
   <head>
     <title>Servicios</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Esta página recoge los servicios desarrollados para el proyecto nextProcurement">
+    <meta name="description" content="Esta página recoge los servicios">
     <meta name="languaje" content="Spanish">
     <meta name="author" content="Pedro Hernández">
     <!-- Required meta tags -->
@@ -79,16 +79,19 @@
 					<a class="nav-link" href="catalogo.html"><span class="es">Catálogo de datos</span><span class="en">Data Catalogue</span></a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-link" href="sparql.html"><span class="es">Punto SPARQL</span><span class="en">SPARQL Endpoint</span></a>
+					<a class="nav-link" href="sparql.html"><span class="es">SPARQL</span><span class="en">SPARQL Endpoint</span></a>
 				  </li>
 				  <li class="nav-item">
 					<a class="nav-link" href="vocabularios.html"><span class="es">Vocabularios</span><span class="en">Vocabularies</span></a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-link"  href="casos-de-uso.html"><span class="es">Casos de uso</span><span class="en">Use cases</span></a>
+					<a class="nav-link"  href="casos-de-uso.html"><span class="es">Casos uso</span><span class="en">Use cases</span></a>
 				  </li>
 				  <li class="nav-item">
 					<a class="nav-link active" href="#"><span class="es">Servicios</span><span class="en">Services</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="publications.html"><span class="es">Publicaciones</span><span class="en">Publications</span></a>
 				  </li>
 				  <li class="nav-item">
 					<a class="nav-link" href="contacto.html"><span class="es">Contacto</span><span class="en">Contact</span></a>
@@ -110,7 +113,7 @@
 		</nav>
 	<div class="row">
 		<div class="col-12">
-		  <h1><span class="es">Services created</span><span class="es">Servicios desarrollados</span></h1>
+		  <h1><span class="en">Services created</span><span class="es">Servicios desarrollados</span></h1>
 		  <hr>
 		  <p align="justify"><span class="es">A continuación se listan las distintas herramientas desarrolladas para procesar la información relativa a las licitaciones el contexto del proyecto.
 		</span>
@@ -122,17 +125,38 @@
 	</div>
 	<hr>
 	<div class="row">
-		<div class="col-12">
-			<h2><span class="es">Clasificador de códigos CPV</span><span class="en">CPV code classifier</span></h2>
+		<div class="col-8">
+			<h2 id="CVP"><span class="es">Clasificador de códigos CPV</span><span class="en">CPV code classifier</span></h2>
 			<p align="justify"><span class="es">El clasificador de códigos CPV recibe la descripción de una oferta de licitación y devuelve las divisiones más probables con las que anotarla. El modelo que obtiene mejores resultados por el momento es un fine-tuning del modelo RoBERTa entrenado con el corpus de la BNE, y está disponible en <a href="https://huggingface.co/oeg/roberta-finetuned-CPV_Spanish">HuggingFace</a>, y se irá actualizando a medida que se refine la tarea. Asimismo, el listado con los notebooks y los datasets utilizados se puede encontrar en el <a href="https://github.com/mnavasloro/CPVClassifier">repositorio de GitHub</a>. En la siguiente demo puede probarse el servicio.<br></span>
 				<span class="en">The CPV code classifier receives the description of a tender and returns the most likely divisions with which to annotate it. The best performing model at the moment is a fine-tuning of the RoBERTa model trained on the BNE corpus, and is available at <a href="https://huggingface.co/oeg/roberta-finetuned-CPV_Spanish">HuggingFace</a>. It will be further improved. Additionally, the notebooks and dataset used can be found in the <a href="https://github.com/mnavasloro/CPVClassifier">GitHub repository</a>. The following demo shows the service.<br></span>
+                </p>
+        </div>
+        <div class="col-4">
+			<table class="table">
+			  <thead class="thead-dark">
+				<tr>
+				  <th scope="col"><span class="en">List of services</span><span class="es">Lista de servicios</span></th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+					<th scope="row"><a href="#CPV"><span class="en">CPV Classifier</span><span class="es">Clasificador CPV</span></a></th>  
+				</tr>
+				<tr>
+				  <th scope="row"><a href="#search"><span class="en">Tender search</span><span class="es">Buscador de licitaciones</span></a></th>  
+				</tr>
+				<tr>
+					<th scope="row"><a href="#clustering"><span class="en">Tender Clustering</span><span class="es">Servicio de Clustering</span></a></th>
+				</tr>
+			  </tbody>
+			</table>
+		</div>
+        <div class="col-12">
 			<iframe src="https://hf.space/embed/mnavas/CPVClassifier/+?__theme=lightapi/predict+" frameBorder="0" height="750" title="Gradio app" class="container p-0 flex-grow space-iframe" allow="accelerometer; ambient-light-sensor; autoplay; battery; camera; document-domain; encrypted-media; fullscreen; geolocation; gyroscope; layout-animations; legacy-image-formats; magnetometer; microphone; midi; oversized-images; payment; picture-in-picture; publickey-credentials-get; sync-xhr; usb; vr ; wake-lock; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"></iframe>
-			</p>
-			
-		
+					
 		<hr>
 		<div class="col-12">
-			<h2><span class="es">Búsqueda de licitaciones</span><span class="en">Tender search</span></h2>
+			<h2 id="search"><span class="es">Búsqueda de licitaciones</span><span class="en">Tender search</span></h2>
 			<p align="justify">
 			
 				<span class="es">Esta herramienta permite buscar licitaciones similares presentes en el grafo de conocimiento a la descripción introducida por el usuario. El servicio puede probarse en la siguiente dirección <a href="https://tbfy.librairy.linkeddata.es/search-api/api.html">https://tbfy.librairy.linkeddata.es/search-api/api.html</a> </span>
@@ -142,7 +166,7 @@
 		</div>
 		<hr>
 		<div class="col-12">
-			<h2><span class="es">Servicio de clustering</span><span class="en">Clustering service</span></h2>
+			<h2 id="clustering"><span class="es">Servicio de clustering</span><span class="en">Clustering service</span></h2>
 			<p align="justify">
 				<span class="en">The <a href="https://librairy.github.io/">LibrAIry</a> service classifies the tenders in different clusters trained on the JCR-Acquis corpus.</span>
 				<span class="es">El servicio <a href="https://librairy.github.io/">LibrAIry</a> clasifica las licitaciones en distintos clusters entrenados sobre el corpus JCR-Acquis.</span>	<br>
@@ -157,7 +181,7 @@
 			
 		</div>
 	</div>
-
+        
 	<div>
 	<br></div>
 	<div id="footer" class="fixed-bottom bg-footer" style="background-color: #F9F9F9; bottom: 0; height:60px">

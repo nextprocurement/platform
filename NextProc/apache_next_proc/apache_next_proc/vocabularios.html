@@ -3,7 +3,7 @@
   <head>
     <title>Vocabularios - nextProcurement</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Esta página describe el proyecto nextProcurement.">
+    <meta name="description" content="Esta página describe los vocabularios.">
     <meta name="languaje" content="Spanish">
     <meta name="author" content="Pedro Hernández y María Navas">
     <!-- Required meta tags -->
@@ -79,16 +79,19 @@
 					<a class="nav-link" href="catalogo.html"><span class="es">Catálogo de datos</span><span class="en">Data Catalogue</span></a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-link" href="sparql.html"><span class="es">Punto SPARQL</span><span class="en">SPARQL Endpoint</span></a>
+					<a class="nav-link" href="sparql.html"><span class="es">SPARQL</span><span class="en">SPARQL Endpoint</span></a>
 				  </li>
 				  <li class="nav-item">
 					<a class="nav-link active" href="#"><span class="es">Vocabularios</span><span class="en">Vocabularies</span></a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-link"  href="casos-de-uso.html"><span class="es">Casos de uso</span><span class="en">Use cases</span></a>
+					<a class="nav-link"  href="casos-de-uso.html"><span class="es">Casos uso</span><span class="en">Use cases</span></a>
 				  </li>
 				  <li class="nav-item">
 					<a class="nav-link" href="servicios.html"><span class="es">Servicios</span><span class="en">Services</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="publications.html"><span class="es">Publicaciones</span><span class="en">Publications</span></a>
 				  </li>
 				  <li class="nav-item">
 					<a class="nav-link" href="contacto.html"><span class="es">Contacto</span><span class="en">Contact</span></a>
@@ -117,39 +120,91 @@
 	<div class="row">
 	<div class="col-12">			
 		
-		<p align="justify"><span class="es">A continuación se pueden consultar los vocabularios utilizados dentro de la iniciativa nextProcurement.</span>
-			<span class="en">The vocabularies used within the nextProcurement initiative can be found below.</span></p>
+		<p align="justify"><span class="es">A continuación se pueden consultar los vocabularios utilizados dentro de la iniciativa nextProcurement. Por el momento,  usamos únicamente la ontología OCDS, pero en el futuro podría integrarse también la ontología eProcurement.</span>
+			<span class="en">The vocabularies used within the nextProcurement initiative can be found below. For now, we only use the OCDS ontology, but in the future, the eProcurement ontology could be integrated as well.</span></p>
 		</div >
 			<table id="tablesorter-demo" class="tablesorter table table-hover table-responsive table-striped">
 				<thead>
 					<tr>
-						<th class=""><span class="es">Nombre vocabulario</span><span class="en">Vocabularie name</span></th>
+						<th class=""><span class="es">Nombre</span><span class="en">Name</span></th>
 						<th class=""><span class="es">Descripción</span><span class="en">Description</span></th>
-						<th class=""><span class="es">Type</span><span class="en">Tipo</span></th>
+						<th class=""><span class="en">Type</span><span class="es">Tipo</span></th>
 						<th class=""><span class="es">Tema</span><span class="en">Topic</span></th>
-						<th class="">URI</th>
-						<th class=""><span class="es">Fuente de datos</span><span class="en">Data source</span></th>
+						<th class="">URL</th>
+						<th class=""><span class="es">Documentación</span><span class="en">Documentation</span></th>
 
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td><span class="es">Nombre vocabulario</span><span class="en">Vocabularie name</span>
+						<td>OCDS
 						</td>
-						<td><span class="es">Descripción</span><span class="en">Description</span>
+						<td><span class="es">La ontología OCDS permite representar todo el proceso de contratación pública, incluyendo concenptos como ``Tender'', ``Bid'' o ``Award''. Esta ontología se desarrolló durante el proyecto europeo TheyBuyForYou se basa en el modelo de datos del</span><span class="en">The OCDS ontology allows to represent the whole public procurement process, including concepts such as ``Tender'', ``Bid'' or ``Award''. This ontology was developed during the European project TheyBuyForYou and is based on the data model in the</span> <a href="https://standard.open-contracting.org/latest/en/">Open Contracting Data Standard</a>.    
 						</td>
-						<td><span class="en">Type</span><span class="es">Tipo</span>
+						<td><span class="en">Ontology</span><span class="es">Ontología</span>                            
 						</td>
-						<td><span class="es">Tema</span><span class="en">Topic</span>
+						<td><span class="en">Public Procurement</span><span class="es">Administración Pública</span>
 						</td>
-						<td>URI
+						<td><a href="https://github.com/TBFY/ocds-ontology">https://github.com/TBFY/ocds-ontology</a>
 						</td>
-						<td><span class="es">Fuente de datos</span><span class="en">Data source</span>
+						<td><a href="https://mnavasloro.github.io/documentationOCDS/">https://mnavasloro.github.io/documentationOCDS/</a>
+						</td>
+					</tr>
+                    <tr>
+						<td>eProcurement
+						</td>
+						<td><span class="es">The eProcurement ontology makes available in an open, structured and machine-readable format data about public procurement, covering it from end to end, i.e. from notification, through tendering to awarding, ordering, invoicing and payment. </span><span class="en">The eProcurement ontology makes available in an open, structured and machine-readable format data about public procurement, covering it from end to end, i.e. from notification, through tendering to awarding, ordering, invoicing and payment.</span>    
+						</td>
+						<td><span class="en">Ontology</span><span class="es">Ontología</span>                            
+						</td>
+						<td><span class="en">Public Procurement</span><span class="es">Administración Pública</span>
+						</td>
+						<td><a href="https://github.com/OP-TED/ePO">https://github.com/OP-TED/ePO</a>
+						</td>
+						<td><a href="https://eprocurementontology.github.io/index.html">https://eprocurementontology.github.io/index.html</a>
 						</td>
 					</tr>		
 				</tbody>
 			</table>
-		</div>
+        <hr>
+    <div class="row">     
+	<div class="col-12">
+        <p align="justify"><h2><span class="es">Obsoleto</span><span class="en">Deprecated</span></h2></p>
+        
+        <p align="justify"><span class="es">Adicionalmente, algunos de los vocabularios relacionados pero actualmente en desuso se exponen a continuación.</span>
+			<span class="en">Additionally, some of the related but currently deprecated vocabularies are set out below.</span></p>
+        </div>
+        </div>
+        <table id="tablesorter-demo" class="tablesorter table table-hover table-responsive table-striped">
+				<thead>
+					<tr>
+						<th class=""><span class="es">Nombre</span><span class="en">Name</span></th>
+						<th class=""><span class="es">Descripción</span><span class="en">Description</span></th>
+						<th class=""><span class="en">Type</span><span class="es">Tipo</span></th>
+						<th class=""><span class="es">Tema</span><span class="en">Topic</span></th>
+						<th class="">URL</th>
+						<th class=""><span class="es">Documentación</span><span class="en">Documentation</span></th>
+
+					</tr>
+				</thead>
+				<tbody>
+						<td>PPROC [No Longer Maintained]
+						</td>
+						<td><span class="es">La ontología PPROC define los conceptos necesarios para describir el proceso de contratación pública y los contratos del sector público (contratación pública electrónica).</span><span class="en">The PPROC ontology defines the necessary concepts to describe public procurement process and the contracts of public sector (public e-procurement).</span>    
+						</td>
+						<td><span class="en">Ontology</span><span class="es">Ontología</span>                            
+						</td>
+						<td><span class="en">Public Procurement</span><span class="es">Administración Pública</span>
+						</td>
+						<td><a href="http://contsem.unizar.es/docs/pproc_1.0.0.rdf">http://contsem.unizar.es/docs/pproc_1.0.0.rdf</a>
+						</td>
+						<td><a href="http://contsem.unizar.es/def/sector-publico/pproc.html">http://contsem.unizar.es/def/sector-publico/pproc.html</a>
+						</td>
+					</tr>		
+				</tbody>
+			</table>
+		
+		
 		
 	</div>
 	<br>
