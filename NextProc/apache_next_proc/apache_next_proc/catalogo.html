@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <title>Catálogo</title>
+    <title>Data Catalogue</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Esta página describe los catálogos de datos.">
     <meta name="languaje" content="Spanish">
@@ -113,7 +113,7 @@
 		</nav>
 
 		  <h1><span class="es">Catálogo de conjunto de datos</span><span class="en">Data Catalogue</span></h1>
-            <h2>(<span class="es">A completar</span><span class="en">To be completed</span>)</h2>
+            <!--h2>(<span class="es">A completar</span><span class="en">To be completed</span>)</h2-->
 
     <hr>
 	<div class="row">
@@ -129,11 +129,9 @@
 					<tr>
 						<th><span class="es">Conjunto de datos</span><span class="en">Data</span>
 						</th>
-						<th><span class="es">Última actualización</span><span class="en">Last update</span>
+						<th><span class="es">Actualización</span><span class="en">Update</span>
 						</th>
-						<th><span class="es">Documentación ontología</span><span class="en">Ontology Documentation</span>
-						</th>
-						<th><span class="es">Enlace SPARQL</span><span class="en">SPARQL link</span>
+						<th>URL
 						</th>
 						<th><span class="es">Descripción</span><span class="en">Description</span>
 						</th>
@@ -141,15 +139,43 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><span class="es">Conjunto de datos</span><span class="en">Data</span>
+						<td>PLACE (Plataforma de Contratación del Sector Público)
 						</td>
-						<td><span class="es">Última actualización</span><span class="en">Last update</span>
+						<td><span class="es">Diaria</span><span class="en">Daily</span>
 						</td>
-						<td><span class="es">Documentación ontología</span><span class="en">Ontology Documentation</span>
+						<td><a href="https://contrataciondelestado.es/wps/portal/plataforma" target="_blank">https://contrataciondelestado.es/wps/portal/plataforma</a>
 						</td>
-						<td><span class="es">Enlace SPARQL</span><span class="en">SPARQL link</span>
+						<td><span class="es">La Plataforma de Contratación del Sector Público permite consultar las licitaciones publicadas en los Perfiles del contratante alojados en la misma, y también las de otros organismos públicos que utilizan otras plataformas de contratación pero que publican las convocatorias de licitaciones y sus resultados mediante mecanismos de agregación.</span><span class="en">The Public Procurement Platform PLACE allows to consult tenders published in the Contractor Profiles hosted on the platform, as well as those of other public bodies that use other procurement platforms but publish calls for tender and their results through aggregation mechanisms.</span>
 						</td>
-						<td><span class="es">Descripción</span><span class="en">Description</span>
+					</tr>
+					<tr>
+						<td>PSCP (Plataforma de Serveis de Contractació Pública)
+						</td>
+						<td><span class="es">Diaria</span><span class="en">Daily</span>
+						</td>
+						<td><a href="https://contractaciopublica.gencat.cat/" target="_blank">https://contractaciopublica.gencat.cat/</a>
+						</td>
+						<td><span class="es">La Plataforma de Servicios de Contratación Pública (PSCP) es el órgano de información y prestación de servicios relacionados con la contratación pública. Constituye, tanto para los ciudadanos como para los usuarios de la Administración y del sector público, el canal de información sobre las licitaciones, adjudicaciones, formalizaciones y sobre todos los aspectos relevantes de la contratación pública. Es el portal único, global e integrado de difusión de la información sobre la actividad contractual y los perfiles de contratante de todos los órganos de contratación de Cataluña, incluidas las administraciones locales.</span><span class="en">The Platform for Public Contracting Services (PSCP) is the authority for information and provision of services related to public contracting. It constitutes, both for the citizens and for the users of the Administration and the public sector, the information channel on the tenders, adjudications, formalizations and on all the relevant aspects of public contracting. It is the unique, global and integrated portal for the dissemination of information on contractual activity and contracting profiles of all the contracting bodies of Catalonia, including local administrations.</span>
+						</td>
+					</tr>
+					<tr>
+						<td>TED (Tenders Electronic Daily)
+						</td>
+						<td><span class="es">Diaria</span><span class="en">Daily</span>
+						</td>
+						<td><a href="https://etendering.ted.europa.eu/general/page.html?name=home&locale=en" target="_blank">https://etendering.ted.europa.eu/general/page.html?name=home&locale=en</a>
+						</td>
+						<td><span class="es">TED (Tenders Electronic Daily) eTendering es una plataforma de contratación electrónica de las instituciones de la UE basada en las Directivas de la UE sobre contratación pública. Al permitir el acceso electrónico gratuito a los documentos de las licitaciones, como la documentación contractual, las especificaciones técnicas, los anexos, las preguntas y respuestas, etc., TED eTendering representa efectivamente una extensión de valor añadido de TED, la versión en línea del "Suplemento al Diario Oficial de la Unión Europea".</span><span class="en">TED (Tenders Electronic Daily) eTendering is an EU institutions' eProcurement platform based on EU Directives on public procurement. Allowing free electronic access to call for tenders' documents such as contractual documentation, technical specifications, annexes, questions and answers etc., TED eTendering effectively represents an added-value extension to TED, the online version of the "Supplement to the Official Journal of the European Union". </span>
+						</td>
+					</tr>
+					<tr>
+						<td>TheyBuyForYou Knowledge Graph data dump
+						</td>
+						<td><span class="es">Mensual (hasta 2022)</span><span class="en">Monthly (until 2022)</span>
+						</td>
+						<td><a href="https://zenodo.org/record/4665906" target="_blank">https://zenodo.org/record/4665906</a>
+						</td>
+						<td><span class="es">Volcado de datos del Gráfico de Conocimiento (KG) para el proyecto TheyBuyForYou en formato RDF que contiene datos de contratación y datos de empresas (para proveedores conciliados) para el período de enero de 2019 a marzo de 2021. Además del volcado de datos del KG en RDF, también está disponible la entrada de datos de origen para el KG, es decir, los datos de adquisición de OpenOpps y los datos de las empresas (para los proveedores conciliados) de OpenCorporates en formato JSON.</span><span class="en">Data dump of the Knowledge Graph (KG) for the TheyBuyForYou project in RDF format containing procurement data and company data (for reconciled suppliers) for the period January 2019 to March 2021. In addition to the KG data dump in RDF, also the source data input for the KG, i.e., procurement data from OpenOpps and company data (for reconciled suppliers) from OpenCorporates in JSON format, is available.</span>
 						</td>
 					</tr>
 				</tbody>
