@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <title>Contacto - nextProcurement</title>
+    <title>Contact</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Esta página describe el proyecto nextProcurement.">
+    <meta name="description" content="Esta página describe cómo contactar.">
     <meta name="languaje" content="Spanish">
     <meta name="author" content="Pedro Hernández y María Navas">
     <!-- Required meta tags -->
@@ -20,57 +20,107 @@
 	<!-- cookies -->
 	<link rel="stylesheet" href="css/cookie.css">
 	<script src="js/cookies.js" type="text/javascript"></script>
-  </head>
-  <body>
-
-
-	<div class="container">
-		<div class="card text-center">
-		  <div class="card-header">
-			<ul class="nav nav-pills card-header-pills">
-			  <li class="nav-item">
-				<a class="nav-link" href="index.html">Inicio</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="pipeline.html">Procesamiento</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="catalogo.html">Catálogo de datos</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="sparql.html">Punto SPARQL</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="vocabularios.html">Vocabularios</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="casos-de-uso.html">Casos de uso</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="servicios.html">Servicios</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link active" href="#">Contacto</a>
-			  </li>
-			</ul>
-		  </div>
-		</div>
-		<nav aria-label="breadcrumb">
-		  <ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-			<li class="breadcrumb-item active" aria-current="page">Contacto</li>
-		  </ol>
+	<script>
+		$(document).ready ( function(){
+			if(getCookie("lang")=="en"){
+			$('.es').hide();
+		} else{
+		  $('.en').hide();
+		  document.cookie = "lang=es";
+		}
+});
+	</script>
+	<script>
+		function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+</script>
+<script>
+		$(function() {
+	  $('#en').click(function() {
+		$('.es').hide();
+		$('.en').show();
+		document.cookie = "lang=en";
+	  });
+	  $('#es').click(function() {
+		$('.es').show();
+		$('.en').hide();
+		document.cookie = "lang=es";
+	  });
+	});
+		</script>
+		</head>
+	  <body>
+	
+	
+		<div class="container">
+			<div class="card text-center">
+			  <div class="card-header">
+				<ul class="nav nav-pills card-header-pills">
+				  <li class="nav-item">
+					<a class="nav-link" href="index.html"><span class="es">Inicio</span><span class="en">Home</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="pipeline.html" class="es"><span class="es">Procesamiento</span><span class="en">Pipeline</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="catalogo.html"><span class="es">Catálogo de datos</span><span class="en">Data Catalogue</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="sparql.html"><span class="es">SPARQL</span><span class="en">SPARQL Endpoint</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="vocabularios.html"><span class="es">Vocabularios</span><span class="en">Vocabularies</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link"  href="casos-de-uso.html"><span class="es">Casos uso</span><span class="en">Use cases</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="servicios.html"><span class="es">Servicios</span><span class="en">Services</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="publications.html"><span class="es">Publicaciones</span><span class="en">Publications</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link active" href="#"><span class="es">Contacto</span><span class="en">Contact</span></a>
+				  </li>
+				  <div class="nav-item" style="right: 1rem; position: absolute;"> 				
+					<input class="btn translate" type="button" id="en" value="🇬🇧" style="padding: 0.01rem 0.29rem; font-size: 1.5rem;"/>
+					<input class="btn translate" type="button" id="es" value="🇪🇸" style="padding: 0.01rem 0.29rem; font-size: 1.5rem;"/>
+				</div>
+				</ul>
+				
+				
+			  </div>
+			</div>
+			<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+					  <li class="breadcrumb-item"><a href="index.html"><span class="es">Inicio</span><span class="en">Home</span></a></li>
+					  <li class="breadcrumb-item active" aria-current="page"><span class="es">Contacto</span><span class="en">Contact</span></li>
+					</ol>
 		</nav>
 	<div class="row">
 		<div class="col-12">
-		  <h1>Contacto</h1>
+		  <h1><span class="es">Contacto</span><span class="en">Contact</span></h1>
 		</div>
 	</div>
 	<hr>
 	<div class="row">
 		<div class="col-12">
 			
-			<p align="justify">Si desea contactar con los responsables de la iniciativa nextProcurement, puede enviar un correo electrónico a la siguiente dirección: <a href="mailto:mail@mail.es">mail nextProcurement por definir</a>
+			<p align="justify"><span class="es">Si desea contactar con los responsables de la iniciativa, puede enviar un correo electrónico a la siguiente dirección:</span><span class="en">If you would like to contact our initiative, please send an e-mail to the following address:</span> <a href="mailto:procurement@delicias.dia.fi.upm.es">procurement(at)delicias(dot)dia(dot)fi(dot)upm(dot)es</a>
 			</p>
 			
 		</div>
@@ -90,11 +140,11 @@
 					<div class="col-md-4 col-xs-4 " align="left">
 						<p style="font-size: small">
 							<!--Latest revision November, 2017<br>-->
-							Desarrollado por <a href="http://www.oeg-upm.net" target="_blank">Ontology Engineering Group</a>
+							<span class="es">Desarrollado por </span><span class="en">Developed by </span><a href="http://www.oeg-upm.net" target="_blank">Ontology Engineering Group</a>
 							<br>
-							Desarrollado usando <a target="_blank" href="http://getbootstrap.com/">Bootstrap</a>
+							<span class="es">Desarrollado usando </span><span class="en">Developed using </span><a target="_blank" href="http://getbootstrap.com/">Bootstrap</a>
 							<br>
-							Última revisión - mayo 2022
+							<span class="es">Última revisión - Agosto </span><span class="en">Last updated - August  </span> 2022
            					<br>
 							<p><image src="images/logos/ccby4.png" alt="CC-BY 4.0"/>   Creative Commons Attribution 4.0 International License.</p>
 						</p>
@@ -126,9 +176,9 @@
 	<!-- cookies -->
 	<div id="overbox3">
 		<div id="infobox3">
-			<p>Esta web utiliza cookies para obtener datos estadísticos de la navegación de sus usuarios. Si continúas navegando consideramos que aceptas su uso.
-			<a href="http://www.ign.es/web/ign/portal/info-aviso-legal">Más información</a>
-			<a onclick="aceptar_cookies();" style="cursor:pointer;">X Cerrar</a></p>
+			<p><span class="es">Esta web utiliza cookies para obtener datos estadísticos de la navegación de sus usuarios. Si continúas navegando consideramos que aceptas su uso.</span>
+				<span class="en">This website uses cookies in order to get statistical navigation data from its users. If you continue navigating, we assume you agree on this.</span>
+			<a onclick="aceptar_cookies();" style="cursor:pointer;">X <span class="en">Close</span><span class="es">Cerrar</span></a></p>
 		</div>
 	</div>
   </body>

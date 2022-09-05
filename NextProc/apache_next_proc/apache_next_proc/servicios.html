@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <title>Servicios</title>
+    <title>Services</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Esta página recoge los servicios desarrollados para el proyecto nextProcurement">
+    <meta name="description" content="Esta página recoge los servicios">
     <meta name="languaje" content="Spanish">
     <meta name="author" content="Pedro Hernández">
     <!-- Required meta tags -->
@@ -20,81 +20,156 @@
 	<!-- cookies -->
 	<link rel="stylesheet" href="css/cookie.css">
 	<script src="js/cookies.js" type="text/javascript"></script>
-  </head>
-  <body>
-
-
-	<div class="container">
-		<div class="card text-center">
-		  <div class="card-header">
-			<ul class="nav nav-pills card-header-pills">
-			  <li class="nav-item">
-				<a class="nav-link" href="index.html">Inicio</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="pipeline.html">Procesamiento</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="catalogo.html">Catálogo de datos</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="sparql.html">Punto SPARQL</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="vocabularios.html">Vocabularios</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="casos-de-uso.html">Casos de uso</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link active" href="servicios.html">Servicios</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="contacto.html">Contacto</a>
-			  </li>
-			</ul>
-		  </div>
-		</div>
-		<nav aria-label="breadcrumb">
-		  <ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-			<li class="breadcrumb-item active" aria-current="page">Servicios</li>
-		  </ol>
+	<script>
+		$(document).ready ( function(){
+			if(getCookie("lang")=="en"){
+			$('.es').hide();
+		} else{
+		  $('.en').hide();
+		  document.cookie = "lang=es";
+		}
+});
+	</script>
+	<script>
+		function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+</script>
+<script>
+		$(function() {
+	  $('#en').click(function() {
+		$('.es').hide();
+		$('.en').show();
+		document.cookie = "lang=en";
+	  });
+	  $('#es').click(function() {
+		$('.es').show();
+		$('.en').hide();
+		document.cookie = "lang=es";
+	  });
+	});
+		</script>
+		</head>
+	  <body>
+	
+	
+		<div class="container">
+			<div class="card text-center">
+			  <div class="card-header">
+				<ul class="nav nav-pills card-header-pills">
+				  <li class="nav-item">
+					<a class="nav-link" href="index.html"><span class="es">Inicio</span><span class="en">Home</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="pipeline.html" class="es"><span class="es">Procesamiento</span><span class="en">Pipeline</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="catalogo.html"><span class="es">Catálogo de datos</span><span class="en">Data Catalogue</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="sparql.html"><span class="es">SPARQL</span><span class="en">SPARQL Endpoint</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="vocabularios.html"><span class="es">Vocabularios</span><span class="en">Vocabularies</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link"  href="casos-de-uso.html"><span class="es">Casos uso</span><span class="en">Use cases</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link active" href="#"><span class="es">Servicios</span><span class="en">Services</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="publications.html"><span class="es">Publicaciones</span><span class="en">Publications</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="contacto.html"><span class="es">Contacto</span><span class="en">Contact</span></a>
+				  </li>
+				  <div class="nav-item" style="right: 1rem; position: absolute;"> 				
+					<input class="btn translate" type="button" id="en" value="🇬🇧" style="padding: 0.01rem 0.29rem; font-size: 1.5rem;"/>
+					<input class="btn translate" type="button" id="es" value="🇪🇸" style="padding: 0.01rem 0.29rem; font-size: 1.5rem;"/>
+				</div>
+				</ul>
+				
+				
+			  </div>
+			</div>
+			<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+					  <li class="breadcrumb-item"><a href="index.html"><span class="es">Inicio</span><span class="en">Home</span></a></li>
+					  <li class="breadcrumb-item active" aria-current="page"><span class="es">Servicios</span><span class="en">Services</span></li>
+					</ol>
 		</nav>
 	<div class="row">
 		<div class="col-12">
-		  <h1>Servicios desarrollados</h1>
+		  <h1><span class="en">Services created</span><span class="es">Servicios desarrollados</span></h1>
 		  <hr>
-		  <p align="justify">A continuación se listan las distintas herramientas desarrolladas para procesar la información relativa a las licitaciones el contexto del proyecto.<br></p>
+		  <p align="justify"><span class="es">A continuación se listan las distintas herramientas desarrolladas para procesar la información relativa a las licitaciones el contexto del proyecto.
+		</span>
+		<span class="en">The different tools developed to process tender-related information in the context of the project are listed below.
+		</span>
+		<br></p>
 		</div>
 		
 	</div>
 	<hr>
 	<div class="row">
-		<div class="col-12">
-			<h2>Clasificador de códigos CPV</h2>
-			<p align="justify">El clasificador de códigos CPV recibe la descripción de una oferta de licitación y devuelve las divisiones más probables con las que anotarla. El modelo que obtiene mejores resultados por el momento es un fine-tuning del modelo RoBERTa entrenado con el corpus de la BNE, y está disponible en <a href="https://huggingface.co/oeg/roberta-finetuned-CPV_Spanish">HuggingFace</a>, y se irá actualizando a medida que se refine la tarea. Asimismo, el listado con los notebooks y los datasets utilizados se puede encontrar en el <a href="https://github.com/mnavasloro/CPVClassifier">repositorio de GitHub</a>. En la siguiente demo puede probarse el servicio.<br>
-			
+		<div class="col-8">
+			<h2 id="CVP"><span class="es">Clasificador de códigos CPV</span><span class="en">CPV code classifier</span></h2>
+			<p align="justify"><span class="es">El clasificador de códigos CPV recibe la descripción de una oferta de licitación y devuelve las divisiones más probables con las que anotarla. El modelo que obtiene mejores resultados por el momento es un fine-tuning del modelo RoBERTa entrenado con el corpus de la BNE, y está disponible en <a href="https://huggingface.co/oeg/roberta-finetuned-CPV_Spanish">HuggingFace</a>, y se irá actualizando a medida que se refine la tarea. Asimismo, el listado con los notebooks y los datasets utilizados se puede encontrar en el <a href="https://github.com/mnavasloro/CPVClassifier">repositorio de GitHub</a>. En la siguiente demo puede probarse el servicio.<br></span>
+				<span class="en">The CPV code classifier receives the description of a tender and returns the most likely divisions with which to annotate it. The best performing model at the moment is a fine-tuning of the RoBERTa model trained on the BNE corpus, and is available at <a href="https://huggingface.co/oeg/roberta-finetuned-CPV_Spanish">HuggingFace</a>. It will be further improved. Additionally, the notebooks and dataset used can be found in the <a href="https://github.com/mnavasloro/CPVClassifier">GitHub repository</a>. The following demo shows the service.<br></span>
+                </p>
+        </div>
+        <div class="col-4">
+			<table class="table">
+			  <thead class="thead-dark">
+				<tr>
+				  <th scope="col"><span class="en">List of services</span><span class="es">Lista de servicios</span></th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+					<th scope="row"><a href="#CPV"><span class="en">CPV Classifier</span><span class="es">Clasificador CPV</span></a></th>  
+				</tr>
+				<tr>
+				  <th scope="row"><a href="#search"><span class="en">Tender search</span><span class="es">Buscador de licitaciones</span></a></th>  
+				</tr>
+				<tr>
+					<th scope="row"><a href="#clustering"><span class="en">Tender Clustering</span><span class="es">Servicio de Clustering</span></a></th>
+				</tr>
+			  </tbody>
+			</table>
+		</div>
+        <div class="col-12">
 			<iframe src="https://hf.space/embed/mnavas/CPVClassifier/+?__theme=lightapi/predict+" frameBorder="0" height="750" title="Gradio app" class="container p-0 flex-grow space-iframe" allow="accelerometer; ambient-light-sensor; autoplay; battery; camera; document-domain; encrypted-media; fullscreen; geolocation; gyroscope; layout-animations; legacy-image-formats; magnetometer; microphone; midi; oversized-images; payment; picture-in-picture; publickey-credentials-get; sync-xhr; usb; vr ; wake-lock; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"></iframe>
-			</p>
-			
-		
+					
 		<hr>
 		<div class="col-12">
-			<h2>Búsqueda de licitaciones</h2>
+			<h2 id="search"><span class="es">Búsqueda de licitaciones</span><span class="en">Tender search</span></h2>
 			<p align="justify">
 			
-			Esta herramienta permite buscar licitaciones similares presentes en el grafo de conocimiento a la descripción introducida por el usuario. El servicio puede probarse en la siguiente dirección <a href="https://tbfy.librairy.linkeddata.es/search-api/api.html">https://tbfy.librairy.linkeddata.es/search-api/api.html</a> 
-			
+				<span class="es">Esta herramienta permite buscar licitaciones similares presentes en el grafo de conocimiento a la descripción introducida por el usuario. El servicio puede probarse en la siguiente dirección <a href="https://tbfy.librairy.linkeddata.es/search-api/api.html">https://tbfy.librairy.linkeddata.es/search-api/api.html</a> </span>
+				<span class="en">This tool allows to search in the knowledge graph tenders similar to the description provided by the user. The service can be tested in the following link <a href="https://tbfy.librairy.linkeddata.es/search-api/api.html">https://tbfy.librairy.linkeddata.es/search-api/api.html</a></span>
 			</p>
 			
 		</div>
 		<hr>
 		<div class="col-12">
-			<h2>Servicio de clustering</h2>
+			<h2 id="clustering"><span class="es">Servicio de clustering</span><span class="en">Clustering service</span></h2>
 			<p align="justify">
-			
-			El servicio <a href="https://librairy.github.io/">LibrAIry</a> clasifica las licitaciones en distintos clusters entrenados sobre el corpus JCR-Acquis.	<br>
+				<span class="en">The <a href="https://librairy.github.io/">LibrAIry</a> service classifies the tenders in different clusters trained on the JCR-Acquis corpus.</span>
+				<span class="es">El servicio <a href="https://librairy.github.io/">LibrAIry</a> clasifica las licitaciones en distintos clusters entrenados sobre el corpus JCR-Acquis.</span>	<br>
 	<br>
 	<br>
 	<br>
@@ -106,7 +181,7 @@
 			
 		</div>
 	</div>
-
+        
 	<div>
 	<br></div>
 	<div id="footer" class="fixed-bottom bg-footer" style="background-color: #F9F9F9; bottom: 0; height:60px">
@@ -116,11 +191,11 @@
 					<div class="col-md-4 col-xs-4 " align="left">
 						<p style="font-size: small">
 							<!--Latest revision November, 2017<br>-->
-							Desarrollado por <a href="http://www.oeg-upm.net" target="_blank">Ontology Engineering Group</a>
+							<span class="es">Desarrollado por </span><span class="en">Developed by </span><a href="http://www.oeg-upm.net" target="_blank">Ontology Engineering Group</a>
 							<br>
-							Desarrollado usando <a target="_blank" href="http://getbootstrap.com/">Bootstrap</a>
+							<span class="es">Desarrollado usando </span><span class="en">Developed using </span><a target="_blank" href="http://getbootstrap.com/">Bootstrap</a>
 							<br>
-							Última revisión - mayo 2022
+							<span class="es">Última revisión - Agosto </span><span class="en">Last updated - August  </span> 2022
            					<br>
 							<p><image src="images/logos/ccby4.png" alt="CC-BY 4.0"/>   Creative Commons Attribution 4.0 International License.</p>
 						</p>
@@ -152,9 +227,9 @@
 	<!-- cookies -->
 	<div id="overbox3">
 		<div id="infobox3">
-			<p>Esta web utiliza cookies para obtener datos estadísticos de la navegación de sus usuarios. Si continúas navegando consideramos que aceptas su uso.
-			<a href="http://www.ign.es/web/ign/portal/info-aviso-legal">Más información</a>
-			<a onclick="aceptar_cookies();" style="cursor:pointer;">X Cerrar</a></p>
+			<p><span class="es">Esta web utiliza cookies para obtener datos estadísticos de la navegación de sus usuarios. Si continúas navegando consideramos que aceptas su uso.</span>
+				<span class="en">This website uses cookies in order to get statistical navigation data from its users. If you continue navigating, we assume you agree on this.</span>
+			<a onclick="aceptar_cookies();" style="cursor:pointer;">X <span class="en">Close</span><span class="es">Cerrar</span></a></p>
 		</div>
 	</div>
   </body>

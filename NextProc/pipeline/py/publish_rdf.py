@@ -61,6 +61,7 @@ def reset_stats():
 # ****************
 
 virtuoso_url = os.getenv("VIRTUOSO_URL") or config.virtuoso["virtuoso_url"]
+virtuoso_docker = config.virtuoso["virtuoso_docker"]
 virtuoso_dataset = os.getenv("VIRTUOSO_DATASET") or config.virtuoso["dataset"]
 virtuoso_user = os.getenv("VIRTUOSO_USER") or config.virtuoso["virtuoso_user"]
 virtuoso_pass = os.getenv("VIRTUOSO_PASS") or config.virtuoso["virtuoso_pass"]
@@ -86,9 +87,12 @@ def number_of_triples(rdf_file):
 # ****************************************
 # Publish RDF data to triplestore database
 # ****************************************
-def publish_rdf(rdf_data):
-    url = virtuoso_url + "/sparql-graph-crud-auth?graph-uri=" + virtuoso_url +"/" + virtuoso_dataset
+def publish_rdf(rdf_data, virtuoso_dir=virtuoso_url):
 
+    url = virtuoso_dir + "/sparql-graph-crud-auth?graph-uri=" + virtuoso_url +"/" + virtuoso_dataset
+     
+    logging.info("publish_rdf(): URL queried " + url)
+    
     body = rdf_data    
 
     auth = HTTPDigestAuth(virtuoso_user, virtuoso_pass) 
@@ -97,7 +101,7 @@ def publish_rdf(rdf_data):
         "Content-Type": "text/turtle;charset=utf-8"
     }
 
-    timeout = 150
+    timeout = 300
     tries = 3
     for i in range(tries):
         try:
@@ -105,7 +109,7 @@ def publish_rdf(rdf_data):
             requests.session().close()
             #response.connection.close()
             if response.status_code != 201 and response.status_code != 200:
-                logging.info("publish_rdf(): ERROR: " + str(response))
+                logging.info("publish_rdf(): ERROR " + response.status_code + ": " + str(response))
                 return None
             else:
                 return response
@@ -116,8 +120,8 @@ def publish_rdf(rdf_data):
             else:
                 logging.info("publish_rdf(): ERROR in request POST. Timeout tries endend.")
                 return None
-        except:
-            logging.info("publish_rdf(): ERROR in request POST")
+        except Exception as e:
+            logging.info("publish_rdf(): ERROR in request POST: " + str(e))
             return None
 
 
@@ -160,15 +164,14 @@ def main(argv):
             ext = os.path.splitext(filePath)[-1].lower()
             if (ext == ".nt"):
                 logging.info("publish_rdf.py: " + filename + " reading")
-                rdf_data = rdf_data + read_rdf_data(filePath)
+                rdf_data = read_rdf_data(filePath)
                     
                 # Update statistics
                 tbfy.statistics.update_stats_count(stats_publish, "number_of_files")
                 tbfy.statistics.update_stats_add(stats_publish, "number_of_triples", number_of_triples(filePath))
+                if publish_rdf(rdf_data) != None:
+                    logging.info("publish_rdf.py: " + filePath + " published")
 
-    logging.info("publish_rdf.py: " + input_folder + " publishing")
-    
-    publish_rdf(rdf_data)
 
     process_end_time = datetime.now()
     duration_in_seconds = (process_end_time - process_start_time).total_seconds()
@@ -194,58 +197,21 @@ def publish_rdfAPI(input_folder):
             ext = os.path.splitext(filePath)[-1].lower()
             if (ext == ".nt"):
                 logging.info("publish_rdf.py: " + filename + " reading")
-                rdf_data = rdf_data + read_rdf_data(filePath)
+                rdf_data = read_rdf_data(filePath)
                     
                 # Update statistics
                 tbfy.statistics.update_stats_count(stats_publish, "number_of_files")
                 tbfy.statistics.update_stats_add(stats_publish, "number_of_triples", number_of_triples(filePath))
+                # publish_rdf(rdf_data)
+                if publish_rdf(rdf_data, virtuoso_docker) != None:
+                    logging.info("publish_rdf.py: " + filePath + " published")
 
-    logging.info("publish_rdf.py: " + input_folder)
-
-    publish_rdf(rdf_data)
+    
 
     process_end_time = datetime.now()
     duration_in_seconds = (process_end_time - process_start_time).total_seconds()
     tbfy.statistics.update_stats_value(stats_publish, "publish_duration_in_seconds", duration_in_seconds)
     write_stats(input_folder) # Write statistics
-    reset_stats() # Reset statistics for next folder date
-
-    return("publish_duration_in_seconds", str(duration_in_seconds))
-
-
-def publish_rdfAPI_noDate(input_folder):
-    global stats_publish
-
-    logging.basicConfig(level=config.logging["level"])
-
-    logging.debug("publish_rdf.py: input_folder = " + input_folder)
-
-    process_start_time = datetime.now()
-
-    dirPath = input_folder
-    
-    rdf_data = b''
-
-    if os.path.isdir(dirPath):
-        for filename in os.listdir(dirPath):
-            filePath = os.path.join(dirPath, filename)
-            ext = os.path.splitext(filePath)[-1].lower()
-            if (ext == ".nt"):
-                logging.info("publish_rdf.py: " + filename + " reading")
-                rdf_data = rdf_data + read_rdf_data(filePath)
-                
-                # Update statistics
-                tbfy.statistics.update_stats_count(stats_publish, "number_of_files")
-                tbfy.statistics.update_stats_add(stats_publish, "number_of_triples", number_of_triples(filePath))
-
-            logging.info("publish_rdf.py: " + filename)
-
-            publish_rdf(rdf_data)
-
-    process_end_time = datetime.now()
-    duration_in_seconds = (process_end_time - process_start_time).total_seconds()
-    tbfy.statistics.update_stats_value(stats_publish, "publish_duration_in_seconds", duration_in_seconds)
-    write_stats(dirPath) # Write statistics
     reset_stats() # Reset statistics for next folder date
 
     return("publish_duration_in_seconds", str(duration_in_seconds))

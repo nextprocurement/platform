@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <title>Catálogo - nextProcurement</title>
+    <title>Data Catalogue</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Esta página describe el proyecto nextProcurement.">
+    <meta name="description" content="Esta página describe los catálogos de datos.">
     <meta name="languaje" content="Spanish">
     <meta name="author" content="Pedro Hernández y María Navas">
     <!-- Required meta tags -->
@@ -20,80 +20,162 @@
 	<!-- cookies -->
 	<link rel="stylesheet" href="css/cookie.css">
 	<script src="js/cookies.js" type="text/javascript"></script>
-  </head>
-  <body>
-
-
-	<div class="container">
-		<div class="card text-center">
-		  <div class="card-header">
-			<ul class="nav nav-pills card-header-pills">
-			  <li class="nav-item">
-				<a class="nav-link" href="index.html">Inicio</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="pipeline.html">Procesamiento</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link active" href="#">Catálogo de datos</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="sparql.html">Punto SPARQL</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="vocabularios.html">Vocabularios</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="casos-de-uso.html">Casos de uso</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="servicios.html">Servicios</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="contacto.html">Contacto</a>
-			  </li>
-			</ul>
-		  </div>
-		</div>
-		<nav aria-label="breadcrumb">
-		  <ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
-			<li class="breadcrumb-item active" aria-current="page">Catálogo de datos</li>
-		  </ol>
+	<script>
+		$(document).ready ( function(){
+			if(getCookie("lang")=="en"){
+			$('.es').hide();
+		} else{
+		  $('.en').hide();
+		  document.cookie = "lang=es";
+		}
+});
+	</script>
+	<script>
+		function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+</script>
+<script>
+		$(function() {
+	  $('#en').click(function() {
+		$('.es').hide();
+		$('.en').show();
+		document.cookie = "lang=en";
+	  });
+	  $('#es').click(function() {
+		$('.es').show();
+		$('.en').hide();
+		document.cookie = "lang=es";
+	  });
+	});
+		</script>
+		</head>
+	  <body>
+	
+	
+		<div class="container">
+			<div class="card text-center">
+			  <div class="card-header">
+				<ul class="nav nav-pills card-header-pills">
+				  <li class="nav-item">
+					<a class="nav-link" href="index.html"><span class="es">Inicio</span><span class="en">Home</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="pipeline.html" class="es"><span class="es">Procesamiento</span><span class="en">Pipeline</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link active" href="#"><span class="es">Catálogo de datos</span><span class="en">Data Catalogue</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="sparql.html"><span class="es">SPARQL</span><span class="en">SPARQL Endpoint</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="vocabularios.html"><span class="es">Vocabularios</span><span class="en">Vocabularies</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link"  href="casos-de-uso.html"><span class="es">Casos uso</span><span class="en">Use cases</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="servicios.html"><span class="es">Servicios</span><span class="en">Services</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="publications.html"><span class="es">Publicaciones</span><span class="en">Publications</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="contacto.html"><span class="es">Contacto</span><span class="en">Contact</span></a>
+				  </li>
+				  <div class="nav-item" style="right: 1rem; position: absolute;"> 				
+					<input class="btn translate" type="button" id="en" value="🇬🇧" style="padding: 0.01rem 0.29rem; font-size: 1.5rem;"/>
+					<input class="btn translate" type="button" id="es" value="🇪🇸" style="padding: 0.01rem 0.29rem; font-size: 1.5rem;"/>
+				</div>
+				</ul>
+				
+				
+			  </div>
+			</div>
+			<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+					  <li class="breadcrumb-item"><a href="index.html"><span class="es">Inicio</span><span class="en">Home</span></a></li>
+					  <li class="breadcrumb-item active" aria-current="page"><span class="es">Catálogo de datos</span><span class="en">Data Catalogue</span></li>
+					</ol>
 		</nav>
 
-		  <h1>Catálogo de conjunto de datos</h1>
+		  <h1><span class="es">Catálogo de conjunto de datos</span><span class="en">Data Catalogue</span></h1>
+            <!--h2>(<span class="es">A completar</span><span class="en">To be completed</span>)</h2-->
 
     <hr>
 	<div class="row">
 		<div class="col-12">
-		  <p class="justify">A continuación podrá consultar el listado de conjuntos de datos disponibles hasta la fecha, con enlaces a cada uno de ellos.</p>
+		  <p class="justify"><span class="en">The list of data available for now is listed below.</span><span class="es">A continuación podrá consultar el listado de conjuntos de datos disponibles hasta la fecha, con enlaces a cada uno de ellos.</span></p>
 		</div>
 	</div>
 	
 	<div class="row">
 		<div class="col-12">
-			<table id="tablesorter-demo" class="tablesorter table table-hover table-responsive">
+			<table id="tablesorter-demo" class="tablesorter table table-hover table-responsive table-striped">
 				<thead>
 					<tr>
-						<th >Conjunto de datos</th>
-						<th >Última actualización</th>
-						<th >Documentación ontología</th>
-						<th >Enlace SPARQL</th>
-						<th >Descripción</th>
+						<th><span class="es">Conjunto de datos</span><span class="en">Data</span>
+						</th>
+						<th><span class="es">Actualización</span><span class="en">Update</span>
+						</th>
+						<th>URL
+						</th>
+						<th><span class="es">Descripción</span><span class="en">Description</span>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>Conjunto de datos
+						<td>PLACE (Plataforma de Contratación del Sector Público)
 						</td>
-						<td>Última actualización
+						<td><span class="es">Diaria</span><span class="en">Daily</span>
 						</td>
-						<td>Documentación ontología
+						<td><a href="https://contrataciondelestado.es/wps/portal/plataforma" target="_blank">https://contrataciondelestado.es/wps/portal/plataforma</a>
 						</td>
-						<td>Enlace SPARQL
+						<td><span class="es">La Plataforma de Contratación del Sector Público permite consultar las licitaciones publicadas en los Perfiles del contratante alojados en la misma, y también las de otros organismos públicos que utilizan otras plataformas de contratación pero que publican las convocatorias de licitaciones y sus resultados mediante mecanismos de agregación.</span><span class="en">The Public Procurement Platform PLACE allows to consult tenders published in the Contractor Profiles hosted on the platform, as well as those of other public bodies that use other procurement platforms but publish calls for tender and their results through aggregation mechanisms.</span>
 						</td>
-						<td>Descripción
+					</tr>
+					<tr>
+						<td>PSCP (Plataforma de Serveis de Contractació Pública)
+						</td>
+						<td><span class="es">Diaria</span><span class="en">Daily</span>
+						</td>
+						<td><a href="https://contractaciopublica.gencat.cat/" target="_blank">https://contractaciopublica.gencat.cat/</a>
+						</td>
+						<td><span class="es">La Plataforma de Servicios de Contratación Pública (PSCP) es el órgano de información y prestación de servicios relacionados con la contratación pública. Constituye, tanto para los ciudadanos como para los usuarios de la Administración y del sector público, el canal de información sobre las licitaciones, adjudicaciones, formalizaciones y sobre todos los aspectos relevantes de la contratación pública. Es el portal único, global e integrado de difusión de la información sobre la actividad contractual y los perfiles de contratante de todos los órganos de contratación de Cataluña, incluidas las administraciones locales.</span><span class="en">The Platform for Public Contracting Services (PSCP) is the authority for information and provision of services related to public contracting. It constitutes, both for the citizens and for the users of the Administration and the public sector, the information channel on the tenders, adjudications, formalizations and on all the relevant aspects of public contracting. It is the unique, global and integrated portal for the dissemination of information on contractual activity and contracting profiles of all the contracting bodies of Catalonia, including local administrations.</span>
+						</td>
+					</tr>
+					<tr>
+						<td>TED (Tenders Electronic Daily)
+						</td>
+						<td><span class="es">Diaria</span><span class="en">Daily</span>
+						</td>
+						<td><a href="https://etendering.ted.europa.eu/general/page.html?name=home&locale=en" target="_blank">https://etendering.ted.europa.eu/general/page.html?name=home&locale=en</a>
+						</td>
+						<td><span class="es">TED (Tenders Electronic Daily) eTendering es una plataforma de contratación electrónica de las instituciones de la UE basada en las Directivas de la UE sobre contratación pública. Al permitir el acceso electrónico gratuito a los documentos de las licitaciones, como la documentación contractual, las especificaciones técnicas, los anexos, las preguntas y respuestas, etc., TED eTendering representa efectivamente una extensión de valor añadido de TED, la versión en línea del "Suplemento al Diario Oficial de la Unión Europea".</span><span class="en">TED (Tenders Electronic Daily) eTendering is an EU institutions' eProcurement platform based on EU Directives on public procurement. Allowing free electronic access to call for tenders' documents such as contractual documentation, technical specifications, annexes, questions and answers etc., TED eTendering effectively represents an added-value extension to TED, the online version of the "Supplement to the Official Journal of the European Union". </span>
+						</td>
+					</tr>
+					<tr>
+						<td>TheyBuyForYou Knowledge Graph data dump
+						</td>
+						<td><span class="es">Mensual (hasta 2022)</span><span class="en">Monthly (until 2022)</span>
+						</td>
+						<td><a href="https://zenodo.org/record/4665906" target="_blank">https://zenodo.org/record/4665906</a>
+						</td>
+						<td><span class="es">Volcado de datos del Gráfico de Conocimiento (KG) para el proyecto TheyBuyForYou en formato RDF que contiene datos de contratación y datos de empresas (para proveedores conciliados) para el período de enero de 2019 a marzo de 2021. Además del volcado de datos del KG en RDF, también está disponible la entrada de datos de origen para el KG, es decir, los datos de adquisición de OpenOpps y los datos de las empresas (para los proveedores conciliados) de OpenCorporates en formato JSON.</span><span class="en">Data dump of the Knowledge Graph (KG) for the TheyBuyForYou project in RDF format containing procurement data and company data (for reconciled suppliers) for the period January 2019 to March 2021. In addition to the KG data dump in RDF, also the source data input for the KG, i.e., procurement data from OpenOpps and company data (for reconciled suppliers) from OpenCorporates in JSON format, is available.</span>
 						</td>
 					</tr>
 				</tbody>
@@ -115,11 +197,11 @@
 					<div class="col-md-4 col-xs-4 " align="left">
 						<p style="font-size: small">
 							<!--Latest revision November, 2017<br>-->
-							Desarrollado por <a href="http://www.oeg-upm.net" target="_blank">Ontology Engineering Group</a>
+							<span class="es">Desarrollado por </span><span class="en">Developed by </span><a href="http://www.oeg-upm.net" target="_blank">Ontology Engineering Group</a>
 							<br>
-							Desarrollado usando <a target="_blank" href="http://getbootstrap.com/">Bootstrap</a>
+							<span class="es">Desarrollado usando </span><span class="en">Developed using </span><a target="_blank" href="http://getbootstrap.com/">Bootstrap</a>
 							<br>
-							Última revisión - mayo 2022
+							<span class="es">Última revisión - Agosto </span><span class="en">Last updated - August  </span> 2022
            					<br>
 							<p><image src="images/logos/ccby4.png" alt="CC-BY 4.0"/>   Creative Commons Attribution 4.0 International License.</p>
 						</p>
@@ -151,9 +233,9 @@
 	<!-- cookies -->
 	<div id="overbox3">
 		<div id="infobox3">
-			<p>Esta web utiliza cookies para obtener datos estadísticos de la navegación de sus usuarios. Si continúas navegando consideramos que aceptas su uso.
-			<a href="http://www.ign.es/web/ign/portal/info-aviso-legal">Más información</a>
-			<a onclick="aceptar_cookies();" style="cursor:pointer;">X Cerrar</a></p>
+			<p><span class="es">Esta web utiliza cookies para obtener datos estadísticos de la navegación de sus usuarios. Si continúas navegando consideramos que aceptas su uso.</span>
+				<span class="en">This website uses cookies in order to get statistical navigation data from its users. If you continue navigating, we assume you agree on this.</span>
+			<a onclick="aceptar_cookies();" style="cursor:pointer;">X <span class="en">Close</span><span class="es">Cerrar</span></a></p>
 		</div>
 	</div>
   </body>

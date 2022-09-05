@@ -27,7 +27,7 @@ logging = {
 
 rml = {
     "rml_filename": "rmlmapper.jar",
-    "mapping_filename": "mapping.rml.ttl",
+    "mapping_filename": "rml-mappings/mapping.rml.ttl",
     "rml_input_filename": "outsiders_2021.parquet",
     "rml_output_filename": "output.nt"
 }
@@ -38,6 +38,7 @@ jena_tools = {
 
 virtuoso = {
     "virtuoso_url": "http://" + ip + ":8890", 
+    "virtuoso_docker": "http://virtuoso:8890",
     #"fuseki_url": "http://" + ip + ":3030", 
     "dataset": "tbfy",
     "virtuoso_user" : "dba",
