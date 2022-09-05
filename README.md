@@ -19,7 +19,6 @@ Easy deployment of nextProcurement tools and services into a local environment.
 1. Run the platform by:
     ```
     sudo docker-compose up --build -d
-
     ```
 1. Wait for all services to be available (e.g. `Started Application in xx.xx seconds`). The first time it may take a few minutes to download the Docker images.
     ```
