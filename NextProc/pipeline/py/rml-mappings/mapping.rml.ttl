@@ -44,14 +44,14 @@
   ];
   
   rr:subjectMap [
-    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}" ;
+    rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}" ;
     rr:class ocds:contractingProcess
   ];
   
   rr:predicateObjectMap [
     rr:predicate ocds:hasTender ;
     rr:objectMap [
-      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}" ;
+      rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}" ;
     ]
   ].
   
@@ -64,7 +64,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}" ;
+    rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}" ;
     rr:class ocds:Tender
   ];
       
@@ -103,14 +103,14 @@
   rr:predicateObjectMap [
     rr:predicate ocds:hasMinEstimatedValue ;
     rr:objectMap [
-      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/minValue"
+      rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/minValue"
     ]
   ];
 
  rr:predicateObjectMap [
     rr:predicate ocds:hasMaxEstimatedValue ;
     rr:objectMap [
-      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/maxValue"
+      rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/maxValue"
     ]
   ];
  
@@ -127,7 +127,7 @@
   rr:predicateObjectMap [
     rr:predicate ocds:hasContractPeriod ;
     rr:objectMap [
-      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/contractPeriod"
+      rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/contractPeriod"
     ]
   ];
   
@@ -135,7 +135,7 @@
   rr:predicateObjectMap [
     rr:predicate ocds:hasTenderPeriod ;
     rr:objectMap [
-      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/tenderPeriod"
+      rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/tenderPeriod"
     ]
   ];
 
@@ -150,28 +150,28 @@
   rr:predicateObjectMap [
     rr:predicate ocds:hasDocument ;
     rr:objectMap [
-      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/document/technicalSpecifications"
+      rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/document/technicalSpecifications"
     ]
   ];
   
   rr:predicateObjectMap [
     rr:predicate ocds:hasDocument ;
     rr:objectMap [
-      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/document/evaluationCriteria"
+      rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/document/evaluationCriteria"
     ]
   ];
   
   rr:predicateObjectMap [
     rr:predicate ocds:isProcuringEntityFor ;
     rr:objectMap [
-      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/Organization/{ID}" ;
+      rr:template "http://data.procurement.linkeddata.es/contractingProcess/Organization/{ID}" ;
     ]
   ];    
   
   rr:predicateObjectMap [
     rr:predicate ocds:hasAward ;
     rr:objectMap [
-      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/award"
+      rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/award"
     ]
   ].
 
@@ -186,7 +186,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/minValue" ;
+    rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/minValue" ;
     rr:class ocds:Value
   ];
       
@@ -214,7 +214,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/maxValue" ;
+    rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/maxValue" ;
     rr:class ocds:Value
   ];
       
@@ -242,7 +242,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/tenderPeriod" ;
+    rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/tenderPeriod" ;
     rr:class ocds:Period
   ];
   
@@ -262,7 +262,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/contractPeriod" ;
+    rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/contractPeriod" ;
     rr:class ocds:Period
   ];
   
@@ -301,7 +301,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/document/technicalSpecifications" ;
+    rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/document/technicalSpecifications" ;
     rr:class ocds:Document
   ];
   
@@ -330,7 +330,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/document/evaluationCriteria" ;
+    rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/document/evaluationCriteria" ;
     rr:class ocds:Document
   ];
   
@@ -359,14 +359,14 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/Item/" ;
+    rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/Item/" ;
     rr:class ocds:Item
   ];
 
   rr:predicateObjectMap [
     rr:predicate ocds:hasAdditionalClassification ;
     rr:objectMap [
-      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/Classification/NUTS/{Código de Subentidad Nacional}" ;
+      rr:template "http://data.procurement.linkeddata.es/contractingProcess/Classification/NUTS/{Código de Subentidad Nacional}" ;
       rr:datatype xsd:URI
     ]
   ];
@@ -374,7 +374,7 @@
   rr:predicateObjectMap [
     rr:predicate ocds:hasClassification ;
     rr:objectMap [
-      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/Classification/CPV/{Clasificación CPV}" ;
+      rr:template "http://data.procurement.linkeddata.es/contractingProcess/Classification/CPV/{Clasificación CPV}" ;
       rr:datatype xsd:URI
     ]
   ].
@@ -389,7 +389,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/Classification/CPV/{Clasificación CPV}" ;
+    rr:template "http://data.procurement.linkeddata.es/contractingProcess/Classification/CPV/{Clasificación CPV}" ;
     rr:class skos:Concept
   ];
 
@@ -405,7 +405,7 @@
   rr:predicateObjectMap [
     rr:predicate  skos:inScheme ;
     rr:objectMap [
-      rr:constant "http://data.nextprocurement.linkeddata.es/contractingProcess/Classification/CPV" ;
+      rr:constant "http://data.procurement.linkeddata.es/contractingProcess/Classification/CPV" ;
 	  rr:datatype xsd:URI
     ] 
   ].
@@ -421,7 +421,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/Classification/NUTS/{Código de Subentidad Nacional}" ;
+    rr:template "http://data.procurement.linkeddata.es/contractingProcess/Classification/NUTS/{Código de Subentidad Nacional}" ;
     rr:class skos:Concept
   ];
 
@@ -437,7 +437,7 @@
   rr:predicateObjectMap [
     rr:predicate  skos:inScheme ;
     rr:objectMap [
-      rr:constant "http://data.nextprocurement.linkeddata.es/contractingProcess/Classification/NUTS" ;
+      rr:constant "http://data.procurement.linkeddata.es/contractingProcess/Classification/NUTS" ;
 	  rr:datatype xsd:URI
     ] 
   ].
@@ -452,7 +452,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/award" ;
+    rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/award" ;
     rr:class ocds:Award
   ];
 
@@ -460,7 +460,7 @@
   rr:predicateObjectMap [
     rr:predicate  ocds:hasAwardValue ;
     rr:objectMap [
-      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/award/hasContractValue" ;
+      rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/award/hasContractValue" ;
     ] 
   ].
   
@@ -473,7 +473,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/award/hasContractValue" ;
+    rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/award/hasContractValue" ;
     rr:class ocds:Value
   ];
       
@@ -502,14 +502,14 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/Organization/{Identificador (+ Tipo: mod schemeName)}" ;
+    rr:template "http://data.procurement.linkeddata.es/contractingProcess/Organization/{Identificador (+ Tipo: mod schemeName)}" ;
     rr:class ocds:Organisation ;
   ];
       
   rr:predicateObjectMap [
     rr:predicate ocds:isSupplierFor ;
     rr:objectMap [
-      rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/award" ;
+      rr:template "http://data.procurement.linkeddata.es/contractingProcess/{Número de Expediente}/tender/{Número de Expediente}/award" ;
     ]
   ];
       
@@ -529,7 +529,7 @@
   ];
 
   rr:subjectMap [
-    rr:template "http://data.nextprocurement.linkeddata.es/contractingProcess/Organization/{ID}" ;
+    rr:template "http://data.procurement.linkeddata.es/contractingProcess/Organization/{ID}" ;
     rr:class ocds:Organisation ;
   ];
       
